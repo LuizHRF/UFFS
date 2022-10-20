@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct funcionario{
+  int id;
+  char nome[31];
+  double salario;
+  struct funcionario *proximo;
+};
+typedef struct funcionario Funcionario;
+
+
+Funcionario* crianodo(int id, char n[], double sal, Funcionario *primeiro){
+  Funcionario *aux = malloc (sizeof (Funcionario));
+  (*aux).id = id;
+  strcpy ((*aux).nome, n);
+  (*aux).salario = sal;
+  (*aux).proximo = primeiro;
+  primeiro = aux;
+  return primeiro;
+}
+
+Funcionario* crianodofim(int id, char n[], double sal, Funcionario *primeiro){
+  Funcionario *aux = malloc (sizeof (Funcionario));
+  (*aux).id = id;
+  strcpy ((*aux).nome, n);
+  (*aux).salario = sal;
+  (*aux).proximo = primeiro;
+  Funcionario *ant, *auxi;
+  for(auxi=primeiro, auxi!=NULL, auxi=(*aux).proximo){
+      if((*aux).proximo == NULL){(*auxi).proximo = aux;}
+      ant = aux;
+  }
+}
+
+
+void printlista(Funcionario *primeiro){
+    Funcionario *aux;
+    for(aux=primeiro; aux!=NULL; aux = (*aux).proximo){
+      printf("ID: %d\t||Nome: %s\t||Salário: R$%.2lf\n", (*aux).id, (*aux).nome, (*aux).salario);
+}}
+
+
+int main (){   
+  int tid; double tsal; char tn[20];
+  //Criando lista vazia
+  Funcionario *primeiro = NULL;
+  while(1){
+  
+  int x;
+  printf("[1] - Adicionar funcionário no início da lista\n[2] - Printar lista\n[0] - Ecerrar\n");
+  scanf("%d", &x); if(x==0){break;}
+
+    if(x==1){
+      printf("Digite o ID, Nome e Salário do funcinário\n"); scanf("%d %s %lf", &tid, tn, &tsal);
+      primeiro = crianodo(tid, tn, tsal, primeiro);
+            }
+    else if(x==2){printlista(primeiro);
+            }
+    else if(x==3){
+        printf("Digite o ID, Nome e Salário do funcinário\n"); scanf("%d %s %lf", &tid, tn, &tsal);
+        crianodofim(tid, tn, tsal, primeiro);
+            }
+    else{printf("Inválido\n");}
+        }
+    }
+
