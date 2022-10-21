@@ -36,13 +36,25 @@ void crianodofim(int id, char n[], double sal, Funcionario *primeiro){
   }
 }
 
-
 void printlista(Funcionario *primeiro){
     Funcionario *aux;
     for(aux=primeiro; aux!=NULL; aux = (*aux).proximo){
-      printf("ID: %d\t||Nome: %s\t||Salário: R$%.2lf\n", (*aux).id, (*aux).nome, (*aux).salario);
+      printf("ID: %d\t\t||Nome: %s\t||Salário: R$%.2lf\n", (*aux).id, (*aux).nome, (*aux).salario);
 }}
 
+void removeid(int id, Funcionario *primeiro){
+    Funcionario *aux, *ant;
+    if((*primeiro).id == id){aux=primeiro;primeiro=(*aux).proximo;free(aux);return;} //Não exclui todas as informaões caso seja o primeiro
+    for(aux=primeiro, aux!=NULL, aux = (*aux).proximo;;){
+        if((*aux).id == id){
+            printf("ACHEI");  //Falha de segmentação
+            (*ant).proximo = (*aux).proximo;
+            free(aux);
+            return;
+        }
+        ant = aux;
+    }
+}
 
 int main (){   
   int tid; double tsal; char tn[20];
@@ -51,7 +63,7 @@ int main (){
   while(1){
   
   int x;
-  printf("[1] - Adicionar funcionário no início da lista\n[2] - Printar lista\n[3] - Adicionar funcionário no fim da lista\n[0] - Ecerrar\n");
+  printf("[1] - Adicionar funcionário no início da lista\n[2] - Printar lista\n[3] - Adicionar funcionário no fim da lista\n[4] - Remover pelo ID\n[0] - Ecerrar\n");
   scanf("%d", &x); if(x==0){break;}
 
     if(x==1){
@@ -64,6 +76,12 @@ int main (){
         printf("Digite o ID, Nome e Salário do funcinário\n"); scanf("%d %s %lf", &tid, tn, &tsal);
         crianodofim(tid, tn, tsal, primeiro);
             }
+    else if(x==4){
+        int n;
+        printf("Escreva o ID do funcionário que deseja remover\n");
+        scanf("%d", &n);
+        removeid(n, primeiro);
+    }
     else{printf("Inválido\n");}
         }
     }
