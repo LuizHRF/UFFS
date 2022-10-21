@@ -29,10 +29,10 @@ void crianodofim(int id, char n[], double sal, Funcionario *primeiro){
   (*aux).proximo = primeiro;
   (*aux).proximo = NULL;
   Funcionario *auxi;
-  if(primeiro == NULL){primeiro = aux;}else{
-  for(auxi=primeiro, auxi!=NULL, auxi=(*auxi).proximo;;){  //Por que esses dois ponto e vírugla?
-    if((*auxi).proximo == NULL){(*auxi).proximo = aux;}
-    }
+  if(primeiro == NULL){primeiro = aux;}else{ //O PRIMEIRO NÃO FUNCIONA
+  auxi = primeiro;
+  while((*auxi).proximo != NULL){auxi = (*auxi).proximo;} //Preciso de ajuda com esse while
+  (*auxi).proximo = aux;
   }
 }
 
