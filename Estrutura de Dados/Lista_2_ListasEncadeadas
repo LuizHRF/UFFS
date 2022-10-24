@@ -20,7 +20,7 @@ Funcionario *insereNodoInicio(Funcionario *primeiro, int id, char nome[], double
   return primeiro;
 }
 
-Funcionario *insereNodoFim(Funcionario *primeiro, int id, char nome[], double salario) { //ESTÁ EXCLUINDO NODOS JÁ PRESENTES
+Funcionario *insereNodoFim(Funcionario *primeiro, int id, char nome[], double salario) {
   Funcionario *aux = malloc (sizeof (Funcionario));
   (*aux).id = id;
   strcpy ((*aux).nome, nome);
@@ -33,14 +33,14 @@ Funcionario *insereNodoFim(Funcionario *primeiro, int id, char nome[], double sa
   while((*auxi).proximo != NULL){auxi = (*auxi).proximo;} 
   (*auxi).proximo = aux;
   }
+  return primeiro; //teste
 }
 
 Funcionario *deletaNodo(Funcionario *primeiro, int idDelete) {
     Funcionario *aux, *ant;
     if((*primeiro).id == idDelete){aux=primeiro;primeiro=(*aux).proximo;free(aux);return primeiro;} 
-    for(aux=primeiro, aux!=NULL, aux = (*aux).proximo;;){
+    for(aux=primeiro; aux!=NULL; aux = (*aux).proximo){
         if((*aux).id == idDelete){
-            printf("ACHEI");
             (*ant).proximo = (*aux).proximo;
             free(aux);
             return primeiro;
@@ -72,13 +72,14 @@ int contaNodos(Funcionario *primeiro) {
     return count;
 }
 
-void destroiLista(Funcionario *primeiro) {  //REMOVE INFORMAÇÕES MAS A LISTA AINDA EXISTE
+Funcionario* destroiLista(Funcionario *primeiro) {  //REMOVE INFORMAÇÕES MAS A LISTA AINDA EXISTE
     Funcionario *aux;
     while(primeiro!=NULL){
         aux = primeiro;
         primeiro = (*primeiro).proximo;
         free(aux);
     }
+    return primeiro;
 }
 
 int main() {
@@ -113,7 +114,7 @@ int main() {
     
     else if(x==7){printf("Nodos totais: %d\n", contaNodos(primeiro));}  //Contar nodos
 
-    else if(x==6){destroiLista(primeiro);}
+    else if(x==6){primeiro = destroiLista(primeiro);}
     }
     return 0;
 }
