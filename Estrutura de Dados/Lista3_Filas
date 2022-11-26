@@ -82,7 +82,7 @@ int main(){
     Fila pista;
     inicializafila(&pista);
     int x, id; char nome[20];
-    printf("Digite\n[0] - Para encerrar o programa\n[1] - Adicionar avião na fila\n[2] - Listar número de aviões na fila\n[3] - Autorizar a decolagem do primeiro avião da fila\n[4] - Listar aviões na fila\n[5] - Ver informações do priemiro avião na fila\n");
+    printf("Digite\n[0] - Para encerrar o programa\n[1] - Adicionar avião na fila\n[2] - Listar número de aviões na fila\n[3] - Autorizar a decolagem do primeiro avião da fila\n[4] - Listar aviões na fila\n[5] - Ver informações do primeiro avião na fila\n");
     while(x!=0){
         scanf("%d", &x);
         switch(x){
