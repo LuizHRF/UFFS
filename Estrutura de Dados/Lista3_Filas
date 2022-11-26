@@ -34,6 +34,20 @@ void adicionaraviao(Fila *f, int id, char nome[]){
     }
 }
 
+void decolar(Fila *f){
+    Aviao *aux = f->primeiro;
+    if(f->primeiro == f->ultimo){
+        f->primeiro = NULL;
+        f->ultimo == NULL;
+        printf("||Ultimo avião da fila decolou!  Avião id: %d\tNome: %s||\n",aux->id, aux->nome);}
+    else{
+    f->primeiro = f->primeiro->proximo;
+    printf("||Avião decolou!  Avião id: %d\tNome: %s||\n",aux->id, aux->nome);
+    }
+    free(aux);
+}
+    
+
 void numeroavioes(Fila *f){
     int count = 1;
     if (f->primeiro ==NULL){count = 0;}
@@ -51,7 +65,7 @@ int main(){
     Fila pista;
     inicializafila(&pista);
     int x, id; char nome[20];
-    printf("Digite\n[0] - Para encerrar o programa\n[1] - Adicionar avião na fila\n[2] - Listar número de aviões na fila\n");
+    printf("Digite\n[0] - Para encerrar o programa\n[1] - Adicionar avião na fila\n[2] - Listar número de aviões na fila\n[3] - Autorizar a decolagem do primeiro avião da fila\n");
     while(x!=0){
         scanf("%d", &x);
         switch(x){
@@ -63,11 +77,14 @@ int main(){
         case 2:
         numeroavioes(&pista);break;
         
+        case 3:
+        decolar(&pista);break;
+        
         case 0:
         break;
         
         default:
-        printf("INVÁLIDO");break;
+        printf("INVÁLIDO\n");break;
         }
     }
 }
