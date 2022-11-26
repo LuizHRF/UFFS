@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct aviao{
+    int id;
+    char[20] nome;
+    struct aviao *proximo;
+}Aviao;
+
+typedef struct fila{
+    Aviao *primeiro;
+    Aviao *ultimo;
+}Fila;
+
+void inicializafila(Fila *f){
+    f->primeiro = NULL;
+    f->ultimo = NULL;
+}
+
+void adicionaraviao(Fila *f, int id, char[] nome){
+    
+    Aviao *aux = malloc(sizeof(Aviao));
+    aux->id = id;
+    strcpy(aux->nome, nome);
+    aux->proximo = NULL;
+    
+    if(f->primeiro==NULL){
+        f->primeiro = aux;
+        f->ultimo = aux;
+    }else{
+        f->ultimo->proximo = aux;
+        f->ultimo = aux;
+    }
+}
+
+void numeroavioes(Fila *f){
+    int count = 0;
+    Aviao *aux = f->primeiro;
+    while(aux->proximo !=NULL){
+        count+=1;
+        aux=aux->proximo;
+    }
+    printf("Há %d aviões na fila\n", count);
+}
+
+
+int main(){
+    Fila pista;
+    inicializafila(&pista);
+    int x, id; char[20] nome;
+    printf("Digite\n[1] - Adicionar avião na fila\n[2] - Listar número de aviões na fila\n");
+    while(x!=0){
+        scanf("%d", &x);
+        switch(x){
+            case 1:
+            printf("Digite o id do avião");scanf("%d", &id);
+            printf("Digite o nome do avião");scanf("%s", nome);
+            adicionaraviao(&pista, id, nome);
+        case 2:
+        numeroavioes(&pista);
+        
+        default:
+        printf("INVÁLIDO");
+        }
+    }
+}
