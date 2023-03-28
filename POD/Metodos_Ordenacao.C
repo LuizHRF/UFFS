@@ -1,6 +1,7 @@
+
 /**
- * @file nome_do_arquivo.c
- * @author Nome_do_Aluno
+ * @file Metodos_Ordenacao.c
+ * @author Luiz_Faccio
  * @version 0.1
  * @date 2023-03-28
  *
@@ -18,10 +19,40 @@
  * preenchidos corretamente.
  *
  */
+ 
 #include <stdio.h>
+#include <stdbool.h>
 
+void troca(int *x, int *y){
+    int aux = *x;
+    *x = *y;
+    *y = aux;
+}
 
-int * bubbleSort(int *A, int size);
+//int * bubbleSort(int *A, int size);
+int * bubbleSort(int *A, int size){
+   
+    bool flag;
+
+    for(int i=size-1; i>0; i--){
+        flag = false;
+
+        for(int j=0; j<i; j++){
+
+            if(A[j]>A[j+1]){
+                troca(&A[j], &A[j+1]);
+                flag = true;
+            }
+
+        }
+
+        if(flag==false){
+            return A;
+        }
+    }
+
+    return A;
+}
 // int * selectionSort(int *A, int size);
 // int * InsertionSort(int *A, int size);
 // int * mergeSort(int *A, int size);
@@ -61,10 +92,5 @@ int main(){
     // radix sort
 
     return 0;
-}
-
-int * bubbleSort(int *A, int size){
-   // implementação do Bubble
-    return A;
 }
 
