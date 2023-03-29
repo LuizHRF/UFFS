@@ -73,13 +73,13 @@ int* selectionSort(int *A, int size){
 // int * InsertionSort(int *A, int size);
 int* InsertionSort(int *A, int size){
     for(int i=1; i<size;i++){
-        int *p = &A[i];
+        int p = A[i];
         int j = i;
-        while(*p<A[j-1]&&j>0){
+        while(p<A[j-1]&&j>0){
             A[j] = A[j-1];
             j--;
         }
-        A[j] = *p;
+        A[j] = p;
     }   
     return A;
 }
