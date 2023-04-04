@@ -34,7 +34,7 @@ void copia(int *A, int *v, int size);
 void bubbleSort(int *A, int size);
 void selectionSort(int *A, int size);
 void insertionSort(int *A, int size);
-// void mergeSort(int *A, int size);
+void mergeSort(int *A, int size);
 // void quickSort(int *A, int size);
 // void heapSort(int *A, int size);
 // void countingSort(int *A, int size);
@@ -53,7 +53,7 @@ int main(){
 
     printf("\nVetor tamanho = %d\n", tamanhoVetor);
 
-    // bubble sort
+    /*// bubble sort
     int bubbleVec[tamanhoVetor];
     copia(vetor, bubbleVec, tamanhoVetor);
     bubbleSort(bubbleVec, tamanhoVetor);
@@ -63,7 +63,7 @@ int main(){
     printf("\n");
 
     // selection sort
-    int selectionVec[tamanhoVetor];
+    int selectionVec[tamanhoVetnBubbleor];
     copia(vetor, selectionVec, tamanhoVetor);
     selectionSort(selectionVec, tamanhoVetor);
     printf("\nSelection sort: ");
@@ -78,9 +78,16 @@ int main(){
     printf("\nInsertion sort: ");
     for (i = 0 ; i < tamanhoVetor ; i++)
         printf("%d ", insertionVec[i]);
-    printf("\n");
+    printf("\n");*/
 
     // merge sort
+    int mergeVec[tamanhoVetor];
+    copia(vetor, mergeVec, tamanhoVetor);
+    mergeSort(mergeVec, tamanhoVetor);
+    printf("\nMerge sort: ");
+    for (i = 0 ; i < tamanhoVetor ; i++)
+        printf("%d ", mergeVec[i]);
+    printf("\n");
 
     // quick sort
 
@@ -151,4 +158,54 @@ void insertionSort(int *A, int size){
         A[j] = p;
     }   
     return;
+}
+
+void merge(int *A, int inicio, int fim){
+    if(inicio<fim){
+        int meio = (fim-inicio)/2;
+        merge(A, inicio, meio);
+        merge(A, meio+1, fim);
+        intercala(A, inicio, fim);
+    }
+}
+
+void intercala(int *A, int inicio, int fim){
+    int meio = (fim-inicio)/2;
+    int *aux = malloc(sizeof(int[fim-inicio+1]));
+    int i = inicio, j =meio+1, k =0;
+
+    while(i<=meio && j<=fim){
+        if(A[i] <= A[j]){
+            aux[k] = A[i];
+            i++;
+        }
+        else{
+            aux[k] = A[j];
+            j++;
+        }
+        k++;
+    }
+
+    while(i<=meio){
+        aux[k] = A[i];
+        i++;
+        k++;
+    }
+
+    while(j<=fim){
+        aux[k] = A[j];
+        j++;
+        k++;
+    }
+
+    for(k=inicio; k<=fim; k++){
+        A[k] = aux[k-inicio];
+    }
+
+    free(aux);
+}
+
+
+void mergeSort(int *A, int size){
+    merge(A, 0, size-1);
 }
