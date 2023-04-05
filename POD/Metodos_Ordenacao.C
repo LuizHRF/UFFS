@@ -36,7 +36,7 @@ void bubbleSort(int *A, int size);
 void selectionSort(int *A, int size);
 void insertionSort(int *A, int size);
 void mergeSort(int *A, int size);
-// void quickSort(int *A, int size);
+void quickSort(int *A, int size);
 // void heapSort(int *A, int size);
 // void countingSort(int *A, int size);
 // void radixSort(int *A, int size);
@@ -54,7 +54,7 @@ int main(){
 
     printf("\nVetor tamanho = %d\n", tamanhoVetor);
 
-    /*// bubble sort
+    // bubble sort
     int bubbleVec[tamanhoVetor];
     copia(vetor, bubbleVec, tamanhoVetor);
     bubbleSort(bubbleVec, tamanhoVetor);
@@ -63,8 +63,8 @@ int main(){
         printf("%d ", bubbleVec[i]);
     printf("\n");
 
-    // selection sort
-    int selectionVec[tamanhoVetnBubbleor];
+    //selection sort
+    int selectionVec[tamanhoVetor];
     copia(vetor, selectionVec, tamanhoVetor);
     selectionSort(selectionVec, tamanhoVetor);
     printf("\nSelection sort: ");
@@ -79,7 +79,7 @@ int main(){
     printf("\nInsertion sort: ");
     for (i = 0 ; i < tamanhoVetor ; i++)
         printf("%d ", insertionVec[i]);
-    printf("\n");*/
+    printf("\n");
 
     // merge sort
     int mergeVec[tamanhoVetor];
@@ -91,6 +91,13 @@ int main(){
     printf("\n");
 
     // quick sort
+    int quickVec[tamanhoVetor];
+    copia(vetor, quickVec, tamanhoVetor);
+    quickSort(quickVec, tamanhoVetor);
+    printf("\nQuick sort: ");
+    for (i = 0 ; i < tamanhoVetor ; i++)
+        printf("%d ", quickVec[i]);
+    printf("\n");
 
     // heap sort
 
@@ -208,4 +215,31 @@ void merge(int *A, int inicio, int fim){
 
 void mergeSort(int *A, int size){
     merge(A, 0, size-1);
+}
+
+int particiona(int *A, int inicio, int fim){
+    int p = fim;
+    int k = inicio;
+    for(int i = inicio; i<fim; i++){
+        if(A[i]<=A[p]){
+            troca(&A[i], &A[k]);
+            k++;
+        }
+    }
+    if(A[k]>A[p]){
+        troca(&A[k], &A[p]);
+    }
+    return p;
+}
+
+void quick(int *A, int inicio, int fim){
+    if(inicio<fim){
+        int p = particiona(A, inicio, fim);
+        quick(A, inicio, p-1);
+        quick(A, p+1, fim);
+    }
+}
+
+void quickSort(int *A, int size){
+    quick(A, 0, size-1);
 }
