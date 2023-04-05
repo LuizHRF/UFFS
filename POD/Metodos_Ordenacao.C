@@ -28,6 +28,7 @@
  */
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 void troca(int *x, int *y);
 void copia(int *A, int *v, int size);
@@ -160,17 +161,8 @@ void insertionSort(int *A, int size){
     return;
 }
 
-void merge(int *A, int inicio, int fim){
-    if(inicio<fim){
-        int meio = (fim-inicio)/2;
-        merge(A, inicio, meio);
-        merge(A, meio+1, fim);
-        intercala(A, inicio, fim);
-    }
-}
-
 void intercala(int *A, int inicio, int fim){
-    int meio = (fim-inicio)/2;
+    int meio = (fim+inicio)/2;
     int *aux = malloc(sizeof(int[fim-inicio+1]));
     int i = inicio, j =meio+1, k =0;
 
@@ -205,6 +197,14 @@ void intercala(int *A, int inicio, int fim){
     free(aux);
 }
 
+void merge(int *A, int inicio, int fim){
+    if(inicio<fim){
+        int meio = (fim+inicio)/2;
+        merge(A, inicio, meio);
+        merge(A, meio+1, fim);
+        intercala(A, inicio, fim);
+    }
+}
 
 void mergeSort(int *A, int size){
     merge(A, 0, size-1);
