@@ -3,17 +3,18 @@ package pedido;
 
 
 public class Pedido {
-    public Item_pedido itens[];
-    public double valor_total;
+    private Item_pedido[] itens;
+    private double valor_total;
     
 
-    public Pedido(){
+    public Pedido(int n){
         this.valor_total = 0;
+        this.itens = new Item_pedido[n];
     }
     
     public void adicionarItem(int n, Item_pedido i){
-        itens[n] = i;
-        this.valor_total += i.produto.getval();
+        this.itens[n] = i;
+        this.valor_total += (i.getProduto().getval())*(i.getQnt());
     }
     
     public double getval(){
@@ -22,7 +23,7 @@ public class Pedido {
    
     public static void main(String[] args) {
         
-       Pedido p1 = new Pedido();
+       Pedido p1 = new Pedido(2);
        
        produto p = new produto(61, 12.0, "None");
        produto n = new produto();
@@ -35,7 +36,7 @@ public class Pedido {
        
        double x = p1.getval();
        
-       System.out.println(x);
+       System.out.println("Preço final: R$" + x);
        
     }
     

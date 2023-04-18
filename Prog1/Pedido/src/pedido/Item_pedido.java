@@ -2,7 +2,7 @@
 package pedido;
 
 public class Item_pedido{
-        public produto produto;
+        private produto produto;
         private int qnt;
         
         
@@ -10,5 +10,13 @@ public class Item_pedido{
            this.produto = prod;
            this.qnt= qnt;
        }
-       
+
+    public int getQnt() {
+        return qnt;
+    }
+
+    public produto getProduto() {
+        return produto;
+    }
+
 }
