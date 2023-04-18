@@ -37,15 +37,15 @@ void selectionSort(int *A, int size);
 void insertionSort(int *A, int size);
 void mergeSort(int *A, int size);
 void quickSort(int *A, int size);
-// void heapSort(int *A, int size);
-// void countingSort(int *A, int size);
+void heapSort(int *A, int size);
+void countingSort(int *A, int size);
 // void radixSort(int *A, int size);
 
 
 int main(){
 
     int i;
-    int vetor[] = {1, 22, -10, 38, 5, 7};
+    int vetor[] = {1, 22, -10, 38, 80, 212};
     int tamanhoVetor = (int)sizeof(vetor)/sizeof(int);
 
     printf("\nVetor original: ");
@@ -100,8 +100,21 @@ int main(){
     printf("\n");
 
     // heap sort
-
+    int heapVec[tamanhoVetor];
+    copia(vetor, heapVec, tamanhoVetor);
+    heapSort(heapVec, tamanhoVetor);
+    printf("\nHeap sort: ");
+    for (i = 0 ; i < tamanhoVetor ; i++)
+        printf("%d ", heapVec[i]);
+    printf("\n");
     // counting sort
+    int countVec[tamanhoVetor];
+    copia(vetor, countVec, tamanhoVetor);
+    countingSort(countVec, tamanhoVetor);
+    printf("\nCounting sort: ");
+    for (i = 0 ; i < tamanhoVetor ; i++)
+        printf("%d ", countVec[i]);
+    printf("\n");
 
     // radix sort
 
@@ -242,4 +255,44 @@ void quick(int *A, int inicio, int fim){
 
 void quickSort(int *A, int size){
     quick(A, 0, size-1);
+}
+
+void criaHeap(int A[], int i, int n){
+    int maior = i;
+    int left = (i*2)+1;
+    int right = (i*2)+2;
+    
+    if(left<n&&A[left]>A[i]){
+        maior = left;
+    }
+    if(right<n&&A[right]>A[maior]){
+        maior = right;
+    }
+    
+    if(maior!=i){
+        troca(&A[i], &A[maior]);
+        criaHeap(A, maior, n);
+    }
+}
+
+void heapSort(int *A, int size){
+    for(int k=(size/2)-1; k>=0; k--){
+        criaHeap(A, k, size);   
+    }
+    
+    for(int k = size-1; k>0; k--){
+        troca(&A[0], &A[k]);
+        criaHeap(A, 0, k);
+    }
+}
+
+void countingSort(int *A, int size){
+    int k = A[0];
+    for(int j = 1; j<size; j++){
+        if(A[j]>k){
+            k = A[j];
+        }
+    }
+    
+    
 }
