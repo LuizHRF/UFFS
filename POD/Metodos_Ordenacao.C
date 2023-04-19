@@ -45,7 +45,7 @@ void countingSort(int *A, int size);
 int main(){
 
     int i;
-    int vetor[] = {1, 22, -10, 38, 80, 212};
+    int vetor[] = {1, 22, 211, 38, 80, 212, 90, 190, 0};
     int tamanhoVetor = (int)sizeof(vetor)/sizeof(int);
 
     printf("\nVetor original: ");
@@ -107,6 +107,7 @@ int main(){
     for (i = 0 ; i < tamanhoVetor ; i++)
         printf("%d ", heapVec[i]);
     printf("\n");
+    
     // counting sort
     int countVec[tamanhoVetor];
     copia(vetor, countVec, tamanhoVetor);
@@ -292,7 +293,32 @@ void countingSort(int *A, int size){
         if(A[j]>k){
             k = A[j];
         }
+        if(A[j]<0){
+            printf("\nNão é possível ordenar números negativos com counting sort:");
+            return;
+        }
+    }
+    int count[k+1];
+    int aux[size];
+    
+    for(int i=0;i<=k; i++){
+        count[i]=0;
     }
     
+    for(int i=0; i<size; i++){
+        count[A[i]]++;
+    }
     
+    for(int i = 1; i<=k; i++){
+        count[i]+=count[i-1];
+    }
+    
+    for(int i=size-1;i>=0;i--){
+        count[A[i]] = count[A[i]]-1;
+        aux[count[A[i]]] = A[i];
+    }
+    
+    for(int i=0; i<size; i++){
+        A[i] = aux[i];
+    }
 }
