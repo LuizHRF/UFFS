@@ -45,7 +45,7 @@ void countingSort(int *A, int size);
 int main(){
 
     int i;
-    int vetor[] = {1, 22, 211, 38, 80, 212, 90, 190, 0};
+    int vetor[] = { 22, 211, 38, 80, 212, 90, 99, 190, 0, -1, -2, -182727};
     int tamanhoVetor = (int)sizeof(vetor)/sizeof(int);
 
     printf("\nVetor original: ");
@@ -240,10 +240,17 @@ int particiona(int *A, int inicio, int fim){
             k++;
         }
     }
+    int aux = A[p];
     if(A[k]>A[p]){
         troca(&A[k], &A[p]);
     }
-    return p;
+    for(int i=0; i<=p; i++){
+        if(A[i]==aux){
+            aux = i;
+            break;
+        }
+    }
+    return aux;
 }
 
 void quick(int *A, int inicio, int fim){
