@@ -39,13 +39,13 @@ void mergeSort(int *A, int size);
 void quickSort(int *A, int size);
 void heapSort(int *A, int size);
 void countingSort(int *A, int size);
-// void radixSort(int *A, int size);
+void radixSort(int *A, int size);
 
 
 int main(){
 
     int i;
-    int vetor[] = { 22, 211, 38, 80, 212, 90, 99, 190, 0, -1, -2, -182727};
+    int vetor[] = {22, 211, 38, 80, 212, 90, 99, 190, 0};
     int tamanhoVetor = (int)sizeof(vetor)/sizeof(int);
 
     printf("\nVetor original: ");
@@ -118,6 +118,13 @@ int main(){
     printf("\n");
 
     // radix sort
+    int radVec[tamanhoVetor];
+    copia(vetor, radVec, tamanhoVetor);
+    radixSort(radVec, tamanhoVetor);
+    printf("\nRadix sort: ");
+    for (i = 0 ; i < tamanhoVetor ; i++)
+        printf("%d ", radVec[i]);
+    printf("\n");
 
     return 0;
 }
@@ -327,5 +334,47 @@ void countingSort(int *A, int size){
     
     for(int i=0; i<size; i++){
         A[i] = aux[i];
+    }
+}
+
+int buscaMaior(int *A, int size){
+    int maior = A[0];
+    for(int i=0; i<size; i++){
+        if(A[i]>maior){
+            maior = A[i];
+        }
+    }
+    return maior;
+}
+
+void countSort(int* A, int n, int pos){
+    int aux[n];
+    int count[10];
+    int digito;
+    
+    for(int i=0; i<n; i++){
+        digito = (A[i]/pos)%10;
+        count[digito]++;
+    }
+    
+    for(int i = 1; i<10; i++){
+        count[i] +=count[i-1];
+    }
+    
+    for(int i = n-1; i>=0; i--){
+        digito = (A[i]/pos)%10;
+        count[digito]--;
+        aux[count[digito]] = A[i];
+    }
+    
+    for(int i = 0; i < n; i++){
+        A[i] = aux[i];
+    }
+}
+
+void radixSort(int *A, int size){
+    int max = buscaMaior(A, size);
+    for(int pos = 1; max/pos > 0; pos*=10){
+        countSort(A, size, pos);
     }
 }
