@@ -45,7 +45,7 @@ void radixSort(int *A, int size);
 int main(){
 
     int i;
-    int vetor[] = {22, 211, 38, 80, 212, 90, 99, 19};
+    int vetor[] = {22, 211, 38, 80, 212, 90, 99, 19, 0 , -1};
     int tamanhoVetor = (int)sizeof(vetor)/sizeof(int);
 
     printf("\nVetor original: ");
@@ -343,6 +343,9 @@ int buscaMaior(int *A, int size){
         if(A[i]>maior){
             maior = A[i];
         }
+        if(A[i]<0){
+            return A[i];
+        }
     }
     return maior;
 }
@@ -380,6 +383,9 @@ void countSort(int* A, int n, int pos){
 
 void radixSort(int *A, int size){
     int max = buscaMaior(A, size);
+    if(max<0){
+        printf("\nNão é possível ordenar números negativos com radix sort:");
+    }
     for(int pos = 1; max/pos > 0; pos*=10){
         countSort(A, size, pos);
     }
