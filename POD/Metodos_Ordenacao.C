@@ -45,7 +45,7 @@ void radixSort(int *A, int size);
 int main(){
 
     int i;
-    int vetor[] = {22, 211, 38, 80, 212, 90, 99, 190, 0};
+    int vetor[] = {22, 211, 38, 80, 212, 90, 99, 19};
     int tamanhoVetor = (int)sizeof(vetor)/sizeof(int);
 
     printf("\nVetor original: ");
@@ -352,20 +352,26 @@ void countSort(int* A, int n, int pos){
     int count[10];
     int digito;
     
+    for(int i =0; i<10; i++){
+        count[i] = 0;
+    }
+    
     for(int i=0; i<n; i++){
         digito = (A[i]/pos)%10;
         count[digito]++;
     }
     
     for(int i = 1; i<10; i++){
-        count[i] +=count[i-1];
-    }
+        count[i] = count [i] + count[i-1];
+    }   
+    
     
     for(int i = n-1; i>=0; i--){
         digito = (A[i]/pos)%10;
         count[digito]--;
         aux[count[digito]] = A[i];
     }
+   
     
     for(int i = 0; i < n; i++){
         A[i] = aux[i];
