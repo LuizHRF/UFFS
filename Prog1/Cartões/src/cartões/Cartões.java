@@ -3,7 +3,7 @@ package cartões;
 
 
 public class Cartões {
-
+    
     public static void main(String[] args) {
         
         cartaoCredito cartao1 = new cartaoCredito("Luiz", 2023, 150);
@@ -12,6 +12,11 @@ public class Cartões {
         System.out.println("Valor tarifa: "+cartao2.getTarifaAtual());
      
         cartao1.fazerCompra(300);
+        
+        cartao1.setOwner("Gabi");
+        
+        int val[] = {1, 01, 2078};
+        cartao2.setValidade(val);
 
         System.out.println("Fatura: "+ cartao1.getFaturaAtual());
         
@@ -23,7 +28,9 @@ public class Cartões {
         
         System.out.println("Valor tarifa: "+cartao2.getTarifaAtual());
         
-        cartao1.printc();
+        cartao1.printOps();
+        
+        cartao2.printOps();
     }
     
 }

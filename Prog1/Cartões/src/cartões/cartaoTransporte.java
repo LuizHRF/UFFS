@@ -38,19 +38,27 @@ public class cartaoTransporte extends Cartao{
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+        this.getOps()[getI()] = new Operacao("Alteração no saldo", saldo);
+        this.somaI();
     }
 
     public void setPCD(boolean PCD) {
         this.PCD = PCD;
         if(PCD == true){
             setTarifaAtual(0);
+            this.getOps()[getI()] = new Operacao("Alteração em PCD");
+            this.somaI();
         }else{
             setTarifaAtual(4.4);
+            this.getOps()[getI()] = new Operacao("Alteracao em PCD");
+            this.somaI();
         }   
     }
 
     public void setTarifaAtual(double tarifaAtual) {
         this.tarifaAtual = tarifaAtual;
+        this.getOps()[getI()] = new Operacao("Alteração na tarifa | Nova tarifa: ", tarifaAtual);
+        this.somaI();
     }
     
     

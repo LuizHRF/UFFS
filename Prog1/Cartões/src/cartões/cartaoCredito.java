@@ -47,26 +47,46 @@ public class cartaoCredito extends Cartao {
 
     public void setFaturaAtual(double faturaAtual) {
         this.faturaAtual = faturaAtual;
+        this.getOps()[getI()] = new Operacao("Alteração na fatura | Novo valor: " + faturaAtual);
+        this.somaI();
     }
 
     public void setLimite(double limite) {
         this.limite = limite;
+        this.getOps()[getI()] = new Operacao("Alteração do limite | Novo limite: ", limite);
+        this.somaI();
     }
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+        if(ativo==true){
+            this.getOps()[getI()] = new Operacao("Alteração na situação: Ativado");
+            this.somaI();
+        }
+        else{
+            this.getOps()[getI()] = new Operacao("Alteração na situação: Desativado");
+            this.somaI();
+        }
     }
     
     public void pagarFatura(){
         this.faturaAtual = 0;
+           this.getOps()[getI()] = new Operacao("Alteração na fatura | Fatura paga");
+           this.somaI();
     }
     
     public void fazerCompra(double val){
         if(this.faturaAtual + val > this.limite){
             System.out.println("Limite insuficiente");
+            this.getOps()[getI()] = new Operacao("Compra negada! | Limite insuficiente");
+            this.somaI();
         }
         else{
             this.faturaAtual += val;
+            this.getOps()[getI()] = new Operacao("Compra realizada | Valor: ", val);
+            this.somaI();
         }
     }
+
+    
 }
