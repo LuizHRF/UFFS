@@ -36,8 +36,16 @@ public class Carta {
     }
 
     public static String[] getNaipes() throws Exception{
-        String[] s = naipes; // ou {"copas", "espadas", "ouros", "paus"};
-        if(naipes != s){
+        
+        boolean t = false; String[] s = {"copas", "espadas", "ouros", "paus"};
+        
+        for(int i =0 ; i<4; i++){
+            if(s[i] != naipes[i]){
+                t = true;
+            }
+        }
+        
+        if(t){
             System.out.println("Caiu na excessão");
             throw new Exception("Naipes incorretos");
         }
