@@ -36,14 +36,14 @@ public class Carta {
     }
 
     public static String[] getNaipes() throws Exception{
-//        String[] s = {"copas", "espadas", "ouros", "paus"};
-//        if(naipes != s){
-//            System.out.println("Caiu na excessão");
-//            throw new Exception("Naipes incorretos");
-//        }
-//        else{
-//            return naipes;
-//        }
+        String[] s = naipes; // ou {"copas", "espadas", "ouros", "paus"};
+        if(naipes != s){
+            System.out.println("Caiu na excessão");
+            throw new Exception("Naipes incorretos");
+        }
+        else{
+            return naipes;
+        }
     }
 
     public static String[] getTipos() {
