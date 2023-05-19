@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-static char ok[] = "Operação bem sucedida\n";
+static char ok[] = "Operação bem sucedida";
 static char nf[] = "Chave não encontrada\n";
 
 typedef struct chave{
@@ -21,6 +21,12 @@ int hash(int a){
     return a%13;
 }
 
+void adicionaVetor(int a[], Chave t[], int s){
+    for(int i = 0; i<s; i++){
+        adicionaChave(a[i], t);
+        printf(" : chave [%d]\n", a[i]);
+    }
+}
 
 void adicionaChave(int a, Chave t[]){
     
@@ -30,20 +36,20 @@ void adicionaChave(int a, Chave t[]){
     
     if(t[hash(a)].proximo == NULL){
         t[hash(a)].proximo = aux;
-        printf(ok);
+        printf(ok, "\n");
         return;
     }
     else{
         for(Chave *i = t[hash(a)].proximo; i!= NULL; i = i->proximo){
             
             if(i->val == a){
-                printf("Chave já inserida\n");
+                printf("Chave já inserida");
                 return;
             }
             
             if(i->proximo == NULL){
                 i->proximo = aux;
-                printf(ok);
+                printf(ok, "\n");
                 return;
             }
         }
@@ -67,7 +73,7 @@ void removeChave(int a, Chave t[]){
 
     if(t[hash(a)].proximo->val == a){
         t[hash(a)].proximo = NULL;
-        printf(ok);
+        printf(ok, "\n");
         return;
 
     }else{
@@ -75,7 +81,7 @@ void removeChave(int a, Chave t[]){
         for(Chave *i = t[hash(a)].proximo; i->proximo != NULL; i = i->proximo){
             if(i->proximo->val == a){
                 i->proximo = NULL;
-                printf(ok);
+                printf(ok, "\n");
                 return;
             }
         }
@@ -87,14 +93,9 @@ int main(){
     Chave TabelaHash[13];
     iniciaTabela(TabelaHash);
 
-    printf("Primeira chave:\n");
-    adicionaChave(1, TabelaHash);
-    printf("Segunda chave:\n");
-    adicionaChave(14, TabelaHash);
-    printf("Terceira chave:\n");
-    adicionaChave(2, TabelaHash);
-    printf("Quarta chave:\n");
-    adicionaChave(2, TabelaHash);
+    int vet[] = {1, 14, 2, 2};
+
+    adicionaVetor(vet, TabelaHash, 4);
 
     printf("Encontra 4:\n");
     encontraChave(4, TabelaHash);
