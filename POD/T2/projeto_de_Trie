@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+typedef struct chave{
+    char l;
+    struct chave *filhos[26];
+    int count;
+    bool terminal;
+} Chave;
+
+void inicializaTrie(Chave *c){
+    
+    printf("é aqui?\n");
+    c->count = 0;
+    c->terminal = false;
+    printf("é aqui?\n");
+}
+
+void insereChave(char p[], Chave *t, int inicio){
+    for(int i=inicio; i<=t->count; i++){
+        if(p[inicio]==t->filhos[i]->l){
+            printf("testecaiurec\n");
+            insereChave(p, t->filhos[i], inicio+1);
+        }
+    }
+    if(inicio==strlen(p)-1){
+        printf("testecaiuif\n");
+        t->filhos[t->count]->l = p[inicio];
+        t->filhos[t->count]->terminal = true;
+        t->count++;
+    }else{
+        printf("testecaiuelse\n");
+        t->filhos[t->count]->l = p[inicio];
+        t->count++;
+    }
+}
+
+int main(){
+    
+    Chave *trie;
+    inicializaTrie(trie);
+    char c[]= "Teste";
+    printf("teste\n");
+    
+    
+    return 0;
+}
