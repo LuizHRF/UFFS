@@ -272,9 +272,19 @@ public class PainelTraseiro extends javax.swing.JFrame {
 
         btFechar.setForeground(new java.awt.Color(102, 102, 102));
         btFechar.setText("Fechar");
+        btFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFecharActionPerformed(evt);
+            }
+        });
 
         btLimpar.setForeground(new java.awt.Color(102, 102, 102));
         btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
 
         btCalcular.setForeground(new java.awt.Color(102, 102, 102));
         btCalcular.setText("Calcular");
@@ -318,8 +328,6 @@ public class PainelTraseiro extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        Custo_final.getAccessibleContext().setAccessibleName("Custo Final");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -348,7 +356,9 @@ public class PainelTraseiro extends javax.swing.JFrame {
     }//GEN-LAST:event_tfValor_PessoaActionPerformed
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-       
+
+        try{
+            
         Double Valor_Total = Double.valueOf(tfConsumoTotal.getText());
         Double Valor_couvert = Double.valueOf(tfCouvert.getText());
         
@@ -360,11 +370,12 @@ public class PainelTraseiro extends javax.swing.JFrame {
             if(rbSim.isSelected()){
                 Valor_Total*= 1.1;
             }
-            if(rbSim.isSelected()==false && rbNao.isSelected()==false){
-                throws Exception;
+            if(rbSim.isSelected()==false && rbNao.isSelected()==false || (int)(spnPessoas.getValue())<=0){
+                throw new RuntimeException("Taxa de serviço não selecionada ou número de pessoas inválido");
             }
-        }catch(Exception e){
-            printf("")
+        }catch(RuntimeException e){
+            Pop.infoBox("Taxa de serviço não selecionada ou número inválido de dividendos!", "Informações inválidas");
+            return;
         }
         
         Valor_Final = ((int)spnPessoas.getValue())*Valor_couvert + Valor_Total;
@@ -375,9 +386,26 @@ public class PainelTraseiro extends javax.swing.JFrame {
             
         tfValor_Total.setText(String.format("%.2f", Valor_Final));
         tfValor_Pessoa.setText(String.format("%.2f", Valor_Pessoa));
-       
+        }catch(java.lang.NumberFormatException e){
+            Pop.infoBox("Existem campos vazios!", "Informações inválidas");
+        }
        
     }//GEN-LAST:event_btCalcularActionPerformed
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        
+        tfValor_Total.setText("");
+        tfValor_Pessoa.setText("");
+        tfConsumoTotal.setText("");
+        tfCouvert.setText("");
+        
+        bgTaxadeServico.clearSelection();
+        spnPessoas.setValue(0);
+    }//GEN-LAST:event_btLimparActionPerformed
+
+    private void btFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btFecharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,68 +450,16 @@ public class PainelTraseiro extends javax.swing.JFrame {
     private javax.swing.JButton btFechar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton16;
-    private javax.swing.JRadioButton jRadioButton17;
-    private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton19;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton20;
-    private javax.swing.JRadioButton jRadioButton21;
-    private javax.swing.JRadioButton jRadioButton22;
-    private javax.swing.JRadioButton jRadioButton23;
-    private javax.swing.JRadioButton jRadioButton24;
-    private javax.swing.JRadioButton jRadioButton25;
-    private javax.swing.JRadioButton jRadioButton26;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JRadioButton rbNao;
     private javax.swing.JRadioButton rbSim;
     private javax.swing.JSpinner spnPessoas;
