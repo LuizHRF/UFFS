@@ -19,7 +19,7 @@ void inicializaTrie(Chave *c){
 }
 
 Chave* procura(Chave* trie, char p[], int i, int size){
-
+    printf("[Entrou na procura]\n");
     for(int j=0; j<26; j++){
         if(trie->filhos[j]==NULL){continue;}else{
         if(p[i]==trie->filhos[j]->c){
@@ -58,24 +58,26 @@ Chave* meiaBusca(Chave* raiz, char p[], int* i, int size){
             return meiaBusca(raiz->filhos[j], p, i, size);
         }}
     }
-    for(int k=0; k<26; k++){
-        if(raiz->filhos[k]==NULL){
-            return raiz->filhos[k];
-        }
-    }
+    return raiz;
 }
 
 Chave* inserir(Chave* raiz, char p[], int i, int size){
     if(i == size-1){
         Chave* aux = malloc(sizeof(Chave));
-        aux->c = p[i];
+        aux->c = p[i]; //printf("inserindo letra %c\n", p[i]);
         aux->terminal = 1;
         return aux;
     }else{
-        raiz = malloc(sizeof(Chave));
-        raiz->c = p[i];
+    
+        Chave* aux = malloc(sizeof(Chave));
+        aux->c = p[i]; //printf("Inserindo letra %c\n", p[i]);
         i++;
-        raiz->filhos[0] = inserir(raiz, p, i, size);
+        aux->filhos[0] = inserir(aux, p, i, size);
+        for(int k=0; k<26; k++){
+            if(raiz->filhos[k]==NULL){
+                raiz->filhos[k] = aux;
+            }
+        }
         return raiz;
     }   
 }
@@ -85,8 +87,10 @@ void inserirChave(Chave* raiz, char p[]){
 
         int *i;
         *i = 0;
-        inserir(meiaBusca(raiz, p, i, strlen(p)), p, *i, strlen(p));
+        raiz = inserir(meiaBusca(raiz, p, i, strlen(p)), p, *i, strlen(p));
         printf("Chave inserida com sucesso!\n");
+        printf("Nodo 1, valor: %c\n", raiz->filhos[0]->c);
+        
         
     }else{
         printf("Chave já inserida!");
@@ -101,6 +105,7 @@ int main(){
     Chave *raiz = malloc(sizeof(Chave));
     inicializaTrie(raiz);
     inserirChave(raiz, "teste");
+    
     busca(raiz, "teste");
     
     
