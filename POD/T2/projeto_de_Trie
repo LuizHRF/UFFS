@@ -19,8 +19,9 @@ void inicializaTrie(Chave *c){
 }
 
 Chave* procura(Chave* trie, char p[], int i, int size){
-    printf("entrou! Tamnho de i: %d, valor lá: %c, em comparação: %c\n", i, p[i], trie->filhos[0]->c);
+
     for(int j=0; j<26; j++){
+        if(trie->filhos[j]==NULL){continue;}else{
         if(p[i]==trie->filhos[j]->c){
             printf("Primeiro if\n");
             if(i==size-1){
@@ -32,9 +33,8 @@ Chave* procura(Chave* trie, char p[], int i, int size){
                 }
             }
             return procura(trie->filhos[j], p, i+1, size);
-        }
+        }}
     }
-    printf("Ultimo if\n");
     return NULL;
 }
 
@@ -49,11 +49,14 @@ void busca(Chave *raiz, char p[]){
 }
 
 Chave* meiaBusca(Chave* raiz, char p[], int* i, int size){
+
     for(int j=0; j<26; j++){
+        if(raiz->filhos[j]==NULL){continue;}else{
         if(raiz->filhos[j]->c==p[*i]){
+            printf("Testando filhos[%d]\n", *i);
             *i+=1;
             return meiaBusca(raiz->filhos[j], p, i, size);
-        }
+        }}
     }
     for(int k=0; k<26; k++){
         if(raiz->filhos[k]==NULL){
@@ -63,7 +66,6 @@ Chave* meiaBusca(Chave* raiz, char p[], int* i, int size){
 }
 
 Chave* inserir(Chave* raiz, char p[], int i, int size){
-    
     if(i == size-1){
         Chave* aux = malloc(sizeof(Chave));
         aux->c = p[i];
@@ -79,13 +81,16 @@ Chave* inserir(Chave* raiz, char p[], int i, int size){
 }
 
 void inserirChave(Chave* raiz, char p[]){
-    if(procura(raiz, p, 0, strlen(p))!=NULL){
-        printf("Chave já inserida!\n");
-        return;
-    }else{
-        int* i = 0;
+    if(procura(raiz, p, 0, strlen(p))==NULL){
+
+        int *i;
+        *i = 0;
         inserir(meiaBusca(raiz, p, i, strlen(p)), p, *i, strlen(p));
         printf("Chave inserida com sucesso!\n");
+        
+    }else{
+        printf("Chave já inserida!");
+        return;
     }
     
 }
@@ -96,6 +101,7 @@ int main(){
     Chave *raiz = malloc(sizeof(Chave));
     inicializaTrie(raiz);
     inserirChave(raiz, "teste");
+    busca(raiz, "teste");
     
     
     
