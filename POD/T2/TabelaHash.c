@@ -117,9 +117,9 @@ int main(){
     Chave TabelaHash[13];
     iniciaTabela(TabelaHash);
 
-    int vet[] = {1, 14, 2, 2};
+    int chaves[] = {1, 14, 2, 2};
 
-    adicionaVetor(vet, TabelaHash, 4);
+    adicionaVetor(chaves, TabelaHash, (sizeof(chaves)/sizeof(chaves[0])));
 
     printf("Encontra 4:\n");
     encontraChave(4, TabelaHash);
