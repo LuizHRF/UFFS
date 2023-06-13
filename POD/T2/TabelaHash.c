@@ -45,13 +45,6 @@ int hash(int a){
     return a%13;
 }
 
-void adicionaVetor(int a[], Chave t[], int s){
-    for(int i = 0; i<s; i++){
-        adicionaChave(a[i], t);
-        printf(" : chave [%d]\n", a[i]);
-    }
-}
-
 void adicionaChave(int a, Chave t[]){
     
     Chave *aux = malloc(sizeof(Chave));
@@ -83,29 +76,36 @@ void adicionaChave(int a, Chave t[]){
     return;
 }
 
-void *encontraChave(int a, Chave t[]){
+void adicionaVetor(int a[], Chave t[], int s){
+    for(int i = 0; i<s; i++){
+        adicionaChave(a[i], t);
+        printf(" : chave [%d]\n", a[i]);
+    }
+}
+
+void encontraChave(int a, Chave t[]){
     for(Chave *i = t[hash(a)].proximo; i != NULL; i = i->proximo){
         if(i->val == a){
-            printf("Chave encontrada \n");
+            printf("Chave encontrada \n\n");
             return;
         }
     }
-    printf(nf);
+    printf("%s\n", nf);
 }
 
 void removeChave(int a, Chave t[]){
 
     if(t[hash(a)].proximo->val == a){
-        t[hash(a)].proximo = NULL;
-        printf(ok, "\n");
+        t[hash(a)].proximo = t[hash(a)].proximo->proximo;
+        printf("%s\n", ok);
         return;
 
     }else{
 
         for(Chave *i = t[hash(a)].proximo; i->proximo != NULL; i = i->proximo){
             if(i->proximo->val == a){
-                i->proximo = NULL;
-                printf(ok, "\n");
+                i->proximo = i->proximo->proximo;
+                printf("%s\n", ok);
                 return;
             }
         }
@@ -117,7 +117,7 @@ int main(){
     Chave TabelaHash[13];
     iniciaTabela(TabelaHash);
 
-    int chaves[] = {1, 14, 2, 2};
+    int chaves[] = {1, 14, 2, 2, 27};
 
     adicionaVetor(chaves, TabelaHash, (sizeof(chaves)/sizeof(chaves[0])));
 
@@ -129,5 +129,17 @@ int main(){
     encontraChave(14, TabelaHash);
     printf("Encontra 2:\n");
     encontraChave(2, TabelaHash);
+    encontraChave(27, TabelaHash);
+
+    removeChave(1, TabelaHash);
+
+    printf("Encontra 27:\n");
+    encontraChave(27, TabelaHash);
+    printf("Encontra 1:\n");
+    encontraChave(1, TabelaHash);
+    printf("Encontra 14:\n");
+    encontraChave(14, TabelaHash);
+
+    return 0;
 
 }
