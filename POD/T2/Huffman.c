@@ -78,15 +78,10 @@ void bubbleSortFloresta(Node *A[], int size){ //Função para ordenar em ordem c
         flag = false;
 
         for(int j=0; j<i; j++){
-            if(A[j+1]==NULL){
-                continue;
-            }else{
-                if(A[j]==NULL || (A[j]->frequencia > A[j+1]->frequencia)){
-                    troca(A[j], A[j+1]);
-                    flag = true;
-                }
+            if(A[j]->frequencia > A[j+1]->frequencia){
+                troca(A[j], A[j+1]);
+                flag = true;
             }
-
         }
         if(flag==false){
             return;
@@ -97,19 +92,38 @@ void bubbleSortFloresta(Node *A[], int size){ //Função para ordenar em ordem c
 
 Node *unirFloresta(Node *floresta[], int size){
     
-    if(floresta[1]!=NULL){
-        Node *aux = malloc(sizeof(Node)); printf("Alocando memoria\n");
-        aux->frequencia = floresta[0]->frequencia + floresta[1]->frequencia; printf("Ajustando frequencia: %d\n", aux->frequencia);
-        aux->left = floresta[0]; printf("Atribuindo esquerdo\n");
-        aux->right = floresta[1]; printf("Atribuindo direito\n");
-        floresta[0] = aux; printf("Atribuindo primeiro nodo da arvore\n");
-        floresta[1] = NULL; printf("Atribuindo novo nodo na arvore [1]\n"); printf("Iniciando o bubble\n");
-        bubbleSortFloresta(floresta, size); printf("finalizando o bubble\n");
+    if(size!=1){
+
+        Node *aux = malloc(sizeof(Node)); 
+        aux->frequencia = floresta[0]->frequencia + floresta[1]->frequencia; 
+        aux->left = floresta[0];
+        aux->right = floresta[1];
+
+        floresta[1] = aux;
+
+            for(int i=0;i<size-1; i++){
+                floresta[i] = floresta[i+1];
+            }
+            floresta[size] = NULL;
+
+        bubbleSortFloresta(floresta, size-1); 
+        return unirFloresta(floresta, size-1);
+
     }else{
         return floresta[0];
     }
     printf("Deu erro na união\n");
     return NULL;
+}
+
+void printhuff(Node *huffman){
+    if(huffman == NULL){
+        return;
+    }else{
+        printhuff(huffman->right);
+        printf("Caractere: %c | Frequência: %d\n", huffman->data, huffman->frequencia);
+        printhuff(huffman->left);
+    }
 }
 
 void Codificar_Huffman(char input[]){
@@ -125,13 +139,14 @@ void Codificar_Huffman(char input[]){
     for(int i=0; i<caracteres_diferentes; i++){
         printf("Letra %c | Frequência: %d\n", floresta[i]->data, floresta[i]->frequencia);
     }
-    printf("AGORA ORDENADO: \n\n");
+    printf("AGORA ORDENADO: \n");
     bubbleSortFloresta(floresta, caracteres_diferentes);
     for(int i=0; i<caracteres_diferentes; i++){
         printf("Letra %c | Frequência: %d\n", floresta[i]->data, floresta[i]->frequencia);
     }
 
     Node *Huffman = unirFloresta(floresta, caracteres_diferentes);
+    printhuff(Huffman);
 }
 
 int main() {
