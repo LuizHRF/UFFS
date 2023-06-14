@@ -96,6 +96,7 @@ Node *unirFloresta(Node *floresta[], int size){
 
         Node *aux = malloc(sizeof(Node)); 
         aux->frequencia = floresta[0]->frequencia + floresta[1]->frequencia; 
+        aux->data = '\0';
         aux->left = floresta[0];
         aux->right = floresta[1];
 
@@ -125,6 +126,7 @@ void printhuff(Node *huffman){
         printhuff(huffman->left);
     }
 }
+
 
 void Codificar_Huffman(char input[]){
     int caracteres_diferentes = charDif(input, (int)strlen(input));
