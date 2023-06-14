@@ -7,12 +7,12 @@
       <elementName>ExternalFile</elementName>
       <elementAttributes>
         <entry>
-          <string>Label</string>
-          <string>alerta</string>
-        </entry>
-        <entry>
           <string>applicationType</string>
           <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>alerta</string>
         </entry>
         <entry>
           <string>externalInputs</string>
@@ -28,7 +28,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>/home/aluno/Documentos/VHDL/CasaAutomatica_Alerta.vhdl</file>
+          <file>/home/aluno/Documentos/VHDL/Casa_Automática/CasaAutomatica_Alerta.vhdl</file>
         </entry>
       </elementAttributes>
       <pos x="440" y="-280"/>
@@ -196,12 +196,12 @@
       <elementName>ExternalFile</elementName>
       <elementAttributes>
         <entry>
-          <string>Label</string>
-          <string>Caixas_de_Agua</string>
-        </entry>
-        <entry>
           <string>applicationType</string>
           <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>Caixas_de_Agua</string>
         </entry>
         <entry>
           <string>externalInputs</string>
@@ -217,7 +217,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>/home/aluno/Documentos/VHDL/CasaAutomatica_Caixas.vhdl</file>
+          <file>/home/aluno/Documentos/VHDL/Casa_Automática/CasaAutomatica_Caixas.vhdl</file>
         </entry>
       </elementAttributes>
       <pos x="460" y="100"/>
@@ -256,10 +256,6 @@
       <elementName>LED</elementName>
       <elementAttributes>
         <entry>
-          <string>Label</string>
-          <string>Caixa A está bombeando para B</string>
-        </entry>
-        <entry>
           <string>Color</string>
           <awt-color>
             <red>153</red>
@@ -268,16 +264,16 @@
             <alpha>255</alpha>
           </awt-color>
         </entry>
+        <entry>
+          <string>Label</string>
+          <string>Caixa A está bombeando para B</string>
+        </entry>
       </elementAttributes>
       <pos x="780" y="60"/>
     </visualElement>
     <visualElement>
       <elementName>LED</elementName>
       <elementAttributes>
-        <entry>
-          <string>Label</string>
-          <string>Eletroválvula de A está ligada</string>
-        </entry>
         <entry>
           <string>Color</string>
           <awt-color>
@@ -286,6 +282,10 @@
             <blue>102</blue>
             <alpha>255</alpha>
           </awt-color>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>Eletroválvula de A está ligada</string>
         </entry>
       </elementAttributes>
       <pos x="780" y="160"/>
