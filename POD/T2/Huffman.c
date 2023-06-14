@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 // Estrutura do Nó da árvore
 typedef struct Node {
@@ -9,26 +10,128 @@ typedef struct Node {
     struct Node* left, * right;
 }Node;
 
-int charDif(char palavra[]){  //Função para calcular quandos caracteres diferentes existem na palavra
+int charDif(char entrada[], int s){  //Função para calcular quandos caracteres diferentes existem na palavra
     int k = 0;
     char a;
-    for(int l=0; l<strlen(palavra); l++){
-        a = palavra[l];
-        for(int i = 0; i<strlen(palavra); i++){
-            if(palavra[i]==a){
-                for(int j=i; j<(strlen(palavra)); j++){
-                    palavra[j] = palavra[j+1];
+    char palavra[s];
+    strcpy(palavra, entrada); //copia a palavra original pois o metodo vai retirando letra por letra
+    
+    for(int l=0; l<s; l++){
+        a = palavra[0]; //Analiza smp a primira letra da palavra->
+        if(a=='\0'){break;}
+        k++;
+        
+        for(int i = 0; i<(int)strlen(palavra); i++){
+            
+            if(palavra[i]==a){ //->Compara com as outras letras e se for igual->
+                
+                for(int j=i; j<(int)strlen(palavra); j++){
+                    palavra[j] = palavra[j+1]; //->Puxa todos os caracteres para trás (removendo aquele caractere)
                 }
-                k++;
+                i--;
             }
         }
     }
-    return k-1;
+    return k;
 }
 
-Node* criarfloresta(char palavra[]){ //Função para criar floresta ordenada com os caracteres da palavra
-    int s = charDif(palavra);
+void criarfloresta(Node *floresta[], char palavra[], int carac){ //Função para criar floresta ordenada com os caracteres da palavra
 
+    char a;
+    int count = 0;
+    
+    for(int k=0; k<=carac; k++){
+        a=palavra[0]; //Analiza smp a primeira letra, seguindo a logica da contagem de caracteres diferentes
+        count = 0;
+        Node *aux = malloc(sizeof(Node)); // Aloca memoria para um novo nodo da floresta;
+        aux->data = a;
+        aux->left = NULL;
+        aux->right = NULL;
+        
+        for(int i=0; i<(int)strlen(palavra); i++){
+            
+            if(palavra[i]==a){
+                
+                for(int m=i; m<(int)strlen(palavra);m++){
+                    palavra[m] = palavra[m+1];    //Remove carcatere à caractere adicionando ele à um nodo na floresta
+                }                               //Se o caractere for repetido, apenas aumenta a frequencia;
+                i--;
+                count++;
+            }
+        }
+        aux->frequencia = count;
+        floresta[k] = aux;
+    }
+}
+
+void troca(Node *x, Node *y){
+    
+    
+    Node aux = *x;
+    *x = *y;
+    *y = aux;
+}
+
+void bubbleSortFloresta(Node *A[], int size){ //Função para ordenar em ordem crescente os nodos da floresta
+    bool flag;
+    for(int i=size-1; i>0; i--){
+        flag = false;
+
+        for(int j=0; j<i; j++){
+            if(A[j+1]==NULL){
+                continue;
+            }else{
+                if(A[j]==NULL || (A[j]->frequencia > A[j+1]->frequencia)){
+                    troca(A[j], A[j+1]);
+                    flag = true;
+                }
+            }
+
+        }
+        if(flag==false){
+            return;
+        }
+    }
+    return;
+}
+
+Node *unirFloresta(Node *floresta[], int size){
+    
+    if(floresta[1]!=NULL){
+        Node *aux = malloc(sizeof(Node)); printf("Alocando memoria\n");
+        aux->frequencia = floresta[0]->frequencia + floresta[1]->frequencia; printf("Ajustando frequencia: %d\n", aux->frequencia);
+        aux->left = floresta[0]; printf("Atribuindo esquerdo\n");
+        aux->right = floresta[1]; printf("Atribuindo direito\n");
+        floresta[0] = aux; printf("Atribuindo primeiro nodo da arvore\n");
+        floresta[1] = NULL; printf("Atribuindo novo nodo na arvore [1]\n"); printf("Iniciando o bubble\n");
+        bubbleSortFloresta(floresta, size); printf("finalizando o bubble\n");
+    }else{
+        return floresta[0];
+    }
+    printf("Deu erro na união\n");
+    return NULL;
+}
+
+void Codificar_Huffman(char input[]){
+    int caracteres_diferentes = charDif(input, (int)strlen(input));
+
+    printf("Palavra: %s, Caracteres diferentes: %d\n", input, caracteres_diferentes);
+
+    printf("Criando floresta\n");
+    Node *floresta[caracteres_diferentes];
+    criarfloresta(floresta, input, caracteres_diferentes);
+
+    printf("Imprimindo\n");
+    for(int i=0; i<caracteres_diferentes; i++){
+        printf("Letra %c | Frequência: %d\n", floresta[i]->data, floresta[i]->frequencia);
+    }
+    printf("AGORA ORDENADO: \n\n");
+    bubbleSortFloresta(floresta, caracteres_diferentes);
+    for(int i=0; i<caracteres_diferentes; i++){
+        printf("Letra %c | Frequência: %d\n", floresta[i]->data, floresta[i]->frequencia);
+    }
+
+    Node *Huffman = unirFloresta(floresta, caracteres_diferentes);
 }
 
 int main() {
@@ -37,7 +140,7 @@ int main() {
     fgets(input, sizeof(input), stdin);
     input[strcspn(input, "\n")] = '\0';  // remove o caractere de nova linha
 
-    Node *floresta[charDif(input)];
-
+    Codificar_Huffman(input);
+    
     return 0;
 }
