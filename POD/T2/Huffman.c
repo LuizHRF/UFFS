@@ -97,15 +97,15 @@ Node *unirFloresta(Node *floresta[], int size){
         Node *aux = malloc(sizeof(Node)); 
         aux->frequencia = floresta[0]->frequencia + floresta[1]->frequencia; 
         aux->data = '\0';
-        aux->left = floresta[0];
+        aux->left = floresta[0];  //Cria nodo com as informações unidas dos dois primeiros nodos da árvore
         aux->right = floresta[1];
 
-        floresta[1] = aux;
+        floresta[1] = aux; //susbtitui um nodo antigo pelo novo nodo
 
             for(int i=0;i<size-1; i++){
                 floresta[i] = floresta[i+1];
             }
-            floresta[size] = NULL;
+            floresta[size] = NULL;  // substitui o outro nodo antigo por NULL e coloca-o no fim do veotr
 
         bubbleSortFloresta(floresta, size-1); 
         return unirFloresta(floresta, size-1);
@@ -113,20 +113,27 @@ Node *unirFloresta(Node *floresta[], int size){
     }else{
         return floresta[0];
     }
-    printf("Deu erro na união\n");
     return NULL;
 }
 
-void printhuff(Node *huffman){
+
+void printhuff(Node *huffman, int b){
     if(huffman == NULL){
         return;
     }else{
-        printhuff(huffman->right);
+        
+        for (int i = 0; i < b; i++){ printf(" | ");}
         printf("Caractere: %c | Frequência: %d\n", huffman->data, huffman->frequencia);
-        printhuff(huffman->left);
+        
+        printhuff(huffman->left, b+1);
+        
+        printhuff(huffman->right, b+1);
     }
 }
 
+void imprimeHuffman(Node *huff){
+    printhuff(huff, 0);
+}
 
 void Codificar_Huffman(char input[]){
     int caracteres_diferentes = charDif(input, (int)strlen(input));
@@ -148,7 +155,7 @@ void Codificar_Huffman(char input[]){
     }
 
     Node *Huffman = unirFloresta(floresta, caracteres_diferentes);
-    printhuff(Huffman);
+    imprimeHuffman(Huffman);
 }
 
 int main() {
