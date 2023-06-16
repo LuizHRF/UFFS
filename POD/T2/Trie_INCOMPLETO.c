@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct chave{
+    char c;
+    struct chave *filhos[26];
+    int terminal;
+} Chave;
+
+
+void inicializaTrie(Chave *c){
+    
+    c->terminal = 0;
+    for(int i =0; i<26; i++){
+        c->filhos[i] = NULL;
+    }
+    printf("Raiz inicializada!\n");
+}
+
+Chave* procura(Chave* trie, char p[], int i, int size){
+    printf("[Entrou na procura]\n");
+    for(int j=0; j<26; j++){
+        if(trie->filhos[j]==NULL){continue;}else{
+        if(p[i]==trie->filhos[j]->c){
+            printf("Primeiro if\n");
+            if(i==size-1){
+                printf("Segundo if\n");
+                if(trie->terminal==1){
+                    return trie;
+                }else{
+                    return NULL;
+                }
+            }
+            return procura(trie->filhos[j], p, i+1, size);
+        }}
+    }
+    return NULL;
+}
+
+void busca(Chave *raiz, char p[]){
+    if(procura(raiz, p, 0, strlen(p))==NULL){
+        printf("Chave inexistente!\n");
+        return;
+    }else{
+        printf("Chave encontrada!");
+        return;
+    }
+}
+
+Chave* meiaBusca(Chave* raiz, char p[], int* i, int size){
+
+    for(int j=0; j<26; j++){
+        if(raiz->filhos[j]==NULL){continue;}else{
+        if(raiz->filhos[j]->c==p[*i]){
+            printf("Testando filhos[%d]\n", *i);
+            *i+=1;
+            return meiaBusca(raiz->filhos[j], p, i, size);
+        }}
+    }
+    return raiz;
+}
+
+Chave* inserir(Chave* raiz, char p[], int i, int size){
+    if(i == size-1){
+        Chave* aux = malloc(sizeof(Chave));
+        aux->c = p[i]; //printf("inserindo letra %c\n", p[i]);
+        aux->terminal = 1;
+        return aux;
+    }else{
+    
+        Chave* aux = malloc(sizeof(Chave));
+        aux->c = p[i]; //printf("Inserindo letra %c\n", p[i]);
+        i++;
+        aux->filhos[0] = inserir(aux, p, i, size);
+        for(int k=0; k<26; k++){
+            if(raiz->filhos[k]==NULL){
+                raiz->filhos[k] = aux;
+            }
+        }
+        return raiz;
+    }   
+}
+
+void inserirChave(Chave* raiz, char p[]){
+    if(procura(raiz, p, 0, strlen(p))==NULL){
+
+        int *i;
+        *i = 0;
+        raiz = inserir(meiaBusca(raiz, p, i, strlen(p)), p, *i, strlen(p));
+        printf("Chave inserida com sucesso!\n");
+        printf("Nodo 1, valor: %c\n", raiz->filhos[0]->c);
+        
+        
+    }else{
+        printf("Chave já inserida!");
+        return;
+    }
+    
+}
+
+
+int main(){
+    
+    Chave *raiz = malloc(sizeof(Chave));
+    inicializaTrie(raiz);
+    inserirChave(raiz, "teste");
+    
+    busca(raiz, "teste");
+    
+    
+    
+    return 0;
+}
