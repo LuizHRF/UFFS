@@ -2,24 +2,24 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity Caixas_de_Agua is port(
-    SA20, SA15, SB: in std_logic;
+    SA: in std_logic_vector(3 downto 0);
+    SB, Bomba_Ligada: in std_logic;
     CAB, EVA: out std_logic
 ); 
 end Caixas_de_Agua;
 
 architecture Bombas of Caixas_de_Agua is
     begin
-        process(SA20, SA15, SB) begin
-            if SA20 or SB or SA15 then
-                CAB<= '0';
-            else CAB<= '1';
+        process(SA, SB) begin
+            if SA(0)='1' and Bomba_Ligada = '1' and SB = '0' then CAB<= '1';
+            else CAB <= '0';
             end if;
         end process;
 
-        process(SA15) begin
-            if SA15 then
-                EVA<='1';
-            else EVA<='0';
+        process(SA) begin
+            if SA(1) = '0' then
+                EVA <= '1';
+                else EVA<='0';
             end if;
         end process;
     end Bombas;
