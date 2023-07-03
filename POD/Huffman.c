@@ -90,6 +90,7 @@ void bubbleSortFloresta(Node *A[], int size){ //Função para ordenar em ordem c
     return;
 }
 
+
 Node *unirFloresta(Node *floresta[], int size){
     
     if(size!=1){
@@ -131,19 +132,29 @@ void printhuff(Node *huffman, int b){
     }
 }
 
-void printcod(Node *huffman, int b){
-    if(huffman == NULL){
-        return;
-    }else{
-        
-        if(huffman->data != '\0'){
-            printf("%c", huffman->data);
-        }
-        printf("%d", b);
-        printcod(huffman->left, 0);
-        
-        printcod(huffman->right, 1);
+void printcod(struct Node* root, int arr[], int top) {
+    
+    if (root->left) {
+        arr[top] = 0;
+        printcod(root->left, arr, top + 1);
     }
+    
+    if (root->right) {
+        arr[top] = 1;
+        printcod(root->right, arr, top + 1);
+    }
+    
+    
+    if (root->left == NULL && root->right == NULL) {
+        printf("%c: ", root->data);
+        for (int i = 0; i < top; i++) {
+            printf("%d", arr[i]);
+        }
+        printf("\n");
+    }
+    
+    
+    
 }
 
 void imprimeHuffman(Node *huff){
@@ -151,7 +162,8 @@ void imprimeHuffman(Node *huff){
 }
 
 void imprimecod(Node *huff){
-    printcod(huff, 0);
+    int cod[100];
+    printcod(huff, cod, 0);
 }
 
 void Codificar_Huffman(char input[]){
@@ -174,6 +186,7 @@ void Codificar_Huffman(char input[]){
     }
  */
     Node *Huffman = unirFloresta(floresta, caracteres_diferentes);
+
     imprimecod(Huffman);
 
 }
