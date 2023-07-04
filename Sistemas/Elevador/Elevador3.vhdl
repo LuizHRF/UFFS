@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity ElevatorControl is
+entity Elevador is
     port (
         clock : in std_logic;
         reset : in std_logic;
@@ -13,7 +13,7 @@ entity ElevatorControl is
     );
 end entity;
 
-architecture Behavioral of ElevatorControl is
+architecture bhv_Elevador of Elevador is
     type estadoElevador is (parado, subindo, descendo);
     signal estadoAtual : estadoElevador;
     signal proxEstado : estadoElevador;
