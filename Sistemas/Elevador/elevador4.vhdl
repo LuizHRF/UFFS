@@ -14,7 +14,7 @@ entity Elevador is
 end entity;
 
 architecture bhv_Elevador of Elevador is
-    type estadoElevador is (parado, subindo, descendo, movendo);
+    type estadoElevador is (parado, subindo, descendo);
     signal estadoAtual : estadoElevador;
     signal proxEstado : estadoElevador;
     signal proxAndar : std_logic_vector(1 downto 0);
@@ -47,29 +47,18 @@ begin
                     proxAndar <= sensor;
                 end if;
             when subindo =>
+                proxAndar <= std_logic_vector(unsigned(andarAtual) + 1);
                 if proxAndar = sensor then
                     proxEstado <= parado;
                 else
-                    proxEstado <= movendo;
+                    proxEstado <= subindo;
                 end if;
             when descendo =>
+                proxAndar <= std_logic_vector(unsigned(andarAtual) - 1);
                 if proxAndar = sensor then
                     proxEstado <= parado;
                 else
-                    proxEstado <= movendo;
-                end if;
-            when movendo =>
-                if proxAndar < sensor then
-                    proxEstado <= subindo;
-                else
                     proxEstado <= descendo;
-                end if;
-
-           if estadoAtual = movendo then
-                if estadoAtual = subindo then
-                    proxAndar <= std_logic_vector(unsigned(andarAtual) + 1);
-                else
-                    proxAndar <= std_logic_vector(unsigned(andarAtual) - 1);
                 end if;
             
             andarAtual <= proxAndar;
@@ -90,9 +79,6 @@ begin
             when descendo =>
                 subindo <= '0';
                 descendo <= '1';
-            when movendo =>
-                subindo <= '0';
-                descendo <= '0';
         end case;
 
         if estadoAtual = parado then
