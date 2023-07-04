@@ -67,9 +67,9 @@ begin
 
            if estadoAtual = movendo then
                 if estadoAtual = subindo then
-                    proxAndar <= andarAtual + 1;
+                    proxAndar <= std_logic_vector(unsigned(andarAtual) + 1);
                 else
-                    proxAndar <= andarAtual - 1;
+                    proxAndar <= std_logic_vector(unsigned(andarAtual) - 1);
                 end if;
             
             andarAtual <= proxAndar;
