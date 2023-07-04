@@ -64,13 +64,6 @@ void criarfloresta(Node *floresta[], char palavra[], int carac){ //Função para
     }
 }
 
-void troca(Node *x, Node *y){
-    
-    
-    Node aux = *x;
-    *x = *y;
-    *y = aux;
-}
 
 int compararNodos(const void *a, const void *b) {
     Node *nodoA = *(Node **)a;
@@ -95,23 +88,6 @@ int compararNodos(const void *a, const void *b) {
 void ordenarFloresta(Node *floresta[], int size) {
     qsort(floresta, size, sizeof(Node *), compararNodos);
 }
-void bubbleSortFloresta(Node *A[], int size) {
-    bool flag = true;
-    
-    for (int i = 0; i < size - 1 && flag; i++) {
-        
-        flag = false;
-        
-        for (int j = 0; j < size - 1 - i; j++) {
-            
-            if (A[j]->frequencia > A[j + 1]->frequencia) {
-                troca(A[j], A[j + 1]);
-                flag = true;
-            }
-        }
-    }
-}
-
 
 Node *unirFloresta(Node *floresta[], int size){
     
