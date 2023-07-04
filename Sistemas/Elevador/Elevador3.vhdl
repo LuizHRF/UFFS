@@ -35,7 +35,7 @@ begin
         case estadoAtual is
             when parado =>
                 if chamada /= "0000" then
-                    if sensor = "00" then
+                    if (sensor = chamada) then
                         proxEstado <= parado;
                     elsif sensor < chamada then
                         proxEstado <= subindo;
