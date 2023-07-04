@@ -60,8 +60,6 @@ begin
                 else
                     proxEstado <= descendo;
                 end if;
-            
-            andarAtual <= proxAndar;
              
           end if;     
         end case;
