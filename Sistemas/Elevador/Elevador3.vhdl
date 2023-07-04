@@ -3,84 +3,84 @@ use IEEE.std_logic_1164.all;
 
 entity ElevatorControl is
     port (
-        clk : in std_logic;
+        clock : in std_logic;
         reset : in std_logic;
-        call_request : in std_logic_vector(3 downto 0);
-        floor_sensor : in std_logic_vector(3 downto 0);
-        motor_up : out std_logic;
-        motor_down : out std_logic;
-        current_floor : out std_logic_vector(1 downto 0)
+        chamada : in std_logic_vector(3 downto 0);
+        sensor : in std_logic_vector(3 downto 0);
+        subindo : out std_logic;
+        descendo : out std_logic;
+        andarAtual : out std_logic_vector(1 downto 0)
     );
 end entity;
 
 architecture Behavioral of ElevatorControl is
-    type ElevatorState is (Idle, MoveUp, MoveDown);
-    signal current_state : ElevatorState;
-    signal next_state : ElevatorState;
-    signal next_floor : std_logic_vector(1 downto 0);
+    type estadoElevador is (parado, subindo, descendo);
+    signal estadoAtual : estadoElevador;
+    signal proxEstado : estadoElevador;
+    signal proxAndar : std_logic_vector(1 downto 0);
 begin
-    process (clk, reset)
+    process (clock, reset)
     begin
         if reset = '1' then
-            current_state <= Idle;
-            next_state <= Idle;
-            next_floor <= "00";
-        elsif rising_edge(clk) then
-            current_state <= next_state;
+            estadoAtual <= parado;
+            proxEstado <= parado;
+            proxAndar <= "00";
+        elsif rising_edge(clock) then
+            estadoAtual <= proxEstado;
         end if;
     end process;
 
-    process (current_state, call_request, floor_sensor)
+    process (estadoAtual, chamada, sensor)
     begin
-        case current_state is
-            when Idle =>
-                if call_request /= "0000" then
-                    if floor_sensor = "00" then
-                        next_state <= Idle;
-                    elsif floor_sensor < call_request then
-                        next_state <= MoveUp;
-                        next_floor <= call_request;
-                    elsif floor_sensor > call_request then
-                        next_state <= MoveDown;
-                        next_floor <= call_request;
+        case estadoAtual is
+            when parado =>
+                if chamada /= "0000" then
+                    if sensor = "00" then
+                        proxEstado <= parado;
+                    elsif sensor < chamada then
+                        proxEstado <= subindo;
+                        proxAndar <= chamada;
+                    elsif sensor > chamada then
+                        proxEstado <= descendo;
+                        proxAndar <= chamada;
                     end if;
                 else
-                    next_state <= Idle;
-                    next_floor <= floor_sensor;
+                    proxEstado <= parado;
+                    proxAndar <= sensor;
                 end if;
-            when MoveUp =>
-                if next_floor = floor_sensor then
-                    next_state <= Idle;
+            when subindo =>
+                if proxAndar = sensor then
+                    proxEstado <= parado;
                 else
-                    next_state <= MoveUp;
+                    proxEstado <= subindo;
                 end if;
-            when MoveDown =>
-                if next_floor = floor_sensor then
-                    next_state <= Idle;
+            when descendo =>
+                if proxAndar = sensor then
+                    proxEstado <= parado;
                 else
-                    next_state <= MoveDown;
+                    proxEstado <= descendo;
                 end if;
         end case;
     end process;
 
-    process (current_state, next_state, floor_sensor)
+    process (estadoAtual, proxEstado, sensor)
     begin
-        case current_state is
-            when Idle =>
-                motor_up <= '0';
-                motor_down <= '0';
-            when MoveUp =>
-                motor_up <= '1';
-                motor_down <= '0';
-            when MoveDown =>
-                motor_up <= '0';
-                motor_down <= '1';
+        case estadoAtual is
+            when parado =>
+                subindo <= '0';
+                descendo <= '0';
+            when subindo =>
+                subindo <= '1';
+                descendo <= '0';
+            when descendo =>
+                subindo <= '0';
+                descendo <= '1';
         end case;
 
-        if current_state = Idle then
-            current_floor <= floor_sensor;
+        if estadoAtual = parado then
+            andarAtual <= sensor;
         else
-            current_floor <= next_floor;
+            andarAtual <= proxAndar;
         end if;
     end process;
 end architecture;
