@@ -1,12 +1,13 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity Elevador is
     port (
         clock : in std_logic;
         reset : in std_logic;
         chamada : in std_logic_vector(3 downto 0);
-        sensor : in std_logic_vector(3 downto 0);
+        sensor : in std_logic_vector(1 downto 0);
         subindo : out std_logic;
         descendo : out std_logic;
         andarAtual : out std_logic_vector(1 downto 0)
@@ -14,18 +15,19 @@ entity Elevador is
 end entity;
 
 architecture bhv_Elevador of Elevador is
-    type estadoElevador is (parado, subindo, descendo);
-    signal estadoAtual : estadoElevador;
-    signal proxEstado : estadoElevador;
-    signal proxAndar : std_logic_vector(1 downto 0);
+    type estadoElevador is (P, S, D);
+    signal estadoAtual : estadoElevador := P;
+    signal proxEstado : estadoElevador := P;
+    signal proxAndar : std_logic_vector(1 downto 0) := "00";
+    signal v1: std_logic_vector(1 downto 0) := "01";
 begin
     process (clock, reset)
     begin
         if reset = '1' then
-            estadoAtual <= parado;
-            proxEstado <= parado;
+            estadoAtual <= P;
+            proxEstado <= P;
             proxAndar <= "00";
-        elsif rising_edge(clock) then
+        elsif clock'event and clock = '1' then
             estadoAtual <= proxEstado;
         end if;
     end process;
@@ -33,53 +35,51 @@ begin
     process (estadoAtual, chamada, sensor)
     begin
         case estadoAtual is
-            when parado =>
+            when P =>
                 if chamada /= "0000" then
                     if (sensor = chamada) then
-                        proxEstado <= parado;
+                        proxEstado <= P;
                     elsif sensor < chamada then
-                        proxEstado <= subindo;
+                        proxEstado <= S;
                     elsif sensor > chamada then
-                        proxEstado <= descendo;
+                        proxEstado <= D;
                     end if;
                 else
-                    proxEstado <= parado;
+                    proxEstado <= P;
                     proxAndar <= sensor;
                 end if;
-            when subindo =>
-                proxAndar <= std_logic_vector(unsigned(andarAtual) + 1);
+            when S =>
+                proxAndar <= std_logic_vector(unsigned(andarAtual) + unsigned(v1));
                 if proxAndar = sensor then
-                    proxEstado <= parado;
+                    proxEstado <= P;
                 else
-                    proxEstado <= subindo;
+                    proxEstado <= S;
                 end if;
-            when descendo =>
-                proxAndar <= std_logic_vector(unsigned(andarAtual) - 1);
+            when D =>
+                proxAndar <= std_logic_vector(unsigned(andarAtual) - unsigned(v1));
                 if proxAndar = sensor then
-                    proxEstado <= parado;
+                    proxEstado <= P;
                 else
-                    proxEstado <= descendo;
-                end if;
-             
-          end if;     
+                    proxEstado <= D;
+                end if;   
         end case;
     end process;
 
     process (estadoAtual, proxEstado, sensor)
     begin
         case estadoAtual is
-            when parado =>
+            when P =>
                 subindo <= '0';
                 descendo <= '0';
-            when subindo =>
+            when S =>
                 subindo <= '1';
                 descendo <= '0';
-            when descendo =>
+            when D =>
                 subindo <= '0';
                 descendo <= '1';
         end case;
 
-        if estadoAtual = parado then
+        if estadoAtual = P then
             andarAtual <= sensor;
         else
             andarAtual <= proxAndar;
