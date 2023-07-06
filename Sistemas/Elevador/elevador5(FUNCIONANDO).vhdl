@@ -38,6 +38,9 @@ begin
 
             when P =>
 
+                proxAndar <= sensor;
+                proxEstado <= P;
+
             when S =>
 
                 if sensor = "00" then
@@ -47,13 +50,13 @@ begin
                     elsif sensor = "10" then    
                         proxAndar <= "11";
                     elsif sensor = "11" then
-                        proxAndar <= "11";
+                        proxAndar <= sensor;
                     end if;
 
             when D =>
 
                 if sensor = "00" then   
-                    proxAndar <= "00";
+                    proxAndar <= sensor;
                 elsif sensor = "01" then 
                     proxAndar <= "00";
                 elsif sensor = "10" then    
