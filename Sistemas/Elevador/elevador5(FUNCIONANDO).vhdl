@@ -15,11 +15,12 @@ entity Elevador is
 end entity;
 
 architecture bhv_Elevador of Elevador is
+    
     type estadoElevador is (P, S, D);
     signal estadoAtual : estadoElevador := P;
     signal proxEstado : estadoElevador := P;
     signal proxAndar : std_logic_vector(1 downto 0) := "00";
-    signal v1: std_logic_vector(1 downto 0) := "01";
+
 begin
 
     process (clock, reset)
