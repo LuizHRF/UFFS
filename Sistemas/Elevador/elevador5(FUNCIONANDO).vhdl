@@ -39,7 +39,7 @@ begin
             when P =>
 
                 proxAndar <= sensor;
-                proxEstado <= P;
+                --proxEstado <= P;
 
             when S =>
 
@@ -72,8 +72,10 @@ begin
             estadoAtual <= P;
         elsif proxAndar < chamada then
             proxEstado <= S;
+            estadoAtual <= S;
         elsif proxAndar > chamada then
             proxEstado <= D;
+            estadoAtual <= D;
         end if;
 
         end if;
