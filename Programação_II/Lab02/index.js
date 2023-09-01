@@ -11,7 +11,7 @@ console.log(db.cursos[0]);
 
 app.get('/curso', (req, res) => {
     
-    let id = req.query.id;
+    let id = parseInt(req.query.id);
     console.log("Recebi uma request GET");
 
     for(let i = 0; i<10; i++){
@@ -19,11 +19,11 @@ app.get('/curso', (req, res) => {
             res.send(`CURSO ID: ${db.cursos[i].id}
                       Nome do curso: ${db.cursos[i].nome}
                       Turno do curso: ${db.cursos[i].turno}
-                      Campus do curso: ${db.cursos[i].id_campus}`)
-        break;}
+                      Campus do curso: ${db.cursos[i].id_campus}`);
+        }else{
+            res.send("Curso não encontrado!");
+        }
     }
-
-    res.send("Curso não encontrado!");
 });
 
 app.post('/curso', (req, res) => {
