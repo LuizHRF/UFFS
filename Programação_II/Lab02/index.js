@@ -33,7 +33,7 @@ app.post('/curso', (req, res) => {
     let id_ = parseInt(req.body.id);
     let nome_ = req.body.nome;
     let turno_ = parseInt(req.body.turno);
-    let id_campus_ = parseInt(req.body.turno);
+    let id_campus_ = parseInt(req.body.id_campus);
 
     db.cursos.push({id: id_,
                     nome: nome_,
