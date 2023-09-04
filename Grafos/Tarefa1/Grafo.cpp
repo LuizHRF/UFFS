@@ -74,7 +74,9 @@ void Grafo::imprime() {
     cout << "\n";
 }
 
-void Grafo::remove_vertice(int v){  //DIMINIR O CONTADOR DE ARESTAS QUANDO UM VERTICE É REMOVIDO
+void Grafo::remove_vertice(int v){
+
+    num_arestas_-=lista_adj_[v].size();
 
     if(v<num_vertices_ && v>=0){
 
