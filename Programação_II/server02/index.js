@@ -3,13 +3,13 @@ const bodyParser = require("body-parser")
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.listen(3001, () => console.log("Servidor iniciado na porta 3001"));
 
 app.get('/', (req, res) => {
-    let nome = req.query.nome;
     console.log("Recebi uma request GET");
-    res.send(`Olá ${nome}!`);
+    res.sendFile(`${__dirname}/index.html`);
 });
 
 app.post('/', (req, res) => {
