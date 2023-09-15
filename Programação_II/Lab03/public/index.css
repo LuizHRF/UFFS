@@ -1,0 +1,23 @@
+body{
+    margin: 50px 300px 50px 300px;
+}
+
+
+.ccr_desc{
+    color: rgb(105, 101, 101);
+    width: 500px;
+    text-justify: distribute;
+}
+
+#universidade{
+    font-style: bold;
+    color: #00693E;
+    text-align: center;
+}
+
+.ccr_name{
+    font-style: bold;
+    color: #00693E
+}
+
+
