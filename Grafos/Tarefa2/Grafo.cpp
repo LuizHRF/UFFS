@@ -97,7 +97,7 @@ int Grafo::num_vertices(){
     return num_vertices_;
 } 
 
-void Grafo::busca_larg(int v, std::vector<int> pai, int dist[]) {
+void Grafo::busca_larg(int v, std::vector<int> pai, std::vector<int>& dist) {
 
     std::queue<int> fila;
     std::vector<int> marcado(num_vertices_);
@@ -126,13 +126,13 @@ void Grafo::busca_larg(int v, std::vector<int> pai, int dist[]) {
 void Grafo::suspeitos(int n){
     std::vector<int> pai(num_vertices_, -1);
 
-    int distancia[1000];
+    std::vector<int> distancia(num_vertices_);
 
     busca_larg(n, pai, distancia);
 
     printf("%d:", n);
     for(int i=0; i< num_vertices_; i++){
-        if(distancia[i]<=3){
+        if(distancia[i]<=3 && distancia[i]!=0){
             printf(" %d", i);
         }
     }

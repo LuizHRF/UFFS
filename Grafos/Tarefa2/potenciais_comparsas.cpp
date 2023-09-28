@@ -11,9 +11,6 @@
 #include <iostream>
 using namespace std;
 
-void info(Grafo g){
-    std::cout << "Número de vertices e num de arestas: " << g.num_vertices() << " - " << g.num_arestas() << "\n";
-}
 
 int main() {
 
@@ -27,7 +24,7 @@ int main() {
 
         cin >> x >> y >> op;
         
-        if(op == 'W'){
+        if(op == 'W' || op=='w'){
             g.inserir_aresta(Aresta(x,y));
         }
 

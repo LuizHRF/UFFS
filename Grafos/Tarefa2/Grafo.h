@@ -27,7 +27,7 @@ public:
 
     void imprime();
 
-    void busca_larg(int v, std::vector<int> pai, int dist[]);
+    void busca_larg(int v, std::vector<int> pai, std::vector<int>& dist);
 
     int caminho(int v, int w, std::vector<int> marcado);
     int conexo();
