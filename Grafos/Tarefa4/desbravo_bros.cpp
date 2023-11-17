@@ -14,31 +14,21 @@ using namespace std;
 
 int main() {
 
-    int x, y, it;
-    char op;
+    int x, y, p, it;
 
     cin >> x >> it;
     Digrafo g = Digrafo(x);
 
     while(it!=0){
 
-        cin >> x >> y >> op;
-        
-        if(op == 'W' || op=='w'){
-            //g.inserir_aresta(Aresta(x,y));
-        }
+        cin >> x >> y >>p;
+
+        g.inserir_aresta(Aresta(x, y, p));
 
         it--;
     }
 
-    cin >> it;
-    while(it!=0){
-
-        cin >> x;
-        //g.suspeitos(x);
-
-        it--;
-    }
+    g.print_matriz();
 
     return 0;
 }
