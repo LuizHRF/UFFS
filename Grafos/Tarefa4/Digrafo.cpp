@@ -37,24 +37,8 @@ void Digrafo::remover_aresta(Aresta e) {
     }
 }
 
-
-int Digrafo::caminho(int v, int w, std::vector<int> marcado) {
-    if (v == w) {
-        //printf("%d-", v);
-        return 1;
-    }
-    marcado[v] = 1;
-    for (int u = 0; u < num_vertices_; u++){
-        if (matriz_adj_[v][u] != 0){
-            if (marcado[u] == 0){
-                if (caminho(u, w, marcado)){
-                    //printf("%d-", v);
-                    return 1;
-                }
-            }
-        }
-    }
-    return 0;
+int Digrafo::max_vidas(int v){
+    
 }
 
 int Digrafo::num_arestas(){
@@ -65,31 +49,6 @@ int Digrafo::num_vertices(){
     return num_vertices_;
 } 
 
-void Digrafo::busca_larg(int v, std::vector<int> pai, std::vector<int>& dist) {
-
-    std::queue<int> fila;
-    std::vector<int> marcado(num_vertices_);
-
-    marcado[v] = 1;
-    pai[v] = -1;
-    dist[v] = 0;
-    fila.push(v);
-
-    while(!fila.empty()){
-        int w = fila.front();
-        fila.pop();
-        for (int u =0; u< num_vertices_; u++){
-            if(matriz_adj_[w][u] !=0){
-                if(marcado[u]==0){
-                    marcado[u]=1;
-                    pai[u] =w;
-                    dist[u] = dist[w] +1;
-                    fila.push(u);
-                }
-            }
-        }
-    }
-}
 
 void Digrafo::print_matriz(){
     for(int i=0; i<num_vertices_; i++){

@@ -9,19 +9,21 @@
 
 #include "Digrafo.h" 
 #include <iostream>
-using namespace std;
 
+// código para usar ins e outs:
+// ./desbravo_bros <aquivo.in> arquivo.out
+// da pra selecionar amboas arquivos .out e escolher a opção comparar com o botão direito
 
 int main() {
 
     int x, y, p, it;
 
-    cin >> x >> it;
+    std::cin >> x >> it;
     Digrafo g = Digrafo(x);
 
     while(it!=0){
 
-        cin >> x >> y >>p;
+        std::cin >> x >> y >>p;
 
         g.inserir_aresta(Aresta(x, y, p));
 

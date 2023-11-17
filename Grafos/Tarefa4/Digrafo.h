@@ -25,11 +25,17 @@ public:
     void inserir_aresta(Aresta e);
     void remover_aresta(Aresta e);
 
-    void busca_larg(int v, std::vector<int> pai, std::vector<int>& dist);
-
-    int caminho(int v, int w, std::vector<int> marcado);
-
     void print_matriz();
+
+    int max_vidas(int v);
+    /*
+        Idéia é primeiro inverter todos os pesos (*-1) e utilizar do algoritmo de bellman-ford.
+        O algoritmo dirá se existe um ciclo de pesos negativos, o que significa que é possível adquirir 
+    vidas infinitamente ou, se não houverem ciclos negativos, retornará os caminhos de peso mínimo até 
+    todos os vértices.
+        Dúvida: o módulo do peso do caminho cujo peso for menor entre todos os outros é SEGURAMENTE o
+    maior número de vidas que pode ser adquirido (num caso em que não haja nenhum ciclo negativo)?
+    */
 
 private:
     int num_vertices_;
