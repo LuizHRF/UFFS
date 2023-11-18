@@ -10,9 +10,6 @@
 #include "Digrafo.h" 
 #include <iostream>
 
-// código para usar ins e outs:
-// ./desbravo_bros <aquivo.in> arquivo.out
-// da pra selecionar amboas arquivos .out e escolher a opção comparar com o botão direito
 
 int main() {
 
@@ -30,7 +27,16 @@ int main() {
         it--;
     }
 
-    g.print_matriz();
+    std::cin >> it;
+
+    while(it){
+
+        std::cin >> x;
+
+        g.max_vidas(x);
+
+        it--;
+    }
 
     return 0;
 }
