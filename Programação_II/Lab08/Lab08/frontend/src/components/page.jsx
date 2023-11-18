@@ -2,6 +2,7 @@ import React from "react";
 import Cabecalho from "./cabecalho";
 import Left_menu from "./left_menu";
 import Right_menu from "./right_menu";
+import Rodape from "./rodape";
 
 function Page(){
     return (
@@ -20,6 +21,8 @@ function Page(){
                 <Right_menu />
 
             </div>
+
+            <Rodape />
 
         </div>
     );

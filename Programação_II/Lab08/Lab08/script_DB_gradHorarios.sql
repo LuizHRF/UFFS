@@ -1,5 +1,3 @@
-CREATE DATABASE grade_horarios
-\c grade_horarios
 
 CREATE TABLE cursos(
 	idc INTEGER NOT NULL,
@@ -10,7 +8,7 @@ CREATE TABLE cursos(
 
 CREATE TABLE horarios (
 	hora VARCHAR(20) NOT NULL,
-	idh INTEGER NOT NULL,
+	idh SERIAL NOT NULL,
 	constraint pk_horario primary key (idh) 
 );
 
@@ -30,15 +28,15 @@ INSERT INTO cursos(idc, nome, descr) VALUES
 	(2, 'Ciências Sociais', 'O Curso de Graduação em Ciências Sociais - Bacharelado, presencial, noturno, com oferta de 30 vagas anuais, ano, tem como principal objetivo promover a sólida formação nas áreas do conhecimento das Ciências Sociais (Antropologia, Ciência Política e Sociologia), formando indivíduos com capacidade de análise crítica e encorajando-os a desenvolverem novas aptidões além do estímulo ao desenvolvimento das competências próprias de cada um'),
 	(3, 'Medicina', 'Sem descrição por ora');
 
-INSERT INTO horarios(idh, hora) VALUES
-	(1, 'Sex1234'),
-	(2, 'Qui1234'),
-	(3, 'Ter1234'),
-	(4, 'Seg1234'),
-	(5, 'Qua123 Sex45'),
-	(6, 'Sex123 Qui45'),
-	(7, 'Ter123 Seg45'),
-	(8, 'Ter45 Qua123');
+INSERT INTO horarios(hora) VALUES
+	('Sex1234'),
+	('Qui1234'),
+	('Ter1234'),
+	('Seg1234'),
+	('Qua123 Sex45'),
+	('Sex123 Qui45'),
+	('Ter123 Seg45'),
+	('Ter45 Qua123');
 
 INSERT INTO disciplina(idd, nome, fase, idc, idh) VALUES
 	(1,'Algoritmos', 1, 1, 1),

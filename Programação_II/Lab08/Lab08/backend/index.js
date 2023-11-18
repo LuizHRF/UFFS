@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.listen(3010, () => console.log("Servidor rodando na porta 3010."));
+app.listen(3011, () => console.log("Servidor rodando na porta 3011."));
 
 app.get("/", (req, res) => {
     res.send("Hello, world!");
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.get("/cursos", async (req, res) => {
     try {
-        const cursos = await db.any("SELECT idc as id, nome, descr as desc FROM cursos;");
+        const cursos = await db.any("SELECT idc as id, nome as nome, descr as desc FROM cursos;");
         console.log('Retornando todos cursos.');
         res.json(cursos).status(200);
     } catch (error) {
@@ -32,6 +32,17 @@ app.get("/horarios", async (req, res) => {
     try {
         const horarios = await db.any("SELECT c.idc as curso, d.nome, h.hora, d.fase, d.idd as id FROM disciplina d JOIN cursos c ON d.idc = c.idc JOIN horarios h ON h.idh = d.idh;");
         console.log('Retornando todos horários.');
+        res.json(horarios).status(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(400);
+    }
+});
+
+app.get("/horarios2", async (req, res) => {
+    try {
+        const horarios = await db.any("SELECT * FROM horarios;");
+        console.log('Retornando todos horários2.');
         res.json(horarios).status(200);
     } catch (error) {
         console.log(error);
@@ -58,6 +69,22 @@ app.post("/cursos", async (req, res) => {
         db.none(
             "INSERT INTO cursos (idc, nome, descr) VALUES ($1, $2, $3);",
             [cursoId, cursoNome, cursoDesc]
+        );
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(400);
+    }
+});
+
+app.post("/horarios2", async (req, res) => {
+    try {
+        const horarioHora = req.body.hora;
+
+        db.none(
+            "INSERT INTO horarios (hora) VALUES ($1);",
+            horarioHora
         );
 
         res.sendStatus(200);

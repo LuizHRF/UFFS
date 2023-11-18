@@ -3,7 +3,7 @@ import axios from "axios";
 import Tabela_horario from "./Tabela_horario";
 import Titulo from "./Titulo";
 
-axios.defaults.baseURL = "http://localhost:3010/";
+axios.defaults.baseURL = "http://localhost:3011/";
 axios.defaults.headers.common["Content-Type"] =
     "application/json;charset=utf-8";
 
