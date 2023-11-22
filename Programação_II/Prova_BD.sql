@@ -1,3 +1,5 @@
+SET DATESTYLE = 'DMY';
+
 CREATE TABLE IF NOT EXISTS streaming(
     ids INTEGER NOT NULL,
     names VARCHAR(30) NOT NULL,
@@ -38,8 +40,7 @@ CREATE TABLE IF NOT EXISTS episode(
     duration INTEGER NOT NULL,
     director INTEGER NOT NULL,
     CONSTRAINT pk_episode PRIMARY KEY (idts, idsea, idep),
-    CONSTRAINT fk_episode_tvshow FOREIGN KEY (idts) REFERENCES season(idts),
-    CONSTRAINT fk_episode_season FOREIGN KEY (idsea) REFERENCES season(idsea),
+    CONSTRAINT fk_episode_tvshow FOREIGN KEY (idsea, idts) REFERENCES season(idsea, idts),
     CONSTRAINT fk_episode_director FOREIGN KEY (director) REFERENCES people(idunion)
 );
 
@@ -50,9 +51,7 @@ CREATE TABLE IF NOT EXISTS casts(
     idunion INTEGER NOT NULL,
     role VARCHAR(20) NOT NULL,
     CONSTRAINT pk_cast PRIMARY KEY (idts, idsea, idunion),
-    CONSTRAINT fk_cast_tvshow FOREIGN KEY (idts) REFERENCES episode(idts),
-    CONSTRAINT fk_cast_season FOREIGN KEY (idsea) REFERENCES episode(idsea),
-    CONSTRAINT fk_cast_episode FOREIGN KEY (idep) REFERENCES episode(idep),
+    CONSTRAINT fk_cast_tvshow FOREIGN KEY (idts, idsea, idep) REFERENCES episode(idts, idsea, idep),
     CONSTRAINT fk_cast_people FOREIGN KEY (idunion) REFERENCES people(idunion)
 );
 
@@ -150,13 +149,26 @@ INSERT INTO episode(idts, idsea, idep, titleep, daterep, duration, director) VAL
 INSERT INTO casts(idts, idsea, idep, idunion, role) VALUES
     (1001, 1, 1, 100, 'Coadjuvante'),
     (1001, 2, 6, 102, 'Protagonista'),
-    (1002, 1, 1, 103, 'Coadjuvante'),
     (1002, 2, 4, 104, 'Protagonista'),
     (1003, 3, 3, 105, 'Coadjuvante'),
     (1004, 1, 2, 106, 'Protagonista'),
     (1004, 1, 1, 107, 'Coadjuvante'),
-    (1005, 2, 5, 108, 'Protagonista'),
-    (1005, 2, 2, 109, 'Coadjuvante'),
-    (1006, 2, 4, 110, 'Protagonista');
+    (1005, 2, 5, 108, 'Protagonista');
 
-    
+WITH num_ep AS (SELECT ts.title, COUNT(ep.idep) as n_ep
+FROM episode ep NATURAL JOIN season s
+JOIN tvshow ts ON ts.idts=s.idts
+GROUP BY ts.idts)
+SELECT * FROM num_ep
+WHERE n_ep = (SELECT MAX(n_ep) FROM num_ep);
+
+INSERT INTO episode(idts, idsea, idep, titleep, daterep, duration, director) VALUES 
+    (1001, 4, 12, 'Nome_do_Episódio', '01-01-2001', 100, 101),
+    (1001, 1, 13, 'Nome_do_Episódio', '01-01-2001', 100, 101);
+
+WITH num_ep AS (SELECT ts.title, COUNT(ep.idep) as n_ep
+FROM episode ep NATURAL JOIN season s
+JOIN tvshow ts ON ts.idts=s.idts
+GROUP BY ts.idts)
+SELECT * FROM num_ep
+WHERE n_ep = (SELECT MAX(n_ep) FROM num_ep);
