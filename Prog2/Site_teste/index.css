@@ -1,0 +1,73 @@
+html{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	background: linear-gradient(to bottom, #00693E, #00693d79);
+
+}
+
+
+#logo:hover{
+	transform:scale(1.1);
+}
+
+td:hover, th:hover{
+	transform:scale(1.05);
+	background-color: orange;
+}
+
+.container {
+    	display: flex;
+    	flex-direction: column;
+	background: white;
+	padding: 30px;
+	border: 2px solid black;
+	box-shadow: 20px 20px 30px black;
+}   
+
+body{
+    margin: 50px 200px 50px 200px;
+}
+
+.ccr_desc{
+    color: rgb(105, 101, 101);
+    
+}
+
+#logo{
+	transition: all .3s ease;
+}
+
+h1{
+    font-size: 35px;
+}
+
+td, th{
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    width: 200px;
+    transition: all .3s ease;	
+}
+
+th{
+    background-color: #00693d79;
+}
+
+#universidade{
+    font-style: bold;
+    color: #00693E;
+    text-align: center;
+}
+
+
+.ccr_name{
+    font-style: bold;
+    color: #00693E
+}
+
+a {
+	color: #00693E;
+}
+
+
+
+
