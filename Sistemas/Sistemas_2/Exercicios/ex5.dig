@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<circuit>
+  <version>2</version>
+  <attributes/>
+  <visualElements>
+    <visualElement>
+      <elementName>ExternalFile</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>demux</string>
+        </entry>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>I0:16,I1:16,I2:16,I3:16,I4:16,I5:16,I6:16,I7:16,SEL:3</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>NUM:16</string>
+        </entry>
+        <entry>
+          <string>CodeFile</string>
+          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\Exercicios\ex5.vhd</file>
+        </entry>
+      </elementAttributes>
+      <pos x="600" y="200"/>
+    </visualElement>
+  </visualElements>
+  <wires/>
+  <measurementOrdering/>
+</circuit>
