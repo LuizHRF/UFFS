@@ -18,4 +18,4 @@ architecture Bombas of Caixas_de_Agua is
 
         ER <= SA(1) AND NOT SA(0);
 
-    end Bombas;
+end Bombas;

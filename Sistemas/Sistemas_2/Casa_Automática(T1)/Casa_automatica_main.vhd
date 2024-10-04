@@ -38,8 +38,8 @@ begin
 
     caixas: Caixas_de_Agua
     port map(
-        SA => sw(3 downto 4), -- Corrected to map the vector correctly
-        SB => sw(5), -- You need to provide the input for SB
+        SA => sw(4 downto 3), 
+        SB => sw(5),
         CAB => ledr(9),
         EVA => ledr(8),
         ER => ledr(7)
@@ -48,6 +48,30 @@ begin
 end main;
 
 ------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Caixas_de_Agua is port(
+    SA: in std_logic_vector(1 downto 0);
+    SB: in std_logic;
+    CAB, EVA: out std_logic;
+    ER: out std_logic
+); 
+end Caixas_de_Agua;
+
+architecture Bombas of Caixas_de_Agua is
+    begin
+        
+        EVA <= NOT SA(1);
+
+        CAB <= SA(0) AND NOT SB;
+
+        ER <= SA(1) AND NOT SA(0);
+
+end Bombas;
+
+---------------------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -73,29 +97,7 @@ architecture alrt of alerta is
 
 end alrt;
 
-
 ------------------------------------------------------------------------------------------
-library ieee;
-use ieee.std_logic_1164.all;
 
-entity Caixas_de_Agua is port(
-    SA: in std_logic_vector(1 downto 0);
-    SB: in std_logic;
-    CAB, EVA: out std_logic;
-    ER: out std_logic
-); 
-end Caixas_de_Agua;
 
-architecture Bombas of Caixas_de_Agua is
-    begin
-        
-        EVA <= NOT SA(1);
-
-        CAB <= SA(0) AND NOT SB;
-
-        ER <= SA(1) AND NOT SA(0);
-
-end Bombas;
-
----------------------------------------------------------------------------------------------
 
