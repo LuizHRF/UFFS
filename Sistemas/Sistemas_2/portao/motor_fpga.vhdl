@@ -1,12 +1,10 @@
---------------------------------------------------------------------------------
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity motor is
     Port (
         ledr: out std_logic_vector(9 downto 0);
-        Fecha, Abre, S, clock : in STD_LOGIC;
+        Fecha, Abre, S, clock, r : in STD_LOGIC;
         hex0: out std_logic_vector(6 downto 0)
     );
 end motor;
@@ -16,7 +14,7 @@ architecture Behavioral of motor is
     TYPE state IS (E, A1, A2, A3, A4, F1, F2, F3, F4, ER1, ER2);
     SIGNAL current_state: state := E;
     SIGNAL Porta_aberta, Porta_fechada, procs: STD_LOGIC;
-    SIGNAL pos: STD_LOGIC := '0';
+    SIGNAL pos, res: STD_LOGIC := '0';
 
 
 begin
@@ -26,9 +24,13 @@ begin
     ledr(2) <= procs;   -- Processando
 
 
-    process(clock) begin  
+    process(clock, r) begin  
 
-        IF rising_edge(clock) THEN
+        IF rising_edge(r) THEN
+            current_state <= E;
+            res <= '1';
+
+        ELSIF rising_edge(clock) THEN
                 
                 CASE current_state IS
                     WHEN E =>
@@ -107,6 +109,12 @@ begin
                 procs <= '0';
                 --estado <= "0000";
                 hex0 <= "1000000";
+
+                IF res = '1' THEN
+                    pos <= '0';
+                    res <= '0';
+                END IF;
+
             WHEN A1 =>
                 procs <= '1';
                 --estado <= "0001";

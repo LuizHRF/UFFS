@@ -1,5 +1,3 @@
---------------------------------------------------------------------------------
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -8,7 +6,7 @@ entity sensores is
         sw: in std_logic_vector(9 downto 0);
         key: in std_logic_vector(3 downto 0);
         Fecha, Abre, Sout : out STD_LOGIC;
-        SA, SF: in STD_LOGIC
+        SA, SF, r: in STD_LOGIC
     );
 end sensores;
 
@@ -28,9 +26,12 @@ begin
     clock <= key(3);
 
 
-    process(clock) begin  
+    process(clock, r) begin  
 
-        IF rising_edge(clock) THEN
+        IF rising_edge(r) THEN
+            current_state <= A;
+
+        ELSIF rising_edge(clock) THEN
                 
                 CASE current_state IS
                     WHEN A =>
