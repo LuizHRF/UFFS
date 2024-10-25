@@ -1,4 +1,3 @@
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -29,10 +28,12 @@ architecture Behavioral of portao is
     end component;
 
     SIGNAL Fecha_sig, Abre_sig, Sout, reset: STD_LOGIC;
+    SIGNAL meanLedr: STD_LOGIC_VECTOR(9 downto 0);
 
 begin
     
     reset <= key(1);
+    ledr <= meanLedr;
 
     sensores_inst: sensores port map (
         sw => sw,
@@ -40,13 +41,13 @@ begin
         Fecha => Fecha_sig,
         Abre => Abre_sig,
         Sout => Sout,
-        SA => ledr(0),
-        SF => ledr(1),
+        SA => meanLedr(0),
+        SF => meanLedr(1),
         r => reset
     );
 
     motor_inst: motor port map (
-        ledr => ledr,
+        ledr => meanLedr,
         Fecha => Fecha_sig,
         Abre => Abre_sig,
         S => Sout,

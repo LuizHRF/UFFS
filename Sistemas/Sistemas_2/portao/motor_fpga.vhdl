@@ -13,7 +13,7 @@ architecture Behavioral of motor is
 
     TYPE state IS (E, A1, A2, A3, A4, F1, F2, F3, F4, ER1, ER2);
     SIGNAL current_state: state := E;
-    SIGNAL Porta_aberta, Porta_fechada, procs: STD_LOGIC;
+    SIGNAL procs: STD_LOGIC;
     SIGNAL pos, res: STD_LOGIC := '0';
 
 
@@ -26,16 +26,19 @@ begin
 
     process(clock, r) begin  
 
-        IF rising_edge(r) THEN
+        IF r = '1' THEN
             current_state <= E;
-            res <= '1';
 
-        ELSIF rising_edge(clock) THEN
+        ELSIF falling_edge(clock) THEN
                 
                 CASE current_state IS
                     WHEN E =>
                         IF S = '1' THEN
-                            current_state <= E;
+                            IF pos = '1' THEN
+                                current_state <= ER1;
+                            ELSIF pos = '0' THEN
+                                current_state <= ER2;
+                            END IF;
                         elsif Abre = '1' THEN
                             current_state <= A1;
                         elsif Fecha = '1' THEN
@@ -109,11 +112,6 @@ begin
                 procs <= '0';
                 --estado <= "0000";
                 hex0 <= "1000000";
-
-                IF res = '1' THEN
-                    pos <= '0';
-                    res <= '0';
-                END IF;
 
             WHEN A1 =>
                 procs <= '1';

@@ -29,10 +29,12 @@ architecture Behavioral of portao is
     end component;
 
     SIGNAL Fecha_sig, Abre_sig, Sout, reset: STD_LOGIC;
+    SIGNAL meanLedr: STD_LOGIC_VECTOR(9 downto 0);
 
 begin
     
     reset <= key(1);
+    ledr <= meanLedr;
 
     sensores_inst: sensores port map (
         sw => sw,
@@ -40,13 +42,13 @@ begin
         Fecha => Fecha_sig,
         Abre => Abre_sig,
         Sout => Sout,
-        SA => ledr(0),
-        SF => ledr(1),
+        SA => meanLedr(0),
+        SF => meanLedr(1),
         r => reset
     );
 
     motor_inst: motor port map (
-        ledr => ledr,
+        ledr => meanLedr,
         Fecha => Fecha_sig,
         Abre => Abre_sig,
         S => Sout,
@@ -76,7 +78,7 @@ architecture Behavioral of motor is
 
     TYPE state IS (E, A1, A2, A3, A4, F1, F2, F3, F4, ER1, ER2);
     SIGNAL current_state: state := E;
-    SIGNAL Porta_aberta, Porta_fechada, procs: STD_LOGIC;
+    SIGNAL procs: STD_LOGIC;
     SIGNAL pos, res: STD_LOGIC := '0';
 
 
@@ -89,16 +91,19 @@ begin
 
     process(clock, r) begin  
 
-        IF rising_edge(r) THEN
+        IF r = '1' THEN
             current_state <= E;
-            res <= '1';
 
-        ELSIF rising_edge(clock) THEN
+        ELSIF falling_edge(clock) THEN
                 
                 CASE current_state IS
                     WHEN E =>
                         IF S = '1' THEN
-                            current_state <= E;
+                            IF pos = '1' THEN
+                                current_state <= ER1;
+                            ELSIF pos = '0' THEN
+                                current_state <= ER2;
+                            END IF;
                         elsif Abre = '1' THEN
                             current_state <= A1;
                         elsif Fecha = '1' THEN
@@ -172,11 +177,6 @@ begin
                 procs <= '0';
                 --estado <= "0000";
                 hex0 <= "1000000";
-
-                IF res = '1' THEN
-                    pos <= '0';
-                    res <= '0';
-                END IF;
 
             WHEN A1 =>
                 procs <= '1';
@@ -259,7 +259,7 @@ begin
 
     process(clock, r) begin  
 
-        IF rising_edge(r) THEN
+        IF r = '1' THEN
             current_state <= A;
 
         ELSIF rising_edge(clock) THEN
@@ -276,13 +276,17 @@ begin
                     WHEN B =>
                         IF Sin = '1' THEN
                             current_state <= D;
-                        ELSE 
+                        ELSIF SF = '1' THEN 
+                            current_state <= B;
+                        ELSE
                             current_state <= A;
                         END IF;
                     WHEN C =>
                         IF Sin = '1' THEN
                             current_state <= D;
-                        ELSE 
+                        ELSIF SA = '1' THEN 
+                            current_state <= C;
+                        else
                             current_state <= A;    
                         END IF;
                     WHEN D =>

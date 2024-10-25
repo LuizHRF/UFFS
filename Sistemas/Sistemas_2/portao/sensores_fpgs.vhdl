@@ -28,7 +28,7 @@ begin
 
     process(clock, r) begin  
 
-        IF rising_edge(r) THEN
+        IF r = '1' THEN
             current_state <= A;
 
         ELSIF rising_edge(clock) THEN
@@ -45,13 +45,17 @@ begin
                     WHEN B =>
                         IF Sin = '1' THEN
                             current_state <= D;
-                        ELSE 
+                        ELSIF SF = '1' THEN 
+                            current_state <= B;
+                        ELSE
                             current_state <= A;
                         END IF;
                     WHEN C =>
                         IF Sin = '1' THEN
                             current_state <= D;
-                        ELSE 
+                        ELSIF SA = '1' THEN 
+                            current_state <= C;
+                        else
                             current_state <= A;    
                         END IF;
                     WHEN D =>
