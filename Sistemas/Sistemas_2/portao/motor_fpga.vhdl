@@ -14,7 +14,7 @@ architecture Behavioral of motor is
     TYPE state IS (E, A1, A2, A3, A4, F1, F2, F3, F4, ER1, ER2);
     SIGNAL current_state: state := E;
     SIGNAL procs: STD_LOGIC;
-    SIGNAL pos, res: STD_LOGIC := '0';
+    SIGNAL pos: STD_LOGIC := '0';
 
 
 begin
