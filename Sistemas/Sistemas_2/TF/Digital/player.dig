@@ -7,12 +7,12 @@
       <elementName>ExternalFile</elementName>
       <elementAttributes>
         <entry>
-          <string>Label</string>
-          <string>player</string>
-        </entry>
-        <entry>
           <string>applicationType</string>
           <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>player</string>
         </entry>
         <entry>
           <string>externalInputs</string>
@@ -28,7 +28,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\player.vhd</file>
+          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\TF\player.vhd</file>
         </entry>
       </elementAttributes>
       <pos x="860" y="320"/>
@@ -67,12 +67,12 @@
       <elementName>Out</elementName>
       <elementAttributes>
         <entry>
-          <string>intFormat</string>
-          <intFormat>dec</intFormat>
-        </entry>
-        <entry>
           <string>Bits</string>
           <int>5</int>
+        </entry>
+        <entry>
+          <string>intFormat</string>
+          <intFormat>dec</intFormat>
         </entry>
       </elementAttributes>
       <pos x="1120" y="340"/>

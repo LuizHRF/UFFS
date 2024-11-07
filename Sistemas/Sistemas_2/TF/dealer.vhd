@@ -4,22 +4,20 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 
-entity player is
+entity dealer is
     Port (
-        Hit         : in  STD_LOGIC;
         start       : in  STD_LOGIC;
         clock       : in  STD_LOGIC;
         reset       : in  STD_LOGIC;
-        stay        : in  STD_LOGIC;
         nextCard    : in  STD_LOGIC_VECTOR(3 downto 0);
 
         getCard     : out STD_LOGIC;
         currentV: out STD_LOGIC_VECTOR(4 downto 0);
         over        : out STD_LOGIC
     );
-end player;
+end dealer;
 
-architecture Behavioral of player is
+architecture Behavioral of dealer is
 
     TYPE state IS (X, X2, Y, Y2, Z, Z2, A, A2, C);
     SIGNAL current_state: state := X;
@@ -75,9 +73,9 @@ begin
                 
                 WHEN Z =>
 
-                    IF stay = '1' OR currentValue >= "10101" THEN
+                    IF currentValue >= "10001" THEN
                         current_state <= C;
-                    ELSIF Hit = '1' THEN
+                    ELSE
                         current_state <= Z2;
                     END IF;
                 
@@ -86,9 +84,9 @@ begin
                 
                 WHEN A =>
 
-                    IF stay = '1' OR currentValue >= "10101" THEN
+                    IF currentValue >= "10001" THEN
                         current_state <= C;
-                    ELSIF Hit = '1' THEN
+                    ELSE
                         current_state <= A2;
                     END IF;
 
@@ -104,7 +102,6 @@ begin
     
     process(current_state) begin
 
-        
         CASE current_state IS
 
             WHEN X =>
