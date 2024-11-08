@@ -21,7 +21,7 @@ end pontuacao;
 
 architecture Behavioral of pontuacao is
 
-    TYPE state IS (A, C, D, E, F, G, H, I);
+    TYPE state IS (A, C, E, F, G, H, I);
     SIGNAL current_state: state := A;
     SIGNAL dealer_playing: std_logic := '0';
 
@@ -43,30 +43,27 @@ begin
                     IF Stay_Player = '1' AND points_player > "10101" THEN
                         current_state <= C;
                     ELSIF Stay_Player = '1' AND points_player <= "10101" THEN
-                        current_state <= D;
+                        current_state <= E;
                     END IF;
 
                 WHEN C =>
                     current_state <= C;
 
-                WHEN D =>
-                    IF stay_dealer = '0' THEN
-                        current_state <= D;
-                    ELSIF stay_dealer = '1' THEN
+                WHEN E =>
+                    IF stay_dealer = '1' THEN
+                        IF points_dealer > "10101" THEN
+                            current_state <= F;
+                        ELSIF points_dealer = points_player THEN
+                            current_state <= G;
+                        ELSIF points_dealer < points_player THEN
+                            current_state <= H;
+                        ELSIF points_dealer > points_player THEN
+                            current_state <= I;
+                        END IF;
+                    ELSE 
                         current_state <= E;
                     END IF;
-
-                WHEN E =>
-                    IF points_dealer > "10101" THEN
-                        current_state <= F;
-                    ELSIF points_dealer = points_player THEN
-                        current_state <= G;
-                    ELSIF points_dealer < points_player THEN
-                        current_state <= H;
-                    ELSIF points_dealer > points_player THEN
-                        current_state <= I;
-                    END IF;
-
+                
                 WHEN F =>
                     current_state <= F;
                 
@@ -93,24 +90,26 @@ begin
 
             WHEN C =>
                 result <= "10";
-
-            WHEN D =>
-                dealer_playing <= '1';
+                dealer_playing <= '0';
 
             WHEN E =>
-                result <= "00";
+                dealer_playing <= '1';
 
             WHEN F =>
                 result <= "01";
+                dealer_playing <= '0';
 
             WHEN G =>
                 result <= "11";
+                dealer_playing <= '0';
 
             WHEN H =>
                 result <= "01";
+                dealer_playing <= '0';
 
             WHEN I =>
                 result <= "10";
+                dealer_playing <= '0';
 
         END CASE;
     END process;
