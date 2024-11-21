@@ -2,16 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all; -- Necessário para conversões entre tipos
 
-entity random_generator is
+entity cards is
     port (
         clk     : in  std_logic;                      -- Sinal de clock
         reset   : in  std_logic;                      -- Sinal de reset
         enable  : in  std_logic;                      -- Habilitação do gerador
         random_number : out std_logic_vector(3 downto 0)
     );
-end random_generator;
+end cards;
 
-architecture Behavioral of random_generator is
+architecture Behavioral of cards is
     signal lfsr : std_logic_vector(15 downto 0) := "1010110010100000";  -- SEED
     signal rnd_int : integer range 1 to 52;
 begin

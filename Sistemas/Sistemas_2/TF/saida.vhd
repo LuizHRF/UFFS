@@ -1,3 +1,4 @@
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -16,8 +17,8 @@ entity saida is
         HEX2            : out STD_LOGIC_VECTOR(6 downto 0);
         HEX3            : out STD_LOGIC_VECTOR(6 downto 0);
 
-        ledg            : out STD_LOGIC_VECTOR(6 downto 0);
-        ledr            : out STD_LOGIC_VECTOR(9 downto 0)
+        r1              : out STD_LOGIC;
+        r2              : out STD_LOGIC
     );
 end saida;
 
@@ -68,8 +69,8 @@ begin
         end case;
     end process;
     
-    ledg(6) <= result(0);
-    ledr(0) <= result(1);
+    r1 <= result(0);
+    r2 <= result(1);
 
     process(pointsShown)
     begin
