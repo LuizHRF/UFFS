@@ -28,7 +28,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\TF\pontuacao.vhd</file>
+          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\pontuacao.vhd</file>
         </entry>
       </elementAttributes>
       <pos x="780" y="120"/>
@@ -58,7 +58,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\TF\dealer.vhd</file>
+          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\dealer.vhd</file>
         </entry>
       </elementAttributes>
       <pos x="480" y="40"/>
@@ -88,7 +88,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\TF\player.vhd</file>
+          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\player.vhd</file>
         </entry>
       </elementAttributes>
       <pos x="480" y="220"/>
@@ -192,7 +192,7 @@
         </entry>
         <entry>
           <string>externalOutputs</string>
-          <string>HEX0:7,HEX1:7,HEX2:7,HEX3:7,ledg:7,ledr:10</string>
+          <string>HEX0:7,HEX1:7,HEX2:7,HEX3:7,r1,r2</string>
         </entry>
         <entry>
           <string>Width</string>
@@ -200,46 +200,10 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\TF\saida.vhd</file>
+          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\saida.vhd</file>
         </entry>
       </elementAttributes>
       <pos x="1100" y="120"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Splitter</elementName>
-      <elementAttributes>
-        <entry>
-          <string>rotation</string>
-          <rotation rotation="3"/>
-        </entry>
-        <entry>
-          <string>Input Splitting</string>
-          <string>7</string>
-        </entry>
-        <entry>
-          <string>Output Splitting</string>
-          <string>6, 1</string>
-        </entry>
-      </elementAttributes>
-      <pos x="1320" y="240"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Splitter</elementName>
-      <elementAttributes>
-        <entry>
-          <string>rotation</string>
-          <rotation rotation="3"/>
-        </entry>
-        <entry>
-          <string>Input Splitting</string>
-          <string>10</string>
-        </entry>
-        <entry>
-          <string>Output Splitting</string>
-          <string>1, 9</string>
-        </entry>
-      </elementAttributes>
-      <pos x="1380" y="240"/>
     </visualElement>
     <visualElement>
       <elementName>LED</elementName>
@@ -249,7 +213,7 @@
           <rotation rotation="3"/>
         </entry>
       </elementAttributes>
-      <pos x="1380" y="300"/>
+      <pos x="1380" y="240"/>
     </visualElement>
     <visualElement>
       <elementName>LED</elementName>
@@ -268,7 +232,7 @@
           </awt-color>
         </entry>
       </elementAttributes>
-      <pos x="1300" y="300"/>
+      <pos x="1320" y="240"/>
     </visualElement>
     <visualElement>
       <elementName>Seven-Seg</elementName>
@@ -489,12 +453,12 @@
       <elementName>ExternalFile</elementName>
       <elementAttributes>
         <entry>
-          <string>Label</string>
-          <string>random_generator</string>
-        </entry>
-        <entry>
           <string>applicationType</string>
           <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>cards</string>
         </entry>
         <entry>
           <string>externalInputs</string>
@@ -510,7 +474,7 @@
         </entry>
         <entry>
           <string>CodeFile</string>
-          <file>C:\Users\Softex\Documents\UFFS\Sistemas\Sistemas_2\TF\cards.vhdl</file>
+          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\cards.vhdl</file>
         </entry>
       </elementAttributes>
       <pos x="100" y="120"/>
@@ -558,12 +522,12 @@
       <elementName>Out</elementName>
       <elementAttributes>
         <entry>
-          <string>intFormat</string>
-          <intFormat>dec</intFormat>
-        </entry>
-        <entry>
           <string>Bits</string>
           <int>4</int>
+        </entry>
+        <entry>
+          <string>intFormat</string>
+          <intFormat>dec</intFormat>
         </entry>
       </elementAttributes>
       <pos x="280" y="80"/>
@@ -931,10 +895,6 @@
       <p2 x="1040" y="680"/>
     </wire>
     <wire>
-      <p1 x="1300" y="260"/>
-      <p2 x="1300" y="300"/>
-    </wire>
-    <wire>
       <p1 x="1300" y="420"/>
       <p2 x="1300" y="460"/>
     </wire>
@@ -1193,10 +1153,6 @@
     <wire>
       <p1 x="1380" y="220"/>
       <p2 x="1380" y="240"/>
-    </wire>
-    <wire>
-      <p1 x="1380" y="260"/>
-      <p2 x="1380" y="300"/>
     </wire>
     <wire>
       <p1 x="1380" y="460"/>

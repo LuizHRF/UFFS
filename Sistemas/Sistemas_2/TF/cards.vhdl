@@ -21,8 +21,6 @@ begin
             lfsr <= "1110110010101110";
         elsif rising_edge(clk) then
             if enable = '1' then
-                -- Implementação do LFSR com feedback polinomial
-                -- Polinômio: x^16 + x^14 + x^13 + x^11 + 1
                 lfsr <= lfsr(14 downto 0) & 
                         (lfsr(15) xor lfsr(13) xor lfsr(12) xor lfsr(10));
             end if;

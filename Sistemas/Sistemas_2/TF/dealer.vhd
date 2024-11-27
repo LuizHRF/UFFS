@@ -24,22 +24,22 @@ architecture Behavioral of dealer is
     signal hasA: std_logic;
     SIGNAL currentValue: std_logic_vector(4 downto 0) := "00000";
 
-    function novoValor(antigo: std_logic_vector(4 downto 0); novo: std_logic_vector(3 downto 0); hA: std_logic) return std_logic_vector is  --- ha = HasA
+    function novoValor(antigo: unsigned(4 downto 0); novo: unsigned(3 downto 0); hA: std_logic) return std_logic_vector is  --- ha = HasA
         variable resultado: std_logic_vector(4 downto 0);  -- Saída de 5 bits
     begin
-        IF novo = "0001" THEN
+        IF novo = 1 THEN
             IF hA = '1' THEN
-                resultado := antigo + "00001";  -- Ás valendo 1
+                resultado := antigo + 1;  -- Ás valendo 1
             ELSE
-                resultado := antigo + "01011"; -- Ás valendo 11
+                resultado := antigo + 11; -- Ás valendo 11
             END IF;
-        ELSIF novo > "01010" THEN
-            resultado := antigo + "01010";  -- Cartas de 10 a 13
+        ELSIF novo > 10 THEN
+            resultado := antigo + 10;  -- Cartas de 10 a 13
         ELSE
-            resultado := antigo + ("0" & novo);
+            resultado := antigo + novo;
         END IF;
         
-        return resultado;
+        return std_logic_vector(resultado);
 
     end function;
 
@@ -115,7 +115,7 @@ begin
 
             WHEN Y =>
                 getCard <= '0';
-                currentValue <= novovalor(currentValue, nextCard, hasA);
+                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
@@ -126,7 +126,7 @@ begin
 
             WHEN Z =>
                 getCard <= '0';
-                currentValue <= novovalor(currentValue, nextCard, hasA);
+                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
@@ -137,7 +137,7 @@ begin
 
             WHEN A =>
                 getCard <= '0';
-                currentValue <= novovalor(currentValue, nextCard, hasA);
+                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
@@ -145,7 +145,7 @@ begin
 
             WHEN A2 =>
                 getCard <= '1';
-                currentValue <= novovalor(currentValue, nextCard, hasA);
+                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
