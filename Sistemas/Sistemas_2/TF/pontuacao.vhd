@@ -6,7 +6,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity pontuacao is
     Port (
         Stay_Player     : in  STD_LOGIC;
-        points_player    : in  STD_LOGIC_VECTOR(4 downto 0);
+        points_player   : in  STD_LOGIC_VECTOR(4 downto 0);
         stay_dealer     : in  STD_LOGIC;
         points_dealer   : in  STD_LOGIC_VECTOR(4 downto 0);
         reset           : in  STD_LOGIC;

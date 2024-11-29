@@ -14,7 +14,7 @@ entity player is
         nextCard    : in  STD_LOGIC_VECTOR(3 downto 0);
 
         getCard     : out STD_LOGIC;
-        currentV: out STD_LOGIC_VECTOR(4 downto 0);
+        currentV    : out STD_LOGIC_VECTOR(4 downto 0);
         over        : out STD_LOGIC
     );
 end player;
@@ -24,10 +24,10 @@ architecture Behavioral of player is
     TYPE state IS (X, X2, Y, Y2, Z, Z2, A, A2, C);
     SIGNAL current_state: state := X;
     signal hasA: std_logic;
-    SIGNAL currentValue: std_logic_vector(4 downto 0) := "00000";
+    SIGNAL currentValue: unsigned(4 downto 0) := "00000";
 
-    function novoValor(antigo: unsigned(4 downto 0); novo: unsigned(3 downto 0); hA: std_logic) return std_logic_vector is  --- ha = HasA
-        variable resultado: std_logic_vector(4 downto 0);  -- Saída de 5 bits
+    function novoValor(antigo: unsigned(4 downto 0); novo: unsigned(3 downto 0); hA: std_logic) return unsigned is  --- ha = HasA
+        variable resultado: unsigned(4 downto 0);  -- Saída de 5 bits
     begin
         IF novo = 1 THEN
             IF hA = '1' THEN
@@ -41,13 +41,13 @@ architecture Behavioral of player is
             resultado := antigo + novo;
         END IF;
         
-        return std_logic_vector(resultado);
+        return resultado;
 
     end function;
 
 begin
 
-    currentV <= currentValue;
+    currentV <= STD_LOGIC_VECTOR(currentValue);
 
     process(clock, reset) begin
 
@@ -75,7 +75,7 @@ begin
                 
                 WHEN Z =>
 
-                    IF stay = '1' OR currentValue >= "10101" THEN
+                    IF stay = '1' OR currentValue >= 21 THEN
                         current_state <= C;
                     ELSIF Hit = '1' THEN
                         current_state <= Z2;
@@ -86,7 +86,7 @@ begin
                 
                 WHEN A =>
 
-                    IF stay = '1' OR currentValue >= "10101" THEN
+                    IF stay = '1' OR currentValue >= 21 THEN
                         current_state <= C;
                     ELSIF Hit = '1' THEN
                         current_state <= A2;
@@ -118,7 +118,7 @@ begin
 
             WHEN Y =>
                 getCard <= '0';
-                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+                currentValue <= novovalor(currentValue, unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
@@ -129,7 +129,7 @@ begin
 
             WHEN Z =>
                 getCard <= '0';
-                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+                currentValue <= novovalor(currentValue, unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
@@ -140,7 +140,7 @@ begin
 
             WHEN A =>
                 getCard <= '0';
-                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+                currentValue <= novovalor(currentValue, unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';
@@ -148,7 +148,7 @@ begin
 
             WHEN A2 =>
                 getCard <= '1';
-                currentValue <= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+                currentValue <= novovalor(currentValue, unsigned(nextCard), hasA);
 
                 IF nextCard = "0001" THEN  -- Se a última carta foi o Ás
                     hasA <= '1';

@@ -4,96 +4,6 @@
   <attributes/>
   <visualElements>
     <visualElement>
-      <elementName>ExternalFile</elementName>
-      <elementAttributes>
-        <entry>
-          <string>applicationType</string>
-          <appType>GHDL</appType>
-        </entry>
-        <entry>
-          <string>Label</string>
-          <string>pontuacao</string>
-        </entry>
-        <entry>
-          <string>externalInputs</string>
-          <string>Stay_Player,points_player:5,stay_dealer,points_dealer:5,reset,clock</string>
-        </entry>
-        <entry>
-          <string>externalOutputs</string>
-          <string>startDealer,result:2,pointsShown:5</string>
-        </entry>
-        <entry>
-          <string>Width</string>
-          <int>12</int>
-        </entry>
-        <entry>
-          <string>CodeFile</string>
-          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\pontuacao.vhd</file>
-        </entry>
-      </elementAttributes>
-      <pos x="780" y="120"/>
-    </visualElement>
-    <visualElement>
-      <elementName>ExternalFile</elementName>
-      <elementAttributes>
-        <entry>
-          <string>applicationType</string>
-          <appType>GHDL</appType>
-        </entry>
-        <entry>
-          <string>Label</string>
-          <string>dealer</string>
-        </entry>
-        <entry>
-          <string>externalInputs</string>
-          <string>start,clock,reset,nextCard:4</string>
-        </entry>
-        <entry>
-          <string>externalOutputs</string>
-          <string>getCard,currentV:5,over</string>
-        </entry>
-        <entry>
-          <string>Width</string>
-          <int>8</int>
-        </entry>
-        <entry>
-          <string>CodeFile</string>
-          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\dealer.vhd</file>
-        </entry>
-      </elementAttributes>
-      <pos x="480" y="40"/>
-    </visualElement>
-    <visualElement>
-      <elementName>ExternalFile</elementName>
-      <elementAttributes>
-        <entry>
-          <string>applicationType</string>
-          <appType>GHDL</appType>
-        </entry>
-        <entry>
-          <string>Label</string>
-          <string>player</string>
-        </entry>
-        <entry>
-          <string>externalInputs</string>
-          <string>Hit,start,clock,reset,stay,nextCard:4</string>
-        </entry>
-        <entry>
-          <string>externalOutputs</string>
-          <string>getCard,currentV:5,over</string>
-        </entry>
-        <entry>
-          <string>Width</string>
-          <int>8</int>
-        </entry>
-        <entry>
-          <string>CodeFile</string>
-          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\player.vhd</file>
-        </entry>
-      </elementAttributes>
-      <pos x="480" y="220"/>
-    </visualElement>
-    <visualElement>
       <elementName>LED</elementName>
       <elementAttributes>
         <entry>
@@ -116,7 +26,7 @@
         </entry>
         <entry>
           <string>rotation</string>
-          <rotation reference="../../../../visualElement[4]/elementAttributes/entry[2]/rotation"/>
+          <rotation reference="../../../../visualElement/elementAttributes/entry[2]/rotation"/>
         </entry>
       </elementAttributes>
       <pos x="680" y="-120"/>
@@ -136,7 +46,7 @@
       <elementAttributes>
         <entry>
           <string>rotation</string>
-          <rotation reference="../../../../visualElement[6]/elementAttributes/entry/rotation"/>
+          <rotation reference="../../../../visualElement[3]/elementAttributes/entry/rotation"/>
         </entry>
       </elementAttributes>
       <pos x="420" y="-120"/>
@@ -174,36 +84,6 @@
       <elementName>In</elementName>
       <elementAttributes/>
       <pos x="300" y="300"/>
-    </visualElement>
-    <visualElement>
-      <elementName>ExternalFile</elementName>
-      <elementAttributes>
-        <entry>
-          <string>applicationType</string>
-          <appType>GHDL</appType>
-        </entry>
-        <entry>
-          <string>Label</string>
-          <string>saida</string>
-        </entry>
-        <entry>
-          <string>externalInputs</string>
-          <string>last_card:4,result:2,pointsShown:5,cardRequest</string>
-        </entry>
-        <entry>
-          <string>externalOutputs</string>
-          <string>HEX0:7,HEX1:7,HEX2:7,HEX3:7,r1,r2</string>
-        </entry>
-        <entry>
-          <string>Width</string>
-          <int>8</int>
-        </entry>
-        <entry>
-          <string>CodeFile</string>
-          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\saida.vhd</file>
-        </entry>
-      </elementAttributes>
-      <pos x="1100" y="120"/>
     </visualElement>
     <visualElement>
       <elementName>LED</elementName>
@@ -450,36 +330,6 @@
       <pos x="1100" y="40"/>
     </visualElement>
     <visualElement>
-      <elementName>ExternalFile</elementName>
-      <elementAttributes>
-        <entry>
-          <string>applicationType</string>
-          <appType>GHDL</appType>
-        </entry>
-        <entry>
-          <string>Label</string>
-          <string>cards</string>
-        </entry>
-        <entry>
-          <string>externalInputs</string>
-          <string>clk,reset,enable</string>
-        </entry>
-        <entry>
-          <string>externalOutputs</string>
-          <string>random_number:4</string>
-        </entry>
-        <entry>
-          <string>Width</string>
-          <int>8</int>
-        </entry>
-        <entry>
-          <string>CodeFile</string>
-          <file>C:\Users\Pichau\Documents\C0de\UFFS\Sistemas\Sistemas_2\TF\cards.vhdl</file>
-        </entry>
-      </elementAttributes>
-      <pos x="100" y="120"/>
-    </visualElement>
-    <visualElement>
       <elementName>Multiplexer</elementName>
       <elementAttributes>
         <entry>
@@ -497,12 +347,12 @@
           <long>0</long>
         </entry>
       </elementAttributes>
-      <pos x="100" y="140"/>
+      <pos x="20" y="140"/>
     </visualElement>
     <visualElement>
       <elementName>Const</elementName>
       <elementAttributes/>
-      <pos x="100" y="160"/>
+      <pos x="20" y="160"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -531,6 +381,711 @@
         </entry>
       </elementAttributes>
       <pos x="280" y="80"/>
+    </visualElement>
+    <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>cards</string>
+        </entry>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>clk,reset,enable</string>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all; -- Necessário para conversões entre tipos
+
+entity cards is
+    port (
+        clk     : in  std_logic;                      -- Sinal de clock
+        reset   : in  std_logic;                      -- Sinal de reset
+        enable  : in  std_logic;                      -- Habilitação do gerador
+        random_number : out std_logic_vector(3 downto 0)
+    );
+end cards;
+
+architecture Behavioral of cards is
+    signal lfsr : std_logic_vector(15 downto 0) := &quot;1010110010100000&quot;;  -- SEED
+    signal rnd_int : integer range 1 to 52;
+begin
+    process(clk, reset)
+    begin
+        if reset = &apos;1&apos; then
+            lfsr &lt;= &quot;1110110010101110&quot;;
+        elsif rising_edge(clk) then
+            if enable = &apos;1&apos; then
+                lfsr &lt;= lfsr(14 downto 0) &amp; 
+                        (lfsr(15) xor lfsr(13) xor lfsr(12) xor lfsr(10));
+            end if;
+        end if;
+    end process;
+
+    -- Converte o LFSR para número no intervalo de 1 a 13
+    rnd_int &lt;= (to_integer(unsigned(lfsr)) mod 13) + 1;
+
+    random_number &lt;= std_logic_vector(to_unsigned(rnd_int, 4));
+end Behavioral;</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>random_number:4</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>10</int>
+        </entry>
+      </elementAttributes>
+      <pos x="60" y="120"/>
+    </visualElement>
+    <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>dealer</string>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>start,clock,reset,nextCard:4</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>8</int>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity dealer is
+    Port (
+        start       : in  STD_LOGIC;
+        clock       : in  STD_LOGIC;
+        reset       : in  STD_LOGIC;
+        nextCard    : in  STD_LOGIC_VECTOR(3 downto 0);
+
+        getCard     : out STD_LOGIC;
+        currentV: out STD_LOGIC_VECTOR(4 downto 0);
+        over        : out STD_LOGIC
+    );
+end dealer;
+
+architecture Behavioral of dealer is
+
+    TYPE state IS (X, X2, Y, Y2, Z, Z2, A, A2, C);
+    SIGNAL current_state: state := X;
+    signal hasA: std_logic;
+    SIGNAL currentValue: std_logic_vector(4 downto 0) := &quot;00000&quot;;
+
+    function novoValor(antigo: unsigned(4 downto 0); novo: unsigned(3 downto 0); hA: std_logic) return std_logic_vector is  --- ha = HasA
+        variable resultado: std_logic_vector(4 downto 0);  -- Saída de 5 bits
+    begin
+        IF novo = 1 THEN
+            IF hA = &apos;1&apos; THEN
+                resultado := antigo + 1;  -- Ás valendo 1
+            ELSE
+                resultado := antigo + 11; -- Ás valendo 11
+            END IF;
+        ELSIF novo &gt; 10 THEN
+            resultado := antigo + 10;  -- Cartas de 10 a 13
+        ELSE
+            resultado := antigo + novo;
+        END IF;
+        
+        return std_logic_vector(resultado);
+
+    end function;
+
+begin
+
+    currentV &lt;= currentValue;
+
+    process(clock, reset) begin
+
+        IF reset = &apos;1&apos; THEN
+            current_state &lt;= X;
+
+
+        ELSIF rising_edge(clock) THEN
+
+            CASE current_state IS
+
+                WHEN X =&gt; 
+                    IF start = &apos;1&apos; THEN
+                        current_state &lt;= X2;
+                    END IF;
+
+                WHEN X2 =&gt;
+                    current_state &lt;= Y;
+
+                WHEN Y =&gt;
+                    current_state &lt;= Y2;
+
+                WHEN Y2 =&gt;
+                    current_state &lt;= Z;
+                
+                WHEN Z =&gt;
+
+                    IF currentValue &gt;= &quot;10001&quot; THEN
+                        current_state &lt;= C;
+                    ELSE
+                        current_state &lt;= Z2;
+                    END IF;
+                
+                WHEN Z2 =&gt;
+                    current_state &lt;= A;
+                
+                WHEN A =&gt;
+
+                    IF currentValue &gt;= &quot;10001&quot; THEN
+                        current_state &lt;= C;
+                    ELSE
+                        current_state &lt;= A2;
+                    END IF;
+
+                WHEN A2 =&gt;
+                    current_state &lt;= C;
+
+                WHEN C =&gt;
+                    current_state &lt;= C;
+
+            END CASE;
+        END IF;
+    END process;
+    
+    process(current_state) begin
+
+        CASE current_state IS
+
+            WHEN X =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= &quot;00000&quot;;
+                over &lt;= &apos;0&apos;;
+                hasA &lt;= &apos;0&apos;;
+
+            WHEN X2 =&gt;
+                getCard &lt;=&apos;1&apos;;
+
+            WHEN Y =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+
+            WHEN Y2 =&gt;
+                getCard &lt;= &apos;1&apos;;
+
+            WHEN Z =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+            
+            WHEN Z2 =&gt;
+                getCard &lt;= &apos;1&apos;;
+
+            WHEN A =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+
+            WHEN A2 =&gt;
+                getCard &lt;= &apos;1&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+
+            WHEN C =&gt;
+                getCard &lt;= &apos;0&apos;;
+                over &lt;= &apos;1&apos;;
+
+        END CASE;
+    END process;
+
+end Behavioral;</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>getCard,currentV:5,over</string>
+        </entry>
+      </elementAttributes>
+      <pos x="480" y="40"/>
+    </visualElement>
+    <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>player</string>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>Hit,start,clock,reset,stay,nextCard:4</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>8</int>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity player is
+    Port (
+        Hit         : in  STD_LOGIC;
+        start       : in  STD_LOGIC;
+        clock       : in  STD_LOGIC;
+        reset       : in  STD_LOGIC;
+        stay        : in  STD_LOGIC;
+        nextCard    : in  STD_LOGIC_VECTOR(3 downto 0);
+
+        getCard     : out STD_LOGIC;
+        currentV: out STD_LOGIC_VECTOR(4 downto 0);
+        over        : out STD_LOGIC
+    );
+end player;
+
+architecture Behavioral of player is
+
+    TYPE state IS (X, X2, Y, Y2, Z, Z2, A, A2, C);
+    SIGNAL current_state: state := X;
+    signal hasA: std_logic;
+    SIGNAL currentValue: std_logic_vector(4 downto 0) := &quot;00000&quot;;
+
+    function novoValor(antigo: unsigned(4 downto 0); novo: unsigned(3 downto 0); hA: std_logic) return std_logic_vector is  --- ha = HasA
+        variable resultado: std_logic_vector(4 downto 0);  -- Saída de 5 bits
+    begin
+        IF novo = 1 THEN
+            IF hA = &apos;1&apos; THEN
+                resultado := antigo + 1;  -- Ás valendo 1
+            ELSE
+                resultado := antigo + 11; -- Ás valendo 11
+            END IF;
+        ELSIF novo &gt; 10 THEN
+            resultado := antigo + 10;  -- Cartas de 10 a 13
+        ELSE
+            resultado := antigo + novo;
+        END IF;
+        
+        return std_logic_vector(resultado);
+
+    end function;
+
+begin
+
+    currentV &lt;= currentValue;
+
+    process(clock, reset) begin
+
+        IF reset = &apos;1&apos; THEN
+            current_state &lt;= X;
+
+
+        ELSIF rising_edge(clock) THEN
+
+            CASE current_state IS
+
+                WHEN X =&gt; 
+                    IF start = &apos;1&apos; THEN
+                        current_state &lt;= X2;
+                    END IF;
+
+                WHEN X2 =&gt;
+                    current_state &lt;= Y;
+
+                WHEN Y =&gt;
+                    current_state &lt;= Y2;
+
+                WHEN Y2 =&gt;
+                    current_state &lt;= Z;
+                
+                WHEN Z =&gt;
+
+                    IF stay = &apos;1&apos; OR currentValue &gt;= &quot;10101&quot; THEN
+                        current_state &lt;= C;
+                    ELSIF Hit = &apos;1&apos; THEN
+                        current_state &lt;= Z2;
+                    END IF;
+                
+                WHEN Z2 =&gt;
+                    current_state &lt;= A;
+                
+                WHEN A =&gt;
+
+                    IF stay = &apos;1&apos; OR currentValue &gt;= &quot;10101&quot; THEN
+                        current_state &lt;= C;
+                    ELSIF Hit = &apos;1&apos; THEN
+                        current_state &lt;= A2;
+                    END IF;
+
+                WHEN A2 =&gt;
+                    current_state &lt;= C;
+
+                WHEN C =&gt;
+                    current_state &lt;= C;
+
+            END CASE;
+        END IF;
+    END process;
+    
+    process(current_state) begin
+
+        
+        CASE current_state IS
+
+            WHEN X =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= &quot;00000&quot;;
+                over &lt;= &apos;0&apos;;
+                hasA &lt;= &apos;0&apos;;
+
+            WHEN X2 =&gt;
+                getCard &lt;=&apos;1&apos;;
+
+            WHEN Y =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+
+            WHEN Y2 =&gt;
+                getCard &lt;= &apos;1&apos;;
+
+            WHEN Z =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+            
+            WHEN Z2 =&gt;
+                getCard &lt;= &apos;1&apos;;
+
+            WHEN A =&gt;
+                getCard &lt;= &apos;0&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+
+            WHEN A2 =&gt;
+                getCard &lt;= &apos;1&apos;;
+                currentValue &lt;= novovalor(unsigned(currentValue), unsigned(nextCard), hasA);
+
+                IF nextCard = &quot;0001&quot; THEN  -- Se a última carta foi o Ás
+                    hasA &lt;= &apos;1&apos;;
+                END IF;
+
+            WHEN C =&gt;
+                getCard &lt;= &apos;0&apos;;
+                over &lt;= &apos;1&apos;;
+
+        END CASE;
+    END process;
+
+end Behavioral;</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>getCard,currentV:5,over</string>
+        </entry>
+      </elementAttributes>
+      <pos x="480" y="220"/>
+    </visualElement>
+    <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>pontuacao</string>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>Stay_Player,points_player:5,stay_dealer,points_dealer:5,reset,clock</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>12</int>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity pontuacao is
+    Port (
+        Stay_Player     : in  STD_LOGIC;
+        points_player    : in  STD_LOGIC_VECTOR(4 downto 0);
+        stay_dealer     : in  STD_LOGIC;
+        points_dealer   : in  STD_LOGIC_VECTOR(4 downto 0);
+        reset           : in  STD_LOGIC;
+        clock           : in  STD_LOGIC;
+
+        startDealer     : out STD_LOGIC;
+        result          : out STD_LOGIC_VECTOR(1 downto 0);  -- 00 = nada, 01 = vitória, 10 = derrota, 11 = empate
+
+        pointsShown     : out STD_LOGIC_VECTOR(4 downto 0)
+    );
+end pontuacao;
+
+architecture Behavioral of pontuacao is
+
+    TYPE state IS (A, C, E, F, G, H, I);
+    SIGNAL current_state: state := A;
+    SIGNAL dealer_playing: std_logic := &apos;0&apos;;
+
+begin   
+
+    startDealer &lt;= dealer_playing;
+    pointsShown &lt;= points_player WHEN dealer_playing = &apos;0&apos; ELSE points_dealer;
+
+    process(clock, reset) begin
+
+        IF reset = &apos;1&apos; THEN
+            current_state &lt;= A;
+
+        ELSIF rising_edge(clock) THEN
+
+            CASE current_state IS
+
+                WHEN A =&gt; 
+                    IF Stay_Player = &apos;1&apos; AND points_player &gt; &quot;10101&quot; THEN
+                        current_state &lt;= C;
+                    ELSIF Stay_Player = &apos;1&apos; AND points_player &lt;= &quot;10101&quot; THEN
+                        current_state &lt;= E;
+                    END IF;
+
+                WHEN C =&gt;
+                    current_state &lt;= C;
+
+                WHEN E =&gt;
+                    IF stay_dealer = &apos;1&apos; THEN
+                        IF points_dealer &gt; &quot;10101&quot; THEN
+                            current_state &lt;= F;
+                        ELSIF points_dealer = points_player THEN
+                            current_state &lt;= G;
+                        ELSIF points_dealer &lt; points_player THEN
+                            current_state &lt;= H;
+                        ELSIF points_dealer &gt; points_player THEN
+                            current_state &lt;= I;
+                        END IF;
+                    ELSE 
+                        current_state &lt;= E;
+                    END IF;
+                
+                WHEN F =&gt;
+                    current_state &lt;= F;
+                
+                WHEN G =&gt;
+                    current_state &lt;= G;
+
+                WHEN H =&gt;
+                    current_state &lt;= H;
+
+                WHEN I =&gt;
+                    current_state &lt;= I;
+
+                END CASE;
+            END IF;
+        END process;
+    
+    process(current_state) begin
+
+        CASE current_state IS
+
+            WHEN A =&gt;
+                dealer_playing &lt;= &apos;0&apos;;
+                result &lt;= &quot;00&quot;;
+
+            WHEN C =&gt;
+                result &lt;= &quot;10&quot;;
+                dealer_playing &lt;= &apos;0&apos;;
+
+            WHEN E =&gt;
+                dealer_playing &lt;= &apos;1&apos;;
+
+            WHEN F =&gt;
+                result &lt;= &quot;01&quot;;
+                dealer_playing &lt;= &apos;0&apos;;
+
+            WHEN G =&gt;
+                result &lt;= &quot;11&quot;;
+                dealer_playing &lt;= &apos;0&apos;;
+
+            WHEN H =&gt;
+                result &lt;= &quot;01&quot;;
+                dealer_playing &lt;= &apos;0&apos;;
+
+            WHEN I =&gt;
+                result &lt;= &quot;10&quot;;
+                dealer_playing &lt;= &apos;0&apos;;
+
+        END CASE;
+    END process;
+end Behavioral;</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>startDealer,result:2,pointsShown:5</string>
+        </entry>
+      </elementAttributes>
+      <pos x="780" y="120"/>
+    </visualElement>
+    <visualElement>
+      <elementName>External</elementName>
+      <elementAttributes>
+        <entry>
+          <string>applicationType</string>
+          <appType>GHDL</appType>
+        </entry>
+        <entry>
+          <string>Label</string>
+          <string>saida</string>
+        </entry>
+        <entry>
+          <string>externalInputs</string>
+          <string>last_card:4,result:2,pointsShown:5,cardRequest</string>
+        </entry>
+        <entry>
+          <string>Width</string>
+          <int>8</int>
+        </entry>
+        <entry>
+          <string>Code</string>
+          <string>library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity saida is
+    Port (
+        last_card       : in  STD_LOGIC_VECTOR(3 downto 0);
+        result          : in STD_LOGIC_VECTOR(1 downto 0);  -- 00 = nada, 01 = vitória, 10 = derrota, 11 = empate
+        pointsShown     : in STD_LOGIC_VECTOR(4 downto 0);
+
+        cardRequest     : in STD_LOGIC;
+
+        HEX0            : out STD_LOGIC_VECTOR(6 downto 0);
+        HEX1            : out STD_LOGIC_VECTOR(6 downto 0);
+        HEX2            : out STD_LOGIC_VECTOR(6 downto 0);
+        HEX3            : out STD_LOGIC_VECTOR(6 downto 0);
+
+        r1              : out STD_LOGIC;
+        r2              : out STD_LOGIC
+    );
+end saida;
+
+architecture Behavioral of saida is
+
+    function seven_segment_decoder(digit: std_logic_vector(3 downto 0)) return std_logic_vector is
+            variable segments: std_logic_vector(6 downto 0);
+        begin
+            case digit is
+                when &quot;0000&quot; =&gt; segments := &quot;1000000&quot;; -- 0
+                when &quot;0001&quot; =&gt; segments := &quot;1111001&quot;; -- 1
+                when &quot;0010&quot; =&gt; segments := &quot;0100100&quot;; -- 2
+                when &quot;0011&quot; =&gt; segments := &quot;0110000&quot;; -- 3
+                when &quot;0100&quot; =&gt; segments := &quot;0011001&quot;; -- 4
+                when &quot;0101&quot; =&gt; segments := &quot;0010010&quot;; -- 5
+                when &quot;0110&quot; =&gt; segments := &quot;0000010&quot;; -- 6
+                when &quot;0111&quot; =&gt; segments := &quot;1111000&quot;; -- 7
+                when &quot;1000&quot; =&gt; segments := &quot;0000000&quot;; -- 8
+                when &quot;1001&quot; =&gt; segments := &quot;0010000&quot;; -- 9
+                when others =&gt; segments := &quot;1111111&quot;;
+            end case;
+            return segments;
+    end function;
+
+    signal un : std_logic_vector(3 downto 0);
+    signal tens  : std_logic_vector(3 downto 0);
+
+begin
+    
+    HEX2 &lt;= &quot;0111111&quot;;
+
+    process(cardRequest) begin
+        case last_card is
+            when &quot;0001&quot; =&gt; HEX3 &lt;= &quot;1111001&quot;;
+            when &quot;0010&quot; =&gt; HEX3 &lt;= &quot;0100100&quot;;
+            when &quot;0011&quot; =&gt; HEX3 &lt;= &quot;0110000&quot;;
+            when &quot;0100&quot; =&gt; HEX3 &lt;= &quot;0011001&quot;;
+            when &quot;0101&quot; =&gt; HEX3 &lt;= &quot;0010010&quot;;
+            when &quot;0110&quot; =&gt; HEX3 &lt;= &quot;0000010&quot;;
+            when &quot;0111&quot; =&gt; HEX3 &lt;= &quot;1111000&quot;;
+            when &quot;1000&quot; =&gt; HEX3 &lt;= &quot;0000000&quot;;
+            when &quot;1001&quot; =&gt; HEX3 &lt;= &quot;0010000&quot;;
+            when &quot;1010&quot; =&gt; HEX3 &lt;= &quot;0001000&quot;;
+            when &quot;1011&quot; =&gt; HEX3 &lt;= &quot;0000011&quot;;
+            when &quot;1100&quot; =&gt; HEX3 &lt;= &quot;1000110&quot;;
+            when &quot;1101&quot; =&gt; HEX3 &lt;= &quot;0100001&quot;;
+            when others =&gt; HEX3 &lt;= &quot;0000000&quot;;
+        end case;
+    end process;
+    
+    r1 &lt;= result(0);
+    r2 &lt;= result(1);
+
+    process(pointsShown)
+    begin
+        -- Dividir o valor em dezenas e unidades
+        tens &lt;= std_logic_vector(to_unsigned(to_integer(unsigned(pointsShown)) / 10, 4));
+        un &lt;= std_logic_vector(to_unsigned(to_integer(unsigned(pointsShown)) mod 10, 4));
+
+    end process;
+
+    HEX0 &lt;= seven_segment_decoder(un);
+    HEX1 &lt;= seven_segment_decoder(tens);
+
+end Behavioral;</string>
+        </entry>
+        <entry>
+          <string>externalOutputs</string>
+          <string>HEX0:7,HEX1:7,HEX2:7,HEX3:7,r1,r2</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1100" y="120"/>
     </visualElement>
   </visualElements>
   <wires>
@@ -585,6 +1140,10 @@
     <wire>
       <p1 x="260" y="140"/>
       <p2 x="280" y="140"/>
+    </wire>
+    <wire>
+      <p1 x="20" y="140"/>
+      <p2 x="60" y="140"/>
     </wire>
     <wire>
       <p1 x="900" y="460"/>
@@ -683,6 +1242,10 @@
       <p2 x="1340" y="160"/>
     </wire>
     <wire>
+      <p1 x="20" y="160"/>
+      <p2 x="60" y="160"/>
+    </wire>
+    <wire>
       <p1 x="1080" y="160"/>
       <p2 x="1100" y="160"/>
     </wire>
@@ -703,7 +1266,7 @@
       <p2 x="1600" y="480"/>
     </wire>
     <wire>
-      <p1 x="100" y="-100"/>
+      <p1 x="60" y="-100"/>
       <p2 x="840" y="-100"/>
     </wire>
     <wire>
@@ -1047,6 +1610,10 @@
       <p2 x="1340" y="400"/>
     </wire>
     <wire>
+      <p1 x="60" y="-100"/>
+      <p2 x="60" y="120"/>
+    </wire>
+    <wire>
       <p1 x="960" y="440"/>
       <p2 x="960" y="500"/>
     </wire>
@@ -1161,10 +1728,6 @@
     <wire>
       <p1 x="1380" y="640"/>
       <p2 x="1380" y="700"/>
-    </wire>
-    <wire>
-      <p1 x="100" y="-100"/>
-      <p2 x="100" y="120"/>
     </wire>
     <wire>
       <p1 x="1000" y="480"/>

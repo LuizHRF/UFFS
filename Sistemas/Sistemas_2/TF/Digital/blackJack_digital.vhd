@@ -21,9 +21,9 @@ architecture Behavioral of blackJack is
 
     component cards is
         Port (
-            clk     : in  std_logic;                      -- Sinal de clock
-            reset   : in  std_logic;                      -- Sinal de reset
-            enable  : in  std_logic;                      -- Habilitação do gerador
+            clk     : in  std_logic;                      
+            reset   : in  std_logic;                      
+            enable  : in  std_logic;                      
             random_number : out std_logic_vector(3 downto 0)
         );
     end component;
@@ -186,13 +186,13 @@ end Behavioral;
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all; -- Necessário para conversões entre tipos
+use ieee.numeric_std.all; 
 
 entity cards is
     port (
-        clk     : in  std_logic;                      -- Sinal de clock
-        reset   : in  std_logic;                      -- Sinal de reset
-        enable  : in  std_logic;                      -- Habilitação do gerador
+        clk     : in  std_logic;                      
+        reset   : in  std_logic;                      
+        enable  : in  std_logic;                      
         random_number : out std_logic_vector(3 downto 0)
     );
 end cards;
