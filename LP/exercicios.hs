@@ -40,3 +40,47 @@ salarioAtual s a b = f s 0.015 (b - a)
                         where
                             f x y z | z == 1 = x * (y + 1)
                                     | otherwise = f (x* (y+1)) (y*2) (z-1) 
+
+--7
+ultimo :: [a] -> a
+ultimo (x:xs) | null xs = x
+              | otherwise = ultimo xs
+
+--8
+primeiros :: [a] -> [a]
+primeiros (x:xs) | null xs = []
+                 | otherwise = x : primeiros xs
+
+--9
+multiplicaListas :: Num a => [a] -> [a] -> [a]
+multiplicaListas (x:xs) (y:ys) | null xs || null ys = [(x*y)]
+                               | otherwise = (x*y) : multiplicaListas xs ys
+
+--10 / 11 / 12
+
+data Produto = Pe Int String Int Bool SellType
+             | NPe Int String String Int SellType
+             deriving Show
+
+data SellType = Unidade | Peso
+                deriving Show
+
+verificaVal :: Produto -> Int -> Bool
+verificaVal (NPe _ _ _ _ _) _ = True
+verificaVal (Pe _ _ anov _ _) anoa = anov >= anoa 
+
+p1 = Pe 122 "Banana" 2024 True Peso
+p2 = Pe 111 "Pizza" 2025 True Unidade   
+p3 = NPe 999 "Sabonete" "Nivea" 2024 Unidade
+
+-- 13
+
+--14
+func :: Num a => [a] -> a
+func (x:xs) | null xs = x
+func (x:xs) = x + head xs
+func [] = 0
+
+--15
+count :: [a] -> Int
+count l = foldl (\x y -> x+1) 0 l
