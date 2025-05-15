@@ -2,6 +2,8 @@ module TypeChecker where
 
 import Lexer 
 
+
+-- or, not, mul, sub, eq, geq
 typeof :: Expr -> Maybe Ty 
 typeof (Num _) = Just TNum 
 typeof BFalse = Just TBool 
@@ -19,6 +21,22 @@ typeof (If e1 e2 e3) =
                                          | otherwise -> Nothing 
                       _ -> Nothing 
       _ -> Nothing 
+typeof (Or e1 e2) = case (typeof e1, typeof e2) of
+                        (Just TBool, Just TBool) -> Just TBool
+                        _                         -> Nothing
+typeof (Not e) = if (typeof e) == typeof(BTrue) then Just TBool else Nothing
+typeof (Mul e1 e2) = case (typeof e1, typeof e2) of 
+                       (Just TNum, Just TNum) -> Just TNum 
+                       _                      -> Nothing
+typeof (Sub e1 e2) = case (typeof e1, typeof e2) of 
+                       (Just TNum, Just TNum) -> Just TNum 
+                       _                      -> Nothing
+typeof (Eq e1 e2) = case (typeof e1, typeof e2) of 
+                       (Just TNum, Just TNum) -> Just TBool 
+                       _                      -> Nothing
+typeof (Geq e1 e2) = case (typeof e1, typeof e2) of 
+                       (Just TNum, Just TNum) -> Just TBool 
+                       _                      -> Nothing
 
 typecheck :: Expr -> Expr 
 typecheck e = case typeof e of
