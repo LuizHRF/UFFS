@@ -13,6 +13,10 @@ data Expr = BTrue
           | If Expr Expr Expr
           | Eq Expr Expr
           | Geq Expr Expr 
+
+          | Var String
+          | Lam String Expr
+          | App Expr Expr
           deriving Show 
 
 data Ty = TBool 
