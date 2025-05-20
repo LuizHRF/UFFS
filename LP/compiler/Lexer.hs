@@ -15,12 +15,13 @@ data Expr = BTrue
           | Geq Expr Expr 
 
           | Var String
-          | Lam String Expr
+          | Lam String Ty Expr
           | App Expr Expr
           deriving Show 
 
 data Ty = TBool 
         | TNum 
+        | TFun Ty Ty
         deriving (Show, Eq)
 
 data Token = Token_True
@@ -37,6 +38,8 @@ data Token = Token_True
            | Token_Or
            | Token_Geq
            | Token_Eq
+           | Token_Let
+           | Token_Lam
            deriving Show
 
 lexer :: String -> [Token]
@@ -46,6 +49,7 @@ lexer ('*':cs) =        Token_Mul : lexer cs
 lexer ('-':cs) =        Token_Sub : lexer cs
 lexer ('=':'=':cs) =    Token_Eq : lexer cs
 lexer ('>':'=':cs) =    Token_Geq : lexer cs
+lexer ('/' : cs) =      Token_Lam : lexer cs
 
 lexer (c:cs) | isSpace c = lexer cs
              | isDigit c = lexerNum (c:cs)
@@ -66,4 +70,5 @@ lexer_Key_Words cs = case span isAlpha cs of
                         ("ELSE", rest)  -> Token_Else   : lexer rest
                         ("NOT", rest)   -> Token_Not    : lexer rest
                         ("OR", rest)    -> Token_Or     : lexer rest
+                        ("LET", rest)   -> Token_Let    : lexer rest
                         _ -> error "Erro léxico - Palavra chave inválida"
