@@ -17,6 +17,7 @@ data Expr = BTrue
           | Var String
           | Lam String Ty Expr
           | App Expr Expr
+          | Paren Expr
           deriving Show 
 
 data Ty = TBool 
@@ -38,18 +39,28 @@ data Token = Token_True
            | Token_Or
            | Token_Geq
            | Token_Eq
-           | Token_Let
            | Token_Lam
+           | Token_Var String
+           | Token_Seta
+           | Token_Colon
+           | Token_TNum
+           | Token_TBool
+           | Token_Lparen
+           | Token_Rparen
            deriving Show
 
 lexer :: String -> [Token]
 lexer [] = []
 lexer ('+':cs) =        Token_Add : lexer cs
 lexer ('*':cs) =        Token_Mul : lexer cs
+lexer ('-':'>':cs) =    Token_Seta : lexer cs
 lexer ('-':cs) =        Token_Sub : lexer cs
 lexer ('=':'=':cs) =    Token_Eq : lexer cs
 lexer ('>':'=':cs) =    Token_Geq : lexer cs
-lexer ('/' : cs) =      Token_Lam : lexer cs
+lexer (':': cs) =       Token_Colon : lexer cs
+lexer ('(': cs) =       Token_Lparen : lexer cs
+lexer (')': cs) =       Token_Rparen : lexer cs
+
 
 lexer (c:cs) | isSpace c = lexer cs
              | isDigit c = lexerNum (c:cs)
@@ -57,8 +68,7 @@ lexer (c:cs) | isSpace c = lexer cs
 
 
 lexerNum :: String -> [Token]
-lexerNum cs = case span isDigit cs of
-                (num, rest) -> Token_Num (read num) : lexer rest
+lexerNum cs = case span isDigit cs of (num, rest) -> Token_Num (read num) : lexer rest
 
 lexer_Key_Words :: String-> [Token]
 lexer_Key_Words cs = case span isAlpha cs of
@@ -70,5 +80,7 @@ lexer_Key_Words cs = case span isAlpha cs of
                         ("ELSE", rest)  -> Token_Else   : lexer rest
                         ("NOT", rest)   -> Token_Not    : lexer rest
                         ("OR", rest)    -> Token_Or     : lexer rest
-                        ("LET", rest)   -> Token_Let    : lexer rest
-                        _ -> error "Erro léxico - Palavra chave inválida"
+                        ("LAMBDA", rest)-> Token_Lam    : lexer rest
+                        ("NUM", rest)   -> Token_TNum   : lexer rest
+                        ("BOOL", rest)  -> Token_TBool  : lexer rest
+                        (var, rest)     -> Token_Var var: lexer rest
