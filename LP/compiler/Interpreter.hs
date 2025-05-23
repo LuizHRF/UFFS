@@ -26,9 +26,11 @@ subst v e (If e1 e2 e3) = If (subst v e e1) (subst v e e2) (subst v e e3)
 subst v e (Not e1) = Not (subst v e e1)
 subst v e (Eq e1 e2) = Eq (subst v e e1) (subst v e e2)
 subst v e (Geq e1 e2) = Geq (subst v e e1) (subst v e e2)
+subst v e (Paren e1) = Paren (subst v e e1)
 
 
 step :: Expr -> Expr 
+
 step (Add (Num n1) (Num n2)) = Num (n1 + n2)     -- S-Add
 step (Add (Num n1) e2) = let e2' = step e2       -- S-Add2
                            in Add (Num n1) e2' 
@@ -64,7 +66,10 @@ step (Geq e1 e2) = Geq (step e1) e2
 
 step (App b@(Lam x t e1) v) | isValue v = subst x v e1
                           | otherwise = step (App b (step v))
+step (Paren e) = step e
 step (App e1 e2) = App (step e1) e2
+
+
 
 eval :: Expr -> Expr 
 eval e | isValue e = e
