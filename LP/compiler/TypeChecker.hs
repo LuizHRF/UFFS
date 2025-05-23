@@ -53,6 +53,8 @@ typeof ctx (App e1 e2) =
                           _ -> Nothing
     _ -> Nothing
 
+typeof ctx (Paren e) = typeof ctx e
+
 typecheck :: Expr -> Expr 
 typecheck e = case typeof [] e of
                 Just _    -> e
