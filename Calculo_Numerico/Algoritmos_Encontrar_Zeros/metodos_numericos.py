@@ -32,8 +32,6 @@ def bisseccao(I : tuple[2], e2 : float, f: any, c: int = 0) -> float:
     else:
         return bisseccao((a, x), e2, f, c+1)
 
-
-
 def ponto_fixo(x0: float, e1: float, e2: float, f: any, fi: any, c: int = 0) -> float:
 
     """Método do ponto fixo para o zero de uma função
@@ -135,7 +133,6 @@ def metodo_newton(e1: float, e2: float, f: any, df: any, v0: float, c = 0) -> fl
      
     return metodo_newton(e1, e2, f, df, x, c+1)
     
-
 def metodo_secante(e1: float, e2: float, f: any, df: any, v0: float, v1: float, c = 0) -> float:
     """Método da secante para o zero de uma função
 
@@ -162,7 +159,6 @@ def metodo_secante(e1: float, e2: float, f: any, df: any, v0: float, v1: float, 
         return x, c
      
     return metodo_secante(e1, e2, f, df, v1, x, c+1)    
-
 
 def main():
     print("TESTE DE MÉTODOS")
