@@ -1,5 +1,5 @@
 
-import metodos_numericos
+from metodos_numericos import *
 import pandas as pd
 
 def gerar_tabela(
