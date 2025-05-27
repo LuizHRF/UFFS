@@ -30,6 +30,7 @@ subst v e (Paren e1) = Paren (subst v e e1)
 
 
 step :: Expr -> Expr 
+step (Paren e) = e
 
 step (Add (Num n1) (Num n2)) = Num (n1 + n2)     -- S-Add
 step (Add (Num n1) e2) = let e2' = step e2       -- S-Add2
@@ -66,8 +67,11 @@ step (Geq e1 e2) = Geq (step e1) e2
 
 step (App b@(Lam x t e1) v) | isValue v = subst x v e1
                           | otherwise = step (App b (step v))
-step (Paren e) = step e
+
 step (App e1 e2) = App (step e1) e2
+
+step (Let v e1 e2) | isValue e1 = subst v e1 e2
+                   | otherwise = (Let v (step e1) e2)
 
 
 

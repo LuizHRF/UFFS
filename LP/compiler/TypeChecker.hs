@@ -55,6 +55,11 @@ typeof ctx (App e1 e2) =
 
 typeof ctx (Paren e) = typeof ctx e
 
+typeof ctx (Let x e1 e2) = case typeof ctx e1 of
+                                Just t  -> typeof ctx' e2 where
+                                                            ctx' = (x, t) : ctx
+                                _       -> Nothing
+
 typecheck :: Expr -> Expr 
 typecheck e = case typeof [] e of
                 Just _    -> e

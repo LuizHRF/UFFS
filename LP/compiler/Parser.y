@@ -21,6 +21,7 @@ import Lexer
     AND     {Token_And}
     OR      {Token_Or}
     NOT     {Token_Not}
+    '='     {Token_Atb}
     ">="    {Token_Geq}
     "=="    {Token_Eq}
     var     {Token_Var $$}
@@ -30,6 +31,8 @@ import Lexer
     BOOL    {Token_TBool}
     '('     {Token_Lparen}
     ')'     {Token_Rparen}
+    LET     {Token_Let}
+    IN      {Token_In}
 
 %nonassoc IF THEN ELSE BOOL NUM LAMBDA ':' "->" '(' ')'
 
@@ -37,7 +40,7 @@ import Lexer
 %left '+' '-'
 %left '*'
 %left AND OR
-%right NOT var
+%right NOT var '=' LET
 
 
 %%
@@ -58,6 +61,7 @@ Exp : num                           { Num $1 }
     | Exp Exp                       { App $1 $2}
     | var                           { Var $1}
     | '(' Exp ')'                   { Paren $2}
+    | LET var '=' Exp IN Exp        { Let $2 $4 $6}
 
 Type : NUM                          { TNum }
      | BOOL                         { TBool }

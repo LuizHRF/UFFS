@@ -1,0 +1,1 @@
+LET x = (LAMBDA y : BOOL -> y AND TRUE) IN x FALSE

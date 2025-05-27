@@ -7,4 +7,4 @@ import TypeChecker
 
 -- OU, ==, *, -, >=, NOT
 
-main = getContents >>= print . eval . typecheck . parser .lexer
+main = getContents >>= print . eval . typecheck . parser . lexer 
