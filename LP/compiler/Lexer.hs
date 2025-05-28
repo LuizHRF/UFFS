@@ -18,6 +18,8 @@ data Expr = BTrue
           | Lam String Ty Expr
           | App Expr Expr
           | Paren Expr
+
+          | Let String Expr Expr
           deriving Show 
 
 data Ty = TBool 
@@ -47,6 +49,9 @@ data Token = Token_True
            | Token_TBool
            | Token_Lparen
            | Token_Rparen
+           | Token_Let
+           | Token_Atb
+           | Token_In
            deriving Show
 
 lexer :: String -> [Token]
@@ -56,6 +61,7 @@ lexer ('*':cs) =        Token_Mul : lexer cs
 lexer ('-':'>':cs) =    Token_Seta : lexer cs
 lexer ('-':cs) =        Token_Sub : lexer cs
 lexer ('=':'=':cs) =    Token_Eq : lexer cs
+lexer ('=':cs) =        Token_Atb : lexer cs
 lexer ('>':'=':cs) =    Token_Geq : lexer cs
 lexer (':': cs) =       Token_Colon : lexer cs
 lexer ('(': cs) =       Token_Lparen : lexer cs
@@ -83,4 +89,6 @@ lexer_Key_Words cs = case span isAlpha cs of
                         ("LAMBDA", rest)-> Token_Lam    : lexer rest
                         ("NUM", rest)   -> Token_TNum   : lexer rest
                         ("BOOL", rest)  -> Token_TBool  : lexer rest
+                        ("LET", rest)   -> Token_Let    : lexer rest
+                        ("IN", rest)    -> Token_In     : lexer rest
                         (var, rest)     -> Token_Var var: lexer rest
