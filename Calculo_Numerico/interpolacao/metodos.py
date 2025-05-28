@@ -38,9 +38,9 @@ def interpolar_lagrange(x_k, y):
     return lagrange_func
 
 
-def interpolar_gregory_n(x_k, y):
+def interpolar_newton(x_k, y):
     """
-    Interpolação de Gregory-Newton para um ponto específico
+    Interpolação de Newton para um ponto específico
     :param x: Lista de pontos x conhecidos.
     :param y: Lista de pontos y conhecidos correspondentes.
 
@@ -50,7 +50,7 @@ def interpolar_gregory_n(x_k, y):
     if len(x_k) != len(y):
         raise ValueError("As listas x_k e y devem ter o mesmo tamanho.")
     n = len(x_k)
-    def gregory_newton_func(x):
+    def newton_func(x):
         
         # Criação da tabela de diferenças divididas
         tabela = [[0] * n for _ in range(n)]
@@ -71,5 +71,44 @@ def interpolar_gregory_n(x_k, y):
         
         return resultado
 
-    return gregory_newton_func
+    return newton_func
 
+
+def interpolar_gregory_newton(x_k, y):
+    """
+    Interpolação de Gregory-Newton para um ponto específico.
+    
+    :param x_k: Lista de pontos x conhecidos.
+    :param y: Lista de pontos y conhecidos correspondentes.
+    
+    :return: Função de interpolação de Gregory-Newton.
+    """
+    if len(x_k) != len(y):
+        raise ValueError("As listas x_k e y devem ter o mesmo tamanho.")
+    
+    h = x_k[1] - x_k[0]
+    for i in range(1, len(x_k)):
+        if not math.isclose(x_k[i] - x_k[i - 1], h, rel_tol=1e-9, abs_tol=1e-12):
+            raise ValueError("Os valores de x devem ter o mesmo espaçamento entre si.") 
+    
+    def gregory_newton_func(x):
+        n = len(x_k)
+        tabela = [[0] * n for _ in range(n)]
+        
+        for i in range(n):
+            tabela[i][0] = y[i]
+        
+        for j in range(1, n):
+            for i in range(n - j):
+                tabela[i][j] = (tabela[i + 1][j - 1] - tabela[i][j - 1])
+        
+        resultado = tabela[0][0]
+        produto = 1
+        
+        for j in range(1, n):
+            produto *= (x - x_k[j - 1])
+            resultado += (tabela[0][j]/ (math.factorial(j) * h**j)) * produto
+        
+        return resultado
+
+    return gregory_newton_func
