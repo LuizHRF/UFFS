@@ -7,7 +7,6 @@ isValue BTrue        = True
 isValue BFalse       = True
 isValue (Num _)      = True
 isValue (Lam _ _ _)  = True
-isValue (Error _)    = True
 isValue _            = False
 
 subst :: String -> Expr -> Expr -> Expr
@@ -28,15 +27,13 @@ subst v e (Not e1) = Not (subst v e e1)
 subst v e (Eq e1 e2) = Eq (subst v e e1) (subst v e e2)
 subst v e (Geq e1 e2) = Geq (subst v e e1) (subst v e e2)
 subst v e (Paren e1) = Paren (subst v e e1)
-subst v e (Error x) = Error x
 
 subst v e (Let x e1 e2) = Let x (subst v e e1) (subst v e e2)
 
 subst v e (Try e1 e2) = Try (subst v e e1) (subst v e e2)
 subst v e (Raise e1) = Raise (subst v e e1)
 
-
-
+subst v e (Error) = Error
 
 step :: Expr -> Expr 
 step (Paren e) = e
@@ -84,6 +81,11 @@ step (Raise (Raise e)) = (Raise e)
 
 step (Try e@(Raise e1) e2) = if isValue e1 then (App e2 e1) else (Try (step e) e2)
 step (Try e1 e2) = if isValue e1 then e1 else (Try (step e1) e2)
+
+step (Error) = Error
+
+step (App Error e1) = Error
+step (App e Error) = if isValue e then Error else (App (step e) Error)
 
 step (App b@(Lam x t e1) v) | isValue v = subst x v e1
                           | otherwise = step (App b (step v))

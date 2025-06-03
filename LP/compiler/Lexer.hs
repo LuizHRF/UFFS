@@ -23,7 +23,7 @@ data Expr = BTrue
 
           | Try Expr Expr
           | Raise Expr
-          | Error Int
+          | Error
           deriving Show 
 
 data Ty = TBool 

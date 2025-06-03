@@ -38,13 +38,13 @@ import Lexer
     TRY     {Token_Try}
     ERROR   {Token_Error}
 
-%nonassoc IF THEN ELSE BOOL NUM LAMBDA ':' "->" '(' ')' TRY WITH
+%nonassoc IF THEN ELSE BOOL NUM LAMBDA ':' "->" '(' ')' TRY WITH ERROR
 
 %left ">=" "=="
 %left '+' '-'
 %left '*'
 %left AND OR
-%right NOT var '=' LET RAISE ERROR
+%right NOT var '=' LET RAISE
 
 
 %%
@@ -68,7 +68,7 @@ Exp : num                           { Num $1 }
     | LET var '=' Exp IN Exp        { Let $2 $4 $6}
     | TRY Exp WITH Exp              { Try $2 $4}
     | RAISE Exp                     { Raise $2}
-    | ERROR num                     { Error $2}
+    | ERROR                         { Error}
 
 Type : NUM                          { TNum }
      | BOOL                         { TBool }
