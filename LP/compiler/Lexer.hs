@@ -23,7 +23,6 @@ data Expr = BTrue
 
           | Try Expr Expr
           | Raise Expr
-          | Error Int
           deriving Show 
 
 data Ty = TBool 
@@ -60,7 +59,6 @@ data Token = Token_True
            | Token_Try
            | Token_Raise
            | Token_With
-           | Token_Error
 
            deriving Show
 
@@ -104,5 +102,4 @@ lexer_Key_Words cs = case span isAlpha cs of
                         ("TRY", rest)   -> Token_Try    : lexer rest
                         ("WITH", rest)  -> Token_With   : lexer rest
                         ("RAISE", rest) -> Token_Raise  : lexer rest
-                        ("ERROR", rest) -> Token_Error  : lexer rest
                         (var, rest)     -> Token_Var var: lexer rest

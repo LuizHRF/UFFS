@@ -36,7 +36,6 @@ import Lexer
     WITH    {Token_With}
     RAISE   {Token_Raise}
     TRY     {Token_Try}
-    ERROR   {Token_Error}
 
 %nonassoc IF THEN ELSE BOOL NUM LAMBDA ':' "->" '(' ')' TRY WITH
 
@@ -44,7 +43,7 @@ import Lexer
 %left '+' '-'
 %left '*'
 %left AND OR
-%right NOT var '=' LET RAISE ERROR
+%right NOT var '=' LET RAISE
 
 
 %%
@@ -68,7 +67,6 @@ Exp : num                           { Num $1 }
     | LET var '=' Exp IN Exp        { Let $2 $4 $6}
     | TRY Exp WITH Exp              { Try $2 $4}
     | RAISE Exp                     { Raise $2}
-    | ERROR num                     { Error $2}
 
 Type : NUM                          { TNum }
      | BOOL                         { TBool }
