@@ -7,6 +7,7 @@ isValue BTrue        = True
 isValue BFalse       = True
 isValue (Num _)      = True
 isValue (Lam _ _ _)  = True
+isValue (Error _)    = True
 isValue _            = False
 
 subst :: String -> Expr -> Expr -> Expr
@@ -27,6 +28,14 @@ subst v e (Not e1) = Not (subst v e e1)
 subst v e (Eq e1 e2) = Eq (subst v e e1) (subst v e e2)
 subst v e (Geq e1 e2) = Geq (subst v e e1) (subst v e e2)
 subst v e (Paren e1) = Paren (subst v e e1)
+subst v e (Error x) = Error x
+
+subst v e (Let x e1 e2) = Let x (subst v e e1) (subst v e e2)
+
+subst v e (Try e1 e2) = Try (subst v e e1) (subst v e e2)
+subst v e (Raise e1) = Raise (subst v e e1)
+
+
 
 
 step :: Expr -> Expr 
@@ -56,6 +65,7 @@ step (Or BFalse e1) = e1
 
 step (Not BTrue) = BFalse
 step (Not BFalse) = BTrue
+step (Not e) = Not (step e)
 
 step (Eq (Num n1) (Num n2)) = if n1==n2 then BTrue else BFalse
 step (Eq (Num n1) e2) = Eq (Num n1) (step e2)
@@ -64,6 +74,16 @@ step (Eq e1 e2) = Eq (step e1) e2
 step (Geq (Num n1) (Num n2)) = if n1>=n2 then BTrue else BFalse
 step (Geq (Num n1) e2) = Geq (Num n1) (step e2)
 step (Geq e1 e2) = Geq (step e1) e2
+
+step (App (Raise e1) e2) = step (Raise e1)
+step (App e1 (Raise e2)) = step (Raise e2)
+
+step (Raise e1) = if isValue e1 then e1 else (Raise (step e1))
+
+step (Raise (Raise e)) = (Raise e)
+
+step (Try e@(Raise e1) e2) = if isValue e1 then (App e2 e1) else (Try (step e) e2)
+step (Try e1 e2) = if isValue e1 then e1 else (Try (step e1) e2)
 
 step (App b@(Lam x t e1) v) | isValue v = subst x v e1
                           | otherwise = step (App b (step v))

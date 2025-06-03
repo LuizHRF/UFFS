@@ -33,14 +33,18 @@ import Lexer
     ')'     {Token_Rparen}
     LET     {Token_Let}
     IN      {Token_In}
+    WITH    {Token_With}
+    RAISE   {Token_Raise}
+    TRY     {Token_Try}
+    ERROR   {Token_Error}
 
-%nonassoc IF THEN ELSE BOOL NUM LAMBDA ':' "->" '(' ')'
+%nonassoc IF THEN ELSE BOOL NUM LAMBDA ':' "->" '(' ')' TRY WITH
 
 %left ">=" "=="
 %left '+' '-'
 %left '*'
 %left AND OR
-%right NOT var '=' LET
+%right NOT var '=' LET RAISE ERROR
 
 
 %%
@@ -62,6 +66,9 @@ Exp : num                           { Num $1 }
     | var                           { Var $1}
     | '(' Exp ')'                   { Paren $2}
     | LET var '=' Exp IN Exp        { Let $2 $4 $6}
+    | TRY Exp WITH Exp              { Try $2 $4}
+    | RAISE Exp                     { Raise $2}
+    | ERROR num                     { Error $2}
 
 Type : NUM                          { TNum }
      | BOOL                         { TBool }

@@ -60,6 +60,8 @@ typeof ctx (Let x e1 e2) = case typeof ctx e1 of
                                                             ctx' = (x, t) : ctx
                                 _       -> Nothing
 
+typeof ctx (Error _) = Just TNum
+
 typecheck :: Expr -> Expr 
 typecheck e = case typeof [] e of
                 Just _    -> e

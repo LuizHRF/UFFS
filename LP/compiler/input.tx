@@ -1,1 +1,18 @@
-LET x = (LAMBDA y : BOOL -> y AND TRUE) IN x FALSE
+
+
+    LET y = (LAMBDA y : NUM -> y -5) IN (
+
+        LET x = 6 IN (
+
+            TRY (   
+                IF (x >= 5) THEN (
+                    RAISE ERROR 0
+                ) ELSE (
+                    x
+                )
+            ) WITH (
+                y
+            )
+
+        )
+    )
