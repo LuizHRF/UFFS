@@ -71,12 +71,12 @@ step (Geq (Num n1) (Num n2)) = if n1>=n2 then BTrue else BFalse
 step (Geq (Num n1) e2) = Geq (Num n1) (step e2)
 step (Geq e1 e2) = Geq (step e1) e2
 
-step (App (Raise e1) e2) = step (Raise e1)
-step (App e1 (Raise e2)) = step (Raise e2)
+step (App (Raise e1) e2) = Raise e1
+step (App e1 (Raise e2)) = Raise e2
 
 step (Raise e1) = if isValue e1 then e1 else (Raise (step e1))
 
-step (Raise (Raise e)) = (Raise e)
+step (Raise (Raise e)) = Raise e
 
 step (Try e@(Raise e1) e2) = if isValue e1 then (App e2 e1) else (Try (step e) e2)
 step (Try e1 e2) = if isValue e1 then e1 else (Try (step e1) e2)
