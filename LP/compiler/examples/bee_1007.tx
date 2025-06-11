@@ -1,9 +1,11 @@
-LET handler = (LAMBDA e : NUM -> 0) IN (
+LET handler = (LAMBDA e : NUM -> 10) IN (
 
-    LET a = TRY (5) WITH (handler) IN (
+    LET a = TRY (FALSE) WITH (handler) IN (
         LET b = TRY (6) WITH (handler) IN (
             LET c = TRY (7) WITH (handler) IN (
-                (a*b) - c
+                LET d = TRY (1) WITH (handler) IN ( 
+                    (a * b) - (c * d)
+                )
             )
         )    
     )

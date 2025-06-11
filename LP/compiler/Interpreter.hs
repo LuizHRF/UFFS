@@ -55,6 +55,8 @@ step (Mul (Num n1) e) = Mul (Num n1) (step e)
 step (Mul e1 e2) = Mul (step e1) e2
 
 step (Sub (Num n) (Num n2)) = Num (n-n2)
+step (Sub (Num n) e) = Sub (Num n) (step e)
+step (Sub e1 e2) = Sub (step e1) e2
 
 step (Or BTrue e1) = BTrue
 step (Or BFalse e1) = e1
