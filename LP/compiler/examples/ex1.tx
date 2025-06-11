@@ -2,7 +2,7 @@
 
     LET y = (LAMBDA y : NUM -> y -5) IN (
 
-        LET x = 1 IN (
+        LET x = 5 IN (
 
             TRY (   
                 IF (x >= 5) THEN (

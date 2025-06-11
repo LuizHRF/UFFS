@@ -1,0 +1,14 @@
+LET pi = 3 IN (
+
+    LET handle = (LAMBDA e : NUM -> 0) IN (
+
+        LET r = TRY (2) WITH (handle) IN (
+
+            LET area = pi * (r * r) IN
+                area
+
+        )
+
+    )
+
+)

@@ -76,7 +76,7 @@ step (App e1 (Raise e2)) = Raise e2
 
 step (Raise e1) = if isValue e1 then e1 else (Raise (step e1))
 
-step (Raise (Raise e)) = Raise e
+--step (Raise (Raise e)) = Raise e
 
 step (Try e@(Raise e1) e2) = if isValue e1 then (App e2 e1) else (Try (step e) e2)
 step (Try e1 e2) = if isValue e1 then e1 else (Try (step e1) e2)

@@ -1,0 +1,7 @@
+LET y = (LAMBDA e : NUM -> e + 100) IN (
+    TRY (
+        RAISE (10 + 5)
+    ) WITH (
+        y
+    )
+)

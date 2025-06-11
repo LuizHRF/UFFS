@@ -1,0 +1,14 @@
+LET handle = (LAMBDA e : NUM -> 0) IN (
+
+    LET a = TRY (RAISE 1) WITH (handle) IN (
+
+        LET b = TRY (20) WITH (handle) IN (
+
+            LET x = a + b IN
+                x
+
+        )
+
+    )
+
+)
