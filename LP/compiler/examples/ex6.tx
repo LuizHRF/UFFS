@@ -1,0 +1,7 @@
+LET h = (LAMBDA z : NUM -> IF z == 99 THEN 1 ELSE (IF z == 98 THEN 2 ELSE 0)) IN (
+    TRY (
+        RAISE 97
+    ) WITH (
+        h
+    )
+)

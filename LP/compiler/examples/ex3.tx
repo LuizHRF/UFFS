@@ -1,0 +1,14 @@
+LET y = (LAMBDA z : NUM -> z * 2) IN (
+    LET x = 10 IN (
+        TRY (
+            IF (x >= 5) THEN (
+                RAISE x
+            ) ELSE (
+                x
+            )
+        ) WITH (
+            y
+        )
+    )
+)
+    

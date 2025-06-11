@@ -1,0 +1,13 @@
+LET y = (LAMBDA z : NUM -> z * 2) IN (
+    LET x = 3 IN (
+        TRY (
+            IF (NOT (x >= 5)) THEN (
+                x + 1
+            ) ELSE (
+                RAISE 100
+            )
+        ) WITH (
+            y
+        )
+    )
+)

@@ -1,0 +1,7 @@
+LET id = (LAMBDA z : NUM -> z) IN (
+    TRY (
+        (RAISE 42) + 1
+    ) WITH (
+        id
+    )
+)

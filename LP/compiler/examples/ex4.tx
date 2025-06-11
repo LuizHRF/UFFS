@@ -1,0 +1,7 @@
+LET y = (LAMBDA e : NUM -> e + 100) IN (
+    TRY (
+        (1 + 1)
+    ) WITH (
+        y
+    )
+)

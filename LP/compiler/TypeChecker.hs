@@ -60,6 +60,15 @@ typeof ctx (Let x e1 e2) = case typeof ctx e1 of
                                                             ctx' = (x, t) : ctx
                                 _       -> Nothing
 
+typeof ctx (Raise t) = case typeof ctx t of
+                                Just t -> Just t
+                                _      -> Nothing
+
+typeof ctx (Try t1 t2) = case (typeof ctx t1, typeof ctx t2) of
+                                  (Just ty1, Just ty2) | ty1 == ty2 -> Just ty1
+                                  (Just ty1, Just (TFun _ ty2)) | ty1 == ty2 -> Just ty1
+                                  _ -> Nothing
+
 typecheck :: Expr -> Expr 
 typecheck e = case typeof [] e of
                 Just _    -> e
