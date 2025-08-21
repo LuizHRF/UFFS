@@ -2,7 +2,7 @@
 
 CREATE TABLE Tipos_Veiculos (
     codTipo SERIAL,
-    descricao VARCHAR(20),
+    descricao VARCHAR(25),
     PRIMARY KEY (codTipo)
 );
 
@@ -29,9 +29,9 @@ INSERT INTO Habilitacoes (tipo, idade_min, descricao) VALUES
 
 
 CREATE TABLE Veiculos (
-    matricula INT,          -- Talvez char?
-    nome VARCHAR(25),
-    modelo VARCHAR(20),
+    matricula INT,      
+    nome VARCHAR(30),
+    modelo VARCHAR(30),
     comprimento FLOAT,
     potMotor FLOAT,
     vlDiaria FLOAT,
@@ -108,8 +108,8 @@ CREATE TABLE Clientes (
     nome VARCHAR(30),
     endereco VARCHAR(70),
     estado_civil VARCHAR(20),
-    numero_filhos INT2,
-    data_nasc DATE
+    num_filhos INT2,
+    data_nasc DATE,
     telefone VARCHAR(15),
     codH INT,
     PRIMARY KEY (CPF),
@@ -117,19 +117,19 @@ CREATE TABLE Clientes (
 );
 
 
-INSERT INTO Clientes (CPF, nome, endereco, estado_civil, num_filhos, data_nasc, telefone, codh) values 
-	('68745120480', 'Joao Loco', 	    'Rua  Konder, 181',                      'Casado',     2, '1965/10/22', '4799235687', 5),
-	('52145784502', 'Carlos',     'Rua Paraná, 155, Apto 405', 'Casado',     3, '1970/02/05', '4899563201', 2),
-	('35420227840', 'Marcos',     'Rua Pejuçara, 97, Apto 202',  'Solteiro',   0, '1985/11/29', '4888015423', 3),
-	('89406159987', 'Cristhian',  'Rua Mato Grosso, 48',                           'Divorciado', 3, '1967/09/22', '4799563201', 3),
-	('34568754210', 'Juliano',    'Rua Sete de Setembro, 485, Apto 408',        'Casado',     1, '1970/07/12', '4899873214', 1),
-	('25415420130', 'Luiza',      'Rua Cludio Stakonski, 345, Apto 512',           'Casado',     3, '1950/02/23', '4888025411', 2),
-	('87542022642', 'Cleyton',    'Rua Jorge Lacerda, 354',                      'Solteiro',   0, '1987/12/30', '4899939529', 3),
-	('35421578450', 'Crsitiane',  'Rua Assis Brasil, 455, Apto 604',           'Viuvo',      4, '1945/05/10', '4896584523', 4),
-	('32154789605', 'Eloisa',     'Av. Rio Branco, 542, Apto 708',             'Casado',     2, '1960/10/24', '4895632024', 1),
-	('32022487964', 'Heitor',     'Av. Sao Pedro, 25, Apto 105',   'Solteiro',   0, '1990/07/19', '4899962364', 5),
-	('73154879460', 'Rubens',     'Rua Tamandaré, 152, Apto 547',         'Casado',     1, '1998/03/24', '4888998598', 2),
-	('23548754210', 'Mariana',    'Av. Getulio Vargas, 725, Apto 804',              'Casado',     3, '1972/01/18', '4899596233', 2);
+INSERT INTO Clientes (CPF, nome, endereco, estado_civil, num_filhos, data_nasc, telefone, codH) values 
+    ('68745120480', 'Joao Loco', 	    'Rua  Konder, 181',                      'Casado',     2, '1965/10/22', '4799235687', 5),
+    ('52145784502', 'Carlos',     'Rua Paraná, 155, Apto 405', 'Casado',     3, '1970/02/05', '4899563201', 2),
+    ('35420227840', 'Marcos',     'Rua Pejuçara, 97, Apto 202',  'Solteiro',   0, '1985/11/29', '4888015423', 3),
+    ('89406159987', 'Cristhian',  'Rua Mato Grosso, 48',                           'Divorciado', 3, '1967/09/22', '4799563201', 3),
+    ('34568754210', 'Juliano',    'Rua Sete de Setembro, 485, Apto 408',        'Casado',     1, '1970/07/12', '4899873214', 1),
+    ('25415420130', 'Luiza',      'Rua Cludio Stakonski, 345, Apto 512',           'Casado',     3, '1950/02/23', '4888025411', 2),
+    ('87542022642', 'Cleyton',    'Rua Jorge Lacerda, 354',                      'Solteiro',   0, '1987/12/30', '4899939529', 3),
+    ('35421578450', 'Crsitiane',  'Rua Assis Brasil, 455, Apto 604',           'Viuvo',      4, '1945/05/10', '4896584523', 4),
+    ('32154789605', 'Eloisa',     'Av. Rio Branco, 542, Apto 708',             'Casado',     2, '1960/10/24', '4895632024', 1),
+    ('32022487964', 'Heitor',     'Av. Sao Pedro, 25, Apto 105',   'Solteiro',   0, '1990/07/19', '4899962364', 5),
+    ('73154879460', 'Rubens',     'Rua Tamandaré, 152, Apto 547',         'Casado',     1, '1998/03/24', '4888998598', 2),
+    ('23548754210', 'Mariana',    'Av. Getulio Vargas, 725, Apto 804',              'Casado',     3, '1972/01/18', '4899596233', 2);
 
 CREATE TABLE Locacoes(
     codLoc SERIAL,
