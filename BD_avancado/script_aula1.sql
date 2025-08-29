@@ -173,3 +173,17 @@ INSERT INTO Locacoes(codLoc, valor, inicio, fim, obs, matricula, codF, CPF) valu
 (0023, 16000,  '2022/05/17', '2022/05/21', 'Locação curta de Catamaran', 302, 03, '32022487964'),
 (0024, 1200,   '2022/05/22', '2022/05/23', 'Locação curta de Jet-Ski',   203, 01, '73154879460'),
 (0025, 45600,  '2022/05/27', '2022/06/02', 'Locação média de Iate',      401, 03, '68745120480');
+
+INSERT INTO Locacoes(codLoc, valor, inicio, fim, obs, matricula, codF, CPF) values
+(0028, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '52145784502'),
+(0029, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '35420227840'),
+(0030, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '89406159987'),
+(0031, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '34568754210'),
+(0032, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '25415420130'),
+(0033, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '87542022642'),
+(0034, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '35421578450'),
+(0035, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '32154789605'),
+(0036, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '32022487964'),
+(0037, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '73154879460'),
+(0038, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '23548754210'),
+(0039, 1000, '2025/08/29', '2025/08/30', 'Locação teste para todos os clientes', 401, 1, '68745120480');
