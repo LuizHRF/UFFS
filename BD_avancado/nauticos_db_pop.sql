@@ -1,24 +1,8 @@
--- BD relacional para o domínio de locação de veículos náuticos
-
-CREATE TABLE Tipos_Veiculos (
-    codTipo SERIAL,
-    descricao VARCHAR(25),
-    PRIMARY KEY (codTipo)
-);
-
 
 INSERT INTO Tipos_Veiculos(descricao) VALUES ('Veleiro'), 
                                              ('Jet-Ski'),
                                              ('Catamaran'), 
                                              ('Iate');
-
-CREATE TABLE Habilitacoes (
-    codH SERIAL,
-    tipo VARCHAR(25),                --????
-    idade_min INT,
-    descricao VARCHAR(60),
-    PRIMARY KEY (codH)
-);
 
 INSERT INTO Habilitacoes (tipo, idade_min, descricao) VALUES 
 ('Veleiro',        8,  'Veleiro'),
@@ -26,20 +10,6 @@ INSERT INTO Habilitacoes (tipo, idade_min, descricao) VALUES
 ('Arrais-Amador',  18, 'Pode dirigir todas as embarcações exceto Jet-Ski'),
 ('Mestre-Amador',  18, 'Pode dirigir todas as embarcações'),
 ('Capitão-Amador', 18, 'Pode dirigir todas as embarcações');
-
-
-CREATE TABLE Veiculos (
-    matricula INT,      
-    nome VARCHAR(30),
-    modelo VARCHAR(30),
-    comprimento FLOAT,
-    potMotor FLOAT,
-    vlDiaria FLOAT,
-    codTipo INT,
-    PRIMARY KEY (matricula),
-    FOREIGN KEY (codTipo) REFERENCES Tipos_Veiculos(codTipo)
-);
-
 
 INSERT INTO Veiculos(matricula, nome, modelo, comprimento, potMotor, vlDiaria, codtipo) VALUES 
 (101, 'Princesa da Praia', 	'Cutter',           28, 24, 800,  1),
@@ -61,17 +31,6 @@ INSERT INTO Veiculos(matricula, nome, modelo, comprimento, potMotor, vlDiaria, c
 (404, 'Ariete', 		'Azimut 740',    74, 1150, 12500, 4),
 (405, 'Sereia IV', 		'Prestige 440s', 44, 850,  4500,  4);	
 
-CREATE TABLE Funcionarios (
-    codF SERIAL,
-    nome VARCHAR(30),
-    telefone VARCHAR(15),
-    endereco VARCHAR(70),
-    idade INT,
-    salario FLOAT,
-    PRIMARY KEY (codF)
-);
-
-
 INSERT INTO Funcionarios (nome, telefone, endereco, idade, salario) VALUES
 ('Renan',     1231231231, 'Rua Paraná, 527',         27, 3200),
 ('Rafhael',   1233754124, 'Av. Fernando Machado, 157, Apto 502',        32, 3000),
@@ -79,15 +38,6 @@ INSERT INTO Funcionarios (nome, telefone, endereco, idade, salario) VALUES
 ('Sabrina',   3452762415, 'Rua Quintino Bocaiuva, 782',              37, 3800),
 ('Lucas',     4534563061, 'Rua Felipe Schimidt, 155, Apto 105',        53, 2700),
 ('Marquito',     4534563061, 'Rua Felipe Schimidt, 155, Apto 105',        53, 2700);
-
-CREATE TABLE Veiculos_Habilitacoes(
-    codTipo INT,
-    codH INT,
-    PRIMARY KEY (codTipo, codH),
-    FOREIGN KEY (codTipo) REFERENCES Tipos_Veiculos(codTipo),
-    FOREIGN KEY (codH) REFERENCES Habilitacoes(codH)
-);
-
 
 INSERT INTO Veiculos_Habilitacoes (codTipo, codH) values 
 		
@@ -103,20 +53,6 @@ INSERT INTO Veiculos_Habilitacoes (codTipo, codH) values
 												(4, 4),
 												(4, 5);
 
-CREATE TABLE Clientes (
-    CPF VARCHAR(11),
-    nome VARCHAR(30),
-    endereco VARCHAR(70),
-    estado_civil VARCHAR(20),
-    num_filhos INT2,
-    data_nasc DATE,
-    telefone VARCHAR(15),
-    codH INT,
-    PRIMARY KEY (CPF),
-    FOREIGN KEY (codH) REFERENCES Habilitacoes(codH)
-);
-
-
 INSERT INTO Clientes (CPF, nome, endereco, estado_civil, num_filhos, data_nasc, telefone, codH) values 
     ('68745120480', 'Joao Loco', 	    'Rua  Konder, 181',                      'Casado',     2, '1965/10/22', '4799235687', 5),
     ('52145784502', 'Carlos',     'Rua Paraná, 155, Apto 405', 'Casado',     3, '1970/02/05', '4899563201', 2),
@@ -130,21 +66,6 @@ INSERT INTO Clientes (CPF, nome, endereco, estado_civil, num_filhos, data_nasc, 
     ('32022487964', 'Heitor',     'Av. Sao Pedro, 25, Apto 105',   'Solteiro',   0, '1990/07/19', '4899962364', 5),
     ('73154879460', 'Rubens',     'Rua Tamandaré, 152, Apto 547',         'Casado',     1, '1998/03/24', '4888998598', 2),
     ('23548754210', 'Mariana',    'Av. Getulio Vargas, 725, Apto 804',              'Casado',     3, '1972/01/18', '4899596233', 2);
-
-CREATE TABLE Locacoes(
-    codLoc SERIAL,
-    valor FLOAT,
-    inicio DATE,
-    fim DATE,
-    obs VARCHAR(100),
-    matricula INT,
-    codF INT,
-    CPF VARCHAR(11),
-    PRIMARY KEY(codLoc),
-    FOREIGN KEY (matricula) REFERENCES Veiculos(matricula),
-    FOREIGN KEY (codF) REFERENCES Funcionarios(codF),
-    FOREIGN KEY (CPF) REFERENCES Clientes(CPF)
-);
 
 
 INSERT INTO Locacoes(codLoc, valor, inicio, fim, obs, matricula, codF, CPF) values
