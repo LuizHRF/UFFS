@@ -1,6 +1,7 @@
 --=========================================
 -- Solução do problema 'Primeiro e Último'
 -- Luiz Faccio
+-- Referência utilizada: https://neon.com/postgresql/postgresql-tutorial/postgresql-recursive-query
 --=========================================
 
 -- create table venda(id_venda int primary key
@@ -45,7 +46,7 @@ WITH RECURSIVE cte_ AS (
     SELECT v.id_venda, v.valor as valor, c.count + 1, c.primeiro, c.valor_inicial
     FROM venda v
     INNER JOIN cte_ c ON c.id_venda= v.id_venda_anterior
-)
+),
 
 aux AS ( -- Serve somente para identificar as túplas das últimas vendas, não consgui fazer isso no select principal
     SELECT max(id_venda) as id_venda FROM cte_
@@ -54,8 +55,8 @@ aux AS ( -- Serve somente para identificar as túplas das últimas vendas, não 
 
 SELECT primeiro as primeira_venda, 
        c.id_venda as ultima_venda, 
-       valor_inicial - valor as diferenca_valor,
-       count as total_vendas
+       valor - valor_inicial as diferenca_valor,
+       count as total_mudancas
 FROM cte_ c JOIN aux a ON c.id_venda = a.id_venda
 ORDER BY primeira_venda;
 
